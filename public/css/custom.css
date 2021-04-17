@@ -1,0 +1,55 @@
+
+nav .navbar-nav li a{
+    color: rgb(139, 146, 177) !important;
+    }
+
+.navbar{
+    background: #073B15 !important;
+}
+
+.center {
+    text-align: center;
+}
+
+#logo {
+    float: left;
+    font-size: 1.7em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    font-weight: bold;
+}
+
+.jumbotron {
+    background-image: url("../img/fondo.jpg");
+    background-size: cover;
+    height: 300px;
+}
+
+.jumbotron h1, .jumbotron h2 {
+    color: #fff;
+    letter-spacing: -1px;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+.btn-personalizado {
+    background-color: #073B15;
+  }
+
+.btn-personalizado:hover {
+    text-decoration: none;
+  }
+
+.mesa-title {
+    color: #073B15;
+    font-weight: bold;
+    font-size: 1.25 em
+
+  }
+
+.listing {
+
+    list-style: none;
+    padding-left: 0;
+}
