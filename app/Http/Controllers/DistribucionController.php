@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Distribucion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\View;
 
 class DistribucionController extends Controller
 {
@@ -16,7 +17,7 @@ class DistribucionController extends Controller
     {
         $distribucion = Distribucion::orderBy('nombre')->paginate(4);
 
-        return view('distribucion.index', compact('distribucion'));
+        return view ('distribucionmesas.index', compact('distribucion'));
     }
 
     /**
@@ -26,7 +27,7 @@ class DistribucionController extends Controller
      */
     public function create()
     {
-        //
+        return view('distribucionmesas.create');
     }
 
     /**
@@ -48,7 +49,7 @@ class DistribucionController extends Controller
      */
     public function show(Distribucion $distribucion)
     {
-        //
+        return view('distribucionmesas.create', compact('distribucion'));
     }
 
     /**
@@ -59,7 +60,7 @@ class DistribucionController extends Controller
      */
     public function edit(Distribucion $distribucion)
     {
-        //
+        return view('distribucionmesas.edit', $distribucion);
     }
 
     /**

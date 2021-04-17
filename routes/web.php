@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\DistribucionMesaController;
+use App\Http\Controllers\DistribucionController;
+use App\Http\Controllers\MesaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,4 +19,5 @@ Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
 
-Route::resource('distribucionmesas', DistribucionMesaController::class);
+Route::resource('distribucionmesas', DistribucionController::class);
+Route::resource('mesas', MesaController::class);

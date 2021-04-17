@@ -5,6 +5,7 @@ nav .navbar-nav li a{
 
 .navbar{
     background: #073B15 !important;
+    width: 100%;
 }
 
 .center {
@@ -30,7 +31,6 @@ nav .navbar-nav li a{
     color: #fff;
     letter-spacing: -1px;
     font-weight: bold;
-    padding-top: 30px;
 }
 
 .btn-personalizado {
@@ -45,11 +45,20 @@ nav .navbar-nav li a{
     color: #073B15;
     font-weight: bold;
     font-size: 1.25 em
-
   }
 
 .listing {
 
     list-style: none;
     padding-left: 0;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: grey;
+    color: #fff;
+    text-align: center;
 }

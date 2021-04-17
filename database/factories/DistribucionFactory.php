@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\DistribucionMesa;
+use App\Models\Distribucion;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DistribucionMesaFactory extends Factory
+class DistribucionFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = DistribucionMesa::class;
+    protected $model = Distribucion::class;
 
     /**
      * Define the model's default state.

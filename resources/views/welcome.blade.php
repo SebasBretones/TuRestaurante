@@ -1,6 +1,5 @@
-@extends('partials.bVacio')
-@section('body')
-@extends('partials.navigation')
+@extends('main')
+@section('content')
 <div class="jumbotron center mt-5">
     <h1>Bienvenido a TU RESTAURANTE</h1>
     <h2>La mejor aplicación para gestionar tu restaurante!</h2>

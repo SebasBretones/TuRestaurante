@@ -12,6 +12,11 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{{route('distribucionmesas.index')}}">Todos los tipos</a></li>
+                  @foreach ($distribucionV as $item)
+                  <li><a class="dropdown-item" href="{{route('distribucionmesas.index')}}">{{$item->nombre}}</a></li>
+                  @endforeach
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="{{route('distribucionmesas.create')}}">Crear nuevo tipo de distribución</a></li>
                 </ul>
               </li>
           <li class="nav-item">

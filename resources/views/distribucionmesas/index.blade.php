@@ -1,22 +1,13 @@
-@extends('partials.bVacio')
-@section('body')
-@extends('partials.navigation')
-
-<div align="center">
-    <div class="mt-10">
-        {{$distribucionMesas->links()}}
-    </div>
-    @foreach ($distribucionMesas as $item)
-        <ul class="listing">
-          <div class="row">
-            <div class="well col-md-4 col-md-offset-4">
-              <li class="mesa-title">  {{$item->nombre}} </li>
-            </div>
-          </div>
-        </ul>
-    @endforeach
-    <div class="mt-10">
-        {{$distribucionMesas->links()}}
-    </div>
-    </div>
+@extends('main')
+@section('content')
+<div align="center" class="mt-5">
+    <ul class="nav nav-pills mb-3 justify-content-center pr" id="pills-tab" role="tablist">
+        @foreach ($distribucion as $item)
+          <li class="nav-item" role="presentation">
+            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-{{$item->nombre}}" type="button" role="tab">{{$item->nombre}}</button>
+          </li>
+        @endforeach
+      </ul>
+      @include('mesas.index')
+</div>
 @endsection

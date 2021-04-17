@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Distribucion;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +26,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $dist = Distribucion::orderBy('nombre')->paginate(50);
+        View::share('distribucionV', $dist);
+
         Paginator::useBootstrap();
     }
 }
