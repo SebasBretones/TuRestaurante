@@ -14,8 +14,7 @@ class MesaController extends Controller
      */
     public function index()
     {
-        $mesas = Mesa::orderBy('num_asientos')->paginate(4);
-        return view ('mesas.index', compact('mesas'));
+
     }
 
     /**

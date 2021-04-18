@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $dist = Distribucion::orderBy('nombre')->paginate(50);
+        $dist = Distribucion::orderBy('nombre')->paginate(4);
         View::share('distribucionV', $dist);
 
         Paginator::useBootstrap();

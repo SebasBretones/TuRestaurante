@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Distribucion;
+use App\Models\Mesa;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
 
 class DistribucionController extends Controller
 {
@@ -13,11 +13,19 @@ class DistribucionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $distribucion = Distribucion::orderBy('nombre')->paginate(4);
+        $distribucion = Distribucion::orderBy('id')
+        ->id($request->get('id'))
+        ->paginate(5)->withQueryString();
 
-        return view ('distribucionmesas.index', compact('distribucion'));
+        $mesas = Mesa::orderBy('distribucion_id')
+        ->DistribucionId($request->get('distribucion_id'))
+        ->paginate(10)->withQueryString();
+
+        $selectOption = $request->distribucion_id;
+
+        return view ('distribucionmesas.index', compact('distribucion', 'selectOption', 'mesas' ));
     }
 
     /**
@@ -38,7 +46,10 @@ class DistribucionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $distribucion = new Distribucion();
+        $datos = $request->all();
+
+
     }
 
     /**

@@ -13,4 +13,18 @@ class Mesa extends Model
     public function distribucion(){
         return $this->belongsTo(Distribucion::class);
     }
+
+    public function scopeDistribucionId ($query,$v){
+        if(!isset($v)){
+            return $query->where('distribucion_id','like','%');
+        }
+            Switch($v){
+                case 1:
+                    return $query->where('distribucion_id','like','1');
+                case 2:
+                    return $query->where('distribucion_id','like','2');
+                case 3:
+                    return $query->where('distribucion_id','like','3');
+            }
+        }
 }

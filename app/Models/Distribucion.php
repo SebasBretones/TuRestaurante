@@ -13,4 +13,18 @@ class Distribucion extends Model
     public function mesa(){
         return $this->hasMany(Mesa::class);
     }
+
+    public function scopeId ($query,$v){
+        if(!isset($v)){
+            return $query->where('id','like','%');
+        }
+            Switch($v){
+                case 1:
+                    return $query->where('id','like','1');
+                case 2:
+                    return $query->where('id','like','2');
+                case 3:
+                    return $query->where('id','like','3');
+            }
+        }
 }
