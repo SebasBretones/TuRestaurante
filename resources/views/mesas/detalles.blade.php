@@ -1,9 +1,7 @@
 @extends('main')
 @section('title')
-{{$distribucion->nombre}}
-puya
+Detalles mesa {{$mesa->id}}
 @endsection
 @section('content')
-{{$distribucion->nombre}}
-fdhdfhdfh
+
 @endsection

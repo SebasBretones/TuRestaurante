@@ -56,9 +56,12 @@ class DistribucionController extends Controller
      * @param  \App\Models\Distribucion  $distribucion
      * @return \Illuminate\Http\Response
      */
-    public function show(Distribucion $distribucion)
+    public function show(Distribucion $distribucionmesa, Request $request)
     {
-        return view('distribucionmesas.show', compact('distribucion'));
+        $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)
+        ->paginate(6)->withQueryString();
+
+        return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
     }
 
     /**
