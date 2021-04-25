@@ -1,4 +1,9 @@
 @extends('main')
+@section('title')
+{{$distribucion->nombre}}
+puya
+@endsection
 @section('content')
-<h1>MOSTRAR TIPO DE DISTRIBUCIÓN</h1>
+{{$distribucion->nombre}}
+fdhdfhdfh
 @endsection

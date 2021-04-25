@@ -1,20 +1,37 @@
 @extends('main')
+
+@section('title')
+Crea un nuevo tipo de distribución para tu restaurante
+@endsection
+
 @section('content')
-<div class="py-5 text-center">
-    <img class="d-block mx-auto mb-4" src="{{asset('img/fondo.jpg')}}" alt="" width="72" height="57">
-    <h2>Crea un nuevo tipo de distribución para tu restaurante</h2>
-    <p class="lead"></p>
-</div>
+@if ($errors->any())
+    <div class="alert alert-danger my-3 p-2">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <div>
-    <form class="needs-validation" novalidate>
+    <form name="f" action="{{route('distribucionmesas.store')}}" class="needs-validation row g-3" method="POST">
+        @csrf
         <div class="row">
-            <div class="col">
-                <label for="nombre" class="form-label">Nombre</label>
-                <input type="text" class="form-control" id="nombre" placeholder="" value="" required>
-                <div class="invalid-feedback">
-                Debe insertar un nombre
-            </div>
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="" value="" required>
+            <div class="invalid-feedback">Debe insertar un nombre</div>
+        </div>
+
+        <hr class="my-4">
+
+        <div class="col-auto">
+            <button class="btn btn-primary btn-lg" type="submit">Crear</button>
+        </div>
+
+        <div class="col-auto">
+            <button class="btn btn-danger btn-lg me-2" type="reset">Limpiar</button>
         </div>
     </form>
 </div>

@@ -15,17 +15,11 @@ class DistribucionController extends Controller
      */
     public function index(Request $request)
     {
-        $distribucion = Distribucion::orderBy('id')
+        $distribuciones = Distribucion::orderBy('id')
         ->id($request->get('id'))
-        ->paginate(5)->withQueryString();
+        ->paginate(6)->withQueryString();
 
-        $mesas = Mesa::orderBy('distribucion_id')
-        ->DistribucionId($request->get('distribucion_id'))
-        ->paginate(10)->withQueryString();
-
-        $selectOption = $request->distribucion_id;
-
-        return view ('distribucionmesas.index', compact('distribucion', 'selectOption', 'mesas' ));
+        return view ('distribucionmesas.index', compact('distribuciones'));
     }
 
     /**
@@ -47,9 +41,13 @@ class DistribucionController extends Controller
     public function store(Request $request)
     {
         $distribucion = new Distribucion();
-        $datos = $request->all();
+        $request->validate([
+            'nombre'=>'required'
+        ]);
 
-
+        $distribucion->nombre=ucwords($request->nombre);
+        $distribucion->save();
+        return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución guardada");
     }
 
     /**
@@ -60,7 +58,7 @@ class DistribucionController extends Controller
      */
     public function show(Distribucion $distribucion)
     {
-        return view('distribucionmesas.create', compact('distribucion'));
+        return view('distribucionmesas.show', compact('distribucion'));
     }
 
     /**

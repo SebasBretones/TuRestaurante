@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Mesa extends Model
 {
@@ -15,6 +16,7 @@ class Mesa extends Model
     }
 
     public function scopeDistribucionId ($query,$v){
+        $numDist = DB::table('distribucions')->count();
         if(!isset($v)){
             return $query->where('distribucion_id','like','%');
         }

@@ -1,5 +1,5 @@
 <footer class="footer">
     <div class="container">
-      <p>Place sticky footer content here.</p>
+      <p>GESTIONA TU RESTAURANTE</p>
     </div>
 </footer>

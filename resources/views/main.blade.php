@@ -6,7 +6,10 @@
 
         @include('partials._navigation')
 
-        <div class="container">
+        <div class="container center">
+            <div class="py-5 text-center">
+                <h1>@yield('title')</h1>
+            </div>
 
             @yield('content')
 
@@ -15,8 +18,6 @@
         </div>
 
         @include('partials._js')
-
-        @yield('scripts')
 
     </body>
 </html>
