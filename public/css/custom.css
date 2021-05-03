@@ -24,7 +24,7 @@ nav .navbar-nav li a{
 .jumbotron {
     background-image: url("../img/fondo.jpg");
     background-size: cover;
-    height: 1000px;
+    height: 500px;
 }
 
 .jumbotron h1, .jumbotron h2 {

@@ -6,14 +6,14 @@
 
         @include('partials._navigation')
 
-        <div class="container center">
+        <div class="container">
             <div class="py-5 text-center">
                 <h1>@yield('title')</h1>
             </div>
 
             @yield('content')
 
-            @include('partials._footer')
+            <!--@include('partials._footer')-->
 
         </div>
 
@@ -21,3 +21,4 @@
 
     </body>
 </html>
+

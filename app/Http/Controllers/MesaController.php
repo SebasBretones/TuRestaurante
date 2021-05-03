@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Distribucion;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MesaController extends Controller
 {
@@ -57,7 +59,7 @@ class MesaController extends Controller
      */
     public function edit(Mesa $mesa)
     {
-        //
+        return view('mesas.update', compact('mesa'));
     }
 
     /**
@@ -69,8 +71,39 @@ class MesaController extends Controller
      */
     public function update(Request $request, Mesa $mesa)
     {
-        //
+         /*$res = array('msg'=>"Algo ha ido mal");
+         $data = $request->all();
+
+         $save = $mesa->update($data);
+
+         if($save){
+             $res = array('msg' => 'Form data successfully updated');
+         }
+         return response()->json($res);*/
+
+         $request->validate([
+            'num_asientos' => ['required'],
+        ]);
+
+        $mesa->update($request->all());
+        $distribucionmesa = DB::table('distribucions')->find($mesa->distribucion_id);
+        $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)
+        ->paginate(6)->withQueryString();
+
+        return view('distribucionmesas.detalles', compact('distribucionmesa','mesas'));
+
+         $message = 'La mesa '.$mesa->id.' ha sido editada correctamente.';
+
+         if($request->ajax()){
+            return response()->json([
+                'num_asientos'=>$mesa->num_asientos,
+                'message'=>$message
+            ]);
+         }
+
     }
+
+
 
     /**
      * Remove the specified resource from storage.

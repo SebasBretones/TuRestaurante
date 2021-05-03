@@ -4,7 +4,14 @@ Distribuciones de mesas
 @endsection
 @section('content')
 
-{{$distribuciones->links()}}
+<div class="row">
+    {{$distribuciones->links()}}
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn btn-success me-md-2" type="button">Crear</button>
+      </div>
+</div>
+
 
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 centrado">
     @foreach ($distribuciones as $distribucionmesa)
@@ -15,8 +22,8 @@ Distribuciones de mesas
         <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
             <div class="btn-group">
-                <a href="{{route('distribucionmesas.show',$distribucionmesa)}}" type="button" class="btn btn-sm btn-outline-secondary">View</a>
-                <a type="button" class="btn btn-sm btn-outline-secondary">Edit</a>
+                <a href="{{route('distribucionmesas.show',$distribucionmesa)}}" type="button" class="btn btn-sm btn-outline-secondary">Ver</a>
+                <a type="button" class="btn btn-sm btn-outline-secondary">Editar</a>
             </div>
             @php
             $numMesas = DB::table('mesas')

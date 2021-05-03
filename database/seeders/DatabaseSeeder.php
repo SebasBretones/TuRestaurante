@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DistribucionSeeder::class);
         Mesa::factory(30)->create();
+        $this->call(TapaSeeder::class);
     }
 }
