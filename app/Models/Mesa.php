@@ -9,10 +9,18 @@ use Illuminate\Support\Facades\DB;
 class Mesa extends Model
 {
     use HasFactory;
-    protected $fillable = ['ocupada','num_asientos', 'factura', 'distribucion_id'];
+    protected $fillable = ['ocupada','num_asientos', 'factura_id', 'distribucion_id'];
 
     public function distribucion(){
         return $this->belongsTo(Distribucion::class);
+    }
+
+    public function pedidos(){
+        return $this->hasMany(Pedido::class);
+    }
+
+    public function factura(){
+        return $this->hasOne(Factura::class);
     }
 
     public function scopeDistribucionId ($query,$v){

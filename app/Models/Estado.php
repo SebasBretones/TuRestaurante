@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tapa extends Model
+class Estado extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre','tipo','precio'];
+    protected $fillable= ['nombre'];
 
     public function pedido(){
         return $this->belongsToMany(Pedido::class);

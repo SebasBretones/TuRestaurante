@@ -10,7 +10,7 @@ class Distribucion extends Model
     use HasFactory;
     protected $fillable=['nombre'];
 
-    public function mesa(){
+    public function mesas(){
         return $this->hasMany(Mesa::class);
     }
 

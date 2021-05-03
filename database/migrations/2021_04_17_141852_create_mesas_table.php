@@ -17,10 +17,16 @@ class CreateMesasTable extends Migration
             $table->id();
             $table->boolean('ocupada')->default(false);
             $table->integer('num_asientos');
-            $table->double('factura',8,2)->default(0);
+
             $table->ForeignId('distribucion_id');
             $table->foreign('distribucion_id')->references('id')
             ->on('distribucions')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->ForeignId('factura_id')->nullable();
+            $table->foreign('factura_id')->references('id')
+            ->on('facturas')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->timestamps();

@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(DistribucionSeeder::class);
-        Mesa::factory(30)->create();
+        $this->call(EstadoSeeder::class);
         $this->call(TapaSeeder::class);
+        Mesa::factory(30)->create();
     }
 }
