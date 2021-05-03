@@ -25,22 +25,22 @@ Mesas de {{$distribucionmesa->nombre}}
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group qMesa" data-mesa="{{$mesa->id}}">
                         <a href="{{route('mesas.show',$mesa)}}" type="button" class="btn btn-sm btn-outline-secondary">Ver</a>
-                        <!--<a type="button" class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar</a>-->
-                        <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button" href="{{route('mesas.edit',$mesa)}}">Edit</a>
+                        <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button" href="{{route('mesas.edit',$mesa)}}">Editar</a>
                     </div>
                     @php
                     $numMesas = DB::table('mesas')
                         ->where('distribucion_id', $distribucionmesa->id)
                         ->count();
                     @endphp
-                    <div class="row g-3">
-                        <div class="col-auto">
-                            @if ($mesa->ocupada)
-                            <span class="badge bg-danger">Ocupada</span>
-                            @else
-                            <span class="duracionSalto badge bg-success">Libre</span>
-                            @endif
-                        </div>
+                    <div class="btn-group">
+                        @if ($mesa->ocupada)
+                        <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create',$mesa)}}">Realizar pedido</a>
+                        @endif
+                        @if ($mesa->ocupada)
+                        <span class="badge bg-danger">Ocupada</span>
+                        @else
+                        <span class="duracionSalto badge bg-success">Libre</span>
+                        @endif
                         <!--<div class="col-auto"><small class="text-muted">Mesa {{$cont}}-{{$numMesas}}</small></div>-->
                     </div>
                 </div>

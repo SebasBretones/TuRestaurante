@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DistribucionController;
 use App\Http\Controllers\MesaController;
+use App\Http\Controllers\PedidoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,3 +22,7 @@ Route::get('/', function () {
 
 Route::resource('distribucionmesas', DistribucionController::class);
 Route::resource('mesas', MesaController::class);
+
+Route::get('pedidos/{mesa}/create','App\Http\Controllers\PedidoController@create')->name('pedidos.create');
+Route::post('pedidos/{mesa}','App\Http\Controllers\PedidoController@store')->name('pedidos.store');
+

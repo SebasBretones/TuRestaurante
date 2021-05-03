@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mesa;
 use App\Models\Pedido;
+use App\Models\Tapa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PedidoController extends Controller
 {
@@ -22,9 +25,9 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Mesa $mesa)
     {
-        //
+        return view('pedidos.create', compact('mesa'));
     }
 
     /**
@@ -33,9 +36,41 @@ class PedidoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Mesa $mesa)
     {
-        //
+        /*$request->validate([
+            'estado_id' => ['required'],
+            'mesa_id'=> 'required',
+            'total_pedido' => 'required',
+            'tapa_id' => 'required'
+        ]);*/
+
+        $tapa_ids= $request->tapa_id;
+
+        /*foreach($tapa_ids as $tapa_id) {
+            $pedido = new Pedido();
+            $pedido->mesa_id=$request->mesa_id;
+            $pedido->estado_id=$request->estado_id;
+            $pedido->tapa_id=$request->mesa_id;
+        }*/
+        $pedido = new Pedido();
+        $pedido->mesa_id=$request->mesa_id;
+        $pedido->estado_id=$request->estado_id;
+        $pedido->tapa_id=$request->tapa_id;
+        $pedido->cantidad=$request->cantidad;
+        $pedido->mesa_id=$mesa->id;
+
+
+        $total_pedido= 0;
+        $tapa = DB::table('tapas')->find($pedido->tapa_id);
+
+        for($i=0;$i<($pedido->cantidad);$i++){
+            $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
+        }
+
+        $pedido->save();
+
+        return redirect()->back();
     }
 
     /**

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     use HasFactory;
-    protected $fillable=['total_pedido','tapa_id','estado_id','mesa_id'];
+    protected $fillable=['total_pedido','tapa_id','estado_id','mesa_id','cantidad'];
 
     public function estado(){
         return $this->hasOne(Estado::class);

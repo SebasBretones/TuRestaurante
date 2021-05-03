@@ -81,7 +81,7 @@ class MesaController extends Controller
          }
          return response()->json($res);*/
 
-         $request->validate([
+        $request->validate([
             'num_asientos' => ['required'],
         ]);
 
