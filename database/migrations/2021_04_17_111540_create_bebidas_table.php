@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTapasTable extends Migration
+class CreateBebidasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateTapasTable extends Migration
      */
     public function up()
     {
-        Schema::create('tapas', function (Blueprint $table) {
+        Schema::create('bebidas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',60)->unique;
-            $table->double('precio',8,2)->default(1.5);
-            $table->ForeignId('tipotapa_id');
-            $table->foreign('tipotapa_id')->references('id')
-            ->on('tipotapas')
+            $table->string('nombre',120)->unique();
+            $table->double('precio',8,2)->default(3);
+            $table->ForeignId('tipobebida_id');
+            $table->foreign('tipobebida_id')->references('id')
+            ->on('tipobebidas')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->timestamps();
@@ -33,6 +33,6 @@ class CreateTapasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tapas');
+        Schema::dropIfExists('bebidas');
     }
 }

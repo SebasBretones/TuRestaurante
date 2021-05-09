@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFacturasTable extends Migration
+class CreateTipotapasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +13,9 @@ class CreateFacturasTable extends Migration
      */
     public function up()
     {
-        Schema::create('facturas', function (Blueprint $table) {
+        Schema::create('tipotapas', function (Blueprint $table) {
             $table->id();
-            $table->double('total_factura',8,2);
+            $table->string('nombre',40);
             $table->timestamps();
         });
     }
@@ -28,8 +27,6 @@ class CreateFacturasTable extends Migration
      */
     public function down()
     {
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 0');
-        Schema::drop('facturas');
-        //DB::statement('SET FOREIGN_KEY_CHECKS = 1');
+        Schema::dropIfExists('tipotapas');
     }
 }

@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Tapa extends Model
+class Bebida extends Model
 {
     use HasFactory;
-    protected $fillable = ['nombre','precio','tipotapa_id'];
+    use HasFactory;
+    protected $fillable = ['nombre','precio','tipobebida_id'];
 
     public function pedido(){
         return $this->belongsToMany(Pedido::class);
     }
 
-    public function tipotapa(){
-        return $this->hasOne(Tipotapa::class);
+    public function tipobebida(){
+        return $this->hasOne(Tipobebida::class);
     }
 }

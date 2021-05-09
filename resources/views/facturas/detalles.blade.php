@@ -1,38 +1,11 @@
 @extends('main')
 @section('title')
-Pedidos mesa {{$mesa->id}}
+Factura {{$factura->id}}
 @endsection
 @section('content')
-<div class="mt-3 mx-auto p-2 w-4/5">
-    <form name="f" action="{{route('pedidos.store',$mesa)}}" method="POST">
-        @csrf
-        <div class="row mt-4">
-            @php
-                $tapas = DB::table('tapas')->get();
-            @endphp
-            <div class="col-md-4">
-                <select name="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
-                    <option selected>Selecciona una tapa o ración</option>
-                    @foreach ($tapas as $item)
-                    <option value="{{$item->id}}">{{$item->nombre}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-md-2">
-                <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
-            </div>
-        </div>
-        <div class="row mt-4">
-            <div class="col">
-                <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Crear pedido</button>
-                <button class="btn btn-warning" type="reset"><i class="fa fa-brush"></i> Limpiar</button>
-                <a href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Volver</a>
-            </div>
-        </div>
-    </form>
-</div>
-
-<hr/>
+@php
+    $pedidos=$factura->pedidos;
+@endphp
 
 <div class="row mt-4">
     <div class="col-md-12">
@@ -48,11 +21,8 @@ Pedidos mesa {{$mesa->id}}
                 </tr>
             </thead>
             <tbody>
-                @php
-                    $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
-                @endphp
                 @foreach ($pedidos as $ped)
-                @if ($ped->estado_id!=4)
+                @if ($ped->estado_id==4)
                     @php
                     $pedido= '\App\Models\Pedido'::find($ped->id)
                     @endphp
@@ -98,6 +68,15 @@ Pedidos mesa {{$mesa->id}}
         </table>
     </div>
 </div>
+<div class="row mt-4 center">
+    <div class="col-md-12">
+        <form name="f" action="{{route('facturas.update',$factura)}}" method="POST">
+            @method("PUT")
+            @csrf
+            <button type="submit" onclick="return confirm('¿Estás seguro? Los pedidos y la factura se eliminarán')" class="btn btn-warning">
+                Pagar factura
+            </button>
+        </form>
+    </div>
+</div>
 @endsection
-
-

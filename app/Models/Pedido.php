@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Pedido extends Model
 {
     use HasFactory;
-    protected $fillable=['total_pedido','tapa_id','estado_id','mesa_id','cantidad'];
+    protected $fillable=['cantidad', 'total_pedido','tapa_id','estado_id','mesa_id','bebida_id'];
 
     public function estado(){
         return $this->hasOne(Estado::class);
@@ -16,6 +16,10 @@ class Pedido extends Model
 
     public function tapas(){
         return $this->hasMany(Tapa::class);
+    }
+
+    public function bebidas(){
+        return $this->hasMany(Bebida::class);
     }
 
     public function mesa(){

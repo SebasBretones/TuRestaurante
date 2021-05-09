@@ -3,7 +3,7 @@
 Editar mesa {{$mesa->id}}
 @endsection
 @section('content')
-<div class="mt-3 mx-auto p-2 w-4/5">
+<div class="mt-3 mx-auto p-2 w-4/5" id="formCorto">
     <form name="f" action="{{route('mesas.update',$mesa)}}" method="POST">
         @csrf
         @method('PUT')

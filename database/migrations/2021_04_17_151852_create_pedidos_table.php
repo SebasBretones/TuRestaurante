@@ -16,10 +16,17 @@ class CreatePedidosTable extends Migration
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
             $table->double('total_pedido',8,2);
+            $table->integer('cantidad')->default(1);
 
             $table->ForeignId('tapa_id');
             $table->foreign('tapa_id')->references('id')
             ->on('tapas')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+
+            $table->ForeignId('bebida_id');
+            $table->foreign('bebida_id')->references('id')
+            ->on('bebidas')
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
@@ -29,7 +36,7 @@ class CreatePedidosTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->ForeignId('mesa_id');
+            $table->ForeignId('mesa_id')->nullable();
             $table->foreign('mesa_id')->references('id')
             ->on('mesas')
             ->onUpdate('cascade')

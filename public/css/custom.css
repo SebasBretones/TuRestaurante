@@ -90,3 +90,7 @@ nav .navbar-nav li a{
   }
 }
 /* ============ small devices .end// ============ */
+
+#formCorto{
+    width: fit-content;
+}

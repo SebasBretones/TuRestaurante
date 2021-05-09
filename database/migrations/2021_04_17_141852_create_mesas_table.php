@@ -28,7 +28,7 @@ class CreateMesasTable extends Migration
             $table->foreign('factura_id')->references('id')
             ->on('facturas')
             ->onUpdate('cascade')
-            ->onDelete('cascade');
+            ->onDelete('set null');
             $table->timestamps();
         });
     }

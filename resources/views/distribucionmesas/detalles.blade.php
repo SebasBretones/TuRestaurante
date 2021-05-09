@@ -24,7 +24,10 @@ Mesas de {{$distribucionmesa->nombre}}
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group qMesa" data-mesa="{{$mesa->id}}">
-                        <a href="{{route('mesas.show',$mesa)}}" type="button" class="btn btn-sm btn-outline-secondary">Ver</a>
+                        @php
+                            $factura= '\App\Models\Factura'::find($mesa->factura_id)
+                        @endphp
+                        <a href="{{route('facturas.show',$factura)}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
                         <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button" href="{{route('mesas.edit',$mesa)}}">Editar</a>
                     </div>
                     @php
@@ -34,7 +37,7 @@ Mesas de {{$distribucionmesa->nombre}}
                     @endphp
                     <div class="btn-group">
                         @if ($mesa->ocupada)
-                        <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create',$mesa)}}">Realizar pedido</a>
+                        <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create',$mesa)}}">Pedidos</a>
                         @endif
                         @if ($mesa->ocupada)
                         <span class="badge bg-danger">Ocupada</span>

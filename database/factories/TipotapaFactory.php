@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Factura;
+use App\Models\Tipotapa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FacturaFactory extends Factory
+class TipotapaFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Factura::class;
+    protected $model = Tipotapa::class;
 
     /**
      * Define the model's default state.
@@ -22,7 +22,7 @@ class FacturaFactory extends Factory
     public function definition()
     {
         return [
-            'total_factura'=>0.0
+            //
         ];
     }
 }

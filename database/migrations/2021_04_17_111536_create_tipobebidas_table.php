@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCantidadToPedidos extends Migration
+class CreateTipobebidasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddCantidadToPedidos extends Migration
      */
     public function up()
     {
-        Schema::table('pedidos', function (Blueprint $table) {
-            $table->integer('cantidad')->default(1);
+        Schema::create('tipobebidas', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre',40);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class AddCantidadToPedidos extends Migration
      */
     public function down()
     {
-        Schema::table('pedidos', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('tipobebidas');
     }
 }

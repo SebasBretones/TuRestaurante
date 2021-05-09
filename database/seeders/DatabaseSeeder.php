@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Factura;
 use App\Models\Mesa;
+use App\Models\Tipotapa;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +18,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(DistribucionSeeder::class);
         $this->call(EstadoSeeder::class);
+        $this->call(TipotapaSeeder::class);
         $this->call(TapaSeeder::class);
-        Mesa::factory(30)->create();
+        $this->call(TipobebidaSeeder::class);
+        $this->call(BebidaSeeder::class);
+        Factura::factory(30)->create();
+        $this->call(MesaSeeder::class);
     }
 }

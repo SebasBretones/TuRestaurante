@@ -55,7 +55,7 @@ class PedidoController extends Controller
         }*/
         $pedido = new Pedido();
         $pedido->mesa_id=$request->mesa_id;
-        $pedido->estado_id=$request->estado_id;
+        $pedido->estado_id=1;
         $pedido->tapa_id=$request->tapa_id;
         $pedido->cantidad=$request->cantidad;
         $pedido->mesa_id=$mesa->id;
@@ -104,7 +104,27 @@ class PedidoController extends Controller
      */
     public function update(Request $request, Pedido $pedido)
     {
-        //
+        $pedido->estado_id=$request->estado_id;
+        $pedido->cantidad=$request->cantidad;
+
+        $tapa = DB::table('tapas')->find($pedido->tapa_id);
+
+        $pedido->total_pedido=0;
+        for($i=0;$i<($pedido->cantidad);$i++){
+            $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
+        }
+
+        if($pedido->estado_id==4){
+            $mesa=DB::table('mesas')->find($pedido->mesa_id);
+            $factura=DB::table('facturas')->find($mesa->factura_id);
+            DB::table('facturas')
+                ->where('id', $factura->id)
+                ->update(['total_factura' => $pedido->total_pedido]);
+        }
+
+        $pedido->update();
+
+        return redirect()->back();
     }
 
     /**
@@ -115,6 +135,22 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
-        //
+    }
+
+    public function actualizarEstado(Request $request, Pedido $pedido)
+    {
+        $pedido->estado_id=$request->estado_id;
+        $pedido->cantidad=$pedido->cantidad;
+
+        $tapa = DB::table('tapas')->find($pedido->tapa_id);
+
+        $pedido->total_pedido=0;
+        for($i=0;$i<($pedido->cantidad);$i++){
+            $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
+        }
+
+        $pedido->update();
+
+        return redirect()->back();
     }
 }

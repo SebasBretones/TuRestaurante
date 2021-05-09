@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Distribucion;
+use App\Models\Factura;
 use App\Models\Mesa;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,9 +24,10 @@ class MesaFactory extends Factory
     public function definition()
     {
         $distribucion_ids=Distribucion::pluck('id')->toArray();
+        $facturas_ids=Factura::pluck('id')->toArray();
         return [
             'num_asientos'=>$this->faker->numberBetween($min=2, $max=10),
-            'distribucion_id'=>$this->faker->randomElement($distribucion_ids)
+            'distribucion_id'=>$this->faker->randomElement($distribucion_ids),
         ];
     }
 }

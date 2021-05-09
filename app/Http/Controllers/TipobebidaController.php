@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Factura;
+use App\Models\Tipobebida;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class FacturaController extends Controller
+class TipobebidaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -42,21 +41,21 @@ class FacturaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Factura  $factura
+     * @param  \App\Models\Tipobebida  $tipobebida
      * @return \Illuminate\Http\Response
      */
-    public function show(Factura $factura)
+    public function show(Tipobebida $tipobebida)
     {
-        return view('facturas.detalles', compact('factura'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Factura  $factura
+     * @param  \App\Models\Tipobebida  $tipobebida
      * @return \Illuminate\Http\Response
      */
-    public function edit(Factura $factura)
+    public function edit(Tipobebida $tipobebida)
     {
         //
     }
@@ -65,31 +64,22 @@ class FacturaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Factura  $factura
+     * @param  \App\Models\Tipobebida  $tipobebida
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Factura $factura)
+    public function update(Request $request, Tipobebida $tipobebida)
     {
-        $pedidos=$factura->pedidos;
-
-        foreach($pedidos as $ped){
-            DB::table('pedidos')->where('id',$ped->id)->delete();
-        }
-
-        $factura->total_factura=0;
-        $factura->update();
-
-        return redirect()->route('distribucionmesas.index');
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Factura  $factura
+     * @param  \App\Models\Tipobebida  $tipobebida
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Factura $factura)
+    public function destroy(Tipobebida $tipobebida)
     {
-
+        //
     }
 }

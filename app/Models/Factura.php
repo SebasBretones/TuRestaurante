@@ -10,8 +10,9 @@ class Factura extends Model
     use HasFactory;
     protected $fillable = ['total_factura','pedido_id'];
 
-    public function pedidos(){
-        return $this->hasMany(Pedido::class);
+    public function pedidos()
+    {
+        return $this->hasManyThrough(Pedido::class, Mesa::class);
     }
 
     public function mesa(){
