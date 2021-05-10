@@ -7,7 +7,7 @@ use App\Models\Pedido;
 use App\Models\Tapa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 class PedidoController extends Controller
 {
     /**
@@ -17,8 +17,16 @@ class PedidoController extends Controller
      */
     public function index()
     {
-        //
+        $pedidos = Pedido::all();
+        return view('pedidos.index', compact('pedidos'));
     }
+
+    public function downloadPDF() {
+        $pedidos = Pedido::all();
+        $pdf= PDF::loadview('pedidos.index',compact('pedidos'));
+        return $pdf->download('pedidos.pdf');
+
+      }
 
     /**
      * Show the form for creating a new resource.
@@ -57,15 +65,20 @@ class PedidoController extends Controller
         $pedido->mesa_id=$request->mesa_id;
         $pedido->estado_id=1;
         $pedido->tapa_id=$request->tapa_id;
+        $pedido->bebida_id=$request->bebida_id;
         $pedido->cantidad=$request->cantidad;
         $pedido->mesa_id=$mesa->id;
 
 
-        $total_pedido= 0;
         $tapa = DB::table('tapas')->find($pedido->tapa_id);
+        $bebida = DB::table('bebidas')->find($pedido->bebida_id);
 
         for($i=0;$i<($pedido->cantidad);$i++){
-            $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
+            if($bebida->tipobebida_id==1){
+                $pedido->total_pedido= $pedido->total_pedido + $bebida->precio;
+            } else {
+                $pedido->total_pedido= $pedido->total_pedido + $bebida->precio + $tapa->precio;
+            }
         }
 
         $pedido->save();
@@ -106,12 +119,20 @@ class PedidoController extends Controller
     {
         $pedido->estado_id=$request->estado_id;
         $pedido->cantidad=$request->cantidad;
+        $pedido->tapa_id=$request->tapa_id;
+        $pedido->bebida_id=$request->bebida_id;
 
         $tapa = DB::table('tapas')->find($pedido->tapa_id);
+        $bebida = DB::table('bebidas')->find($pedido->bebida_id);
 
         $pedido->total_pedido=0;
+
         for($i=0;$i<($pedido->cantidad);$i++){
-            $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
+            if($bebida->tipobebida_id==1){
+                $pedido->total_pedido= $pedido->total_pedido + $bebida->precio;
+            } else {
+                $pedido->total_pedido= $pedido->total_pedido + $bebida->precio + $tapa->precio;
+            }
         }
 
         if($pedido->estado_id==4){

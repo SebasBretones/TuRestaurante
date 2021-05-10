@@ -15,16 +15,16 @@ class CreatePedidosTable extends Migration
     {
         Schema::create('pedidos', function (Blueprint $table) {
             $table->id();
-            $table->double('total_pedido',8,2);
+            $table->double('total_pedido',8,2)->default(0);
             $table->integer('cantidad')->default(1);
 
-            $table->ForeignId('tapa_id');
+            $table->ForeignId('tapa_id')->nullable();
             $table->foreign('tapa_id')->references('id')
             ->on('tapas')
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->ForeignId('bebida_id');
+            $table->ForeignId('bebida_id')->nullable();
             $table->foreign('bebida_id')->references('id')
             ->on('bebidas')
             ->onUpdate('cascade')

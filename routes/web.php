@@ -29,5 +29,7 @@ Route::post('pedidos/{mesa}','App\Http\Controllers\PedidoController@store')->nam
 Route::put('pedidos/{pedido}','App\Http\Controllers\PedidoController@actualizarEstado')->name('pedidos.actualizarEstado');
 Route::resource('pedidos', PedidoController::class)->except([
 'create', 'store']);
+Route::get('/download-pdf', [PedidoController::class, 'downloadPDF']);
+
 
 Route::resource('facturas', FacturaController::class)->only(['show','update']);

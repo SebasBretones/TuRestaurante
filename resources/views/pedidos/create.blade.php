@@ -9,11 +9,20 @@ Pedidos mesa {{$mesa->id}}
         <div class="row mt-4">
             @php
                 $tapas = DB::table('tapas')->get();
+                $bebidas = DB::table('bebidas')->get();
             @endphp
             <div class="col-md-4">
                 <select name="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona una tapa o ración</option>
                     @foreach ($tapas as $item)
+                    <option value="{{$item->id}}">{{$item->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-md-4">
+                <select name="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                    <option selected>Selecciona una bebida</option>
+                    @foreach ($bebidas as $item)
                     <option value="{{$item->id}}">{{$item->nombre}}</option>
                     @endforeach
                 </select>
@@ -81,7 +90,33 @@ Pedidos mesa {{$mesa->id}}
                                     @php
                                     $tapa = DB::table('tapas')->find($ped->tapa_id)
                                     @endphp
-                                    {{$tapa->nombre}}
+                                    <select name="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                                        <option>Seleccione una tapa</option>
+                                        @foreach ($tapas as $item)
+                                            <option value="{{$item->id}}"
+                                                @if ($tapa!=null && $item->id==$tapa->id)
+                                                selected
+                                                @endif>
+                                            {{$item->nombre}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </td>
+                                <td>
+                                    @php
+                                    $bebida = DB::table('bebidas')->find($ped->bebida_id)
+                                    @endphp
+                                    <select name="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                                        <option>Seleccione una bebida</option>
+                                        @foreach ($bebidas as $item)
+                                            <option value="{{$item->id}}"
+                                                @if ($bebida!=null && $item->id==$bebida->id)
+                                                selected
+                                                @endif>
+                                            {{$item->nombre}}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </td>
                                 <td>
                                     <input type="number" class="form-control" id="cantidad" name="cantidad" value={{$ped->cantidad}}>
