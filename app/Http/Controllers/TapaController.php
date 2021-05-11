@@ -14,7 +14,10 @@ class TapaController extends Controller
      */
     public function index()
     {
-        //
+        $tapas = Tapa::orderBy('nombre')
+        ->paginate(10)->withQueryString();
+
+        return view ('tapas.index', compact('tapas'));
     }
 
     /**
