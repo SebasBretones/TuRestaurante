@@ -7,6 +7,8 @@ Todos los pedidos
     <a class="btn btn-primary" href="{{ URL::to('download-pdf') }}">Export to PDF</a>
 </div>
 
+{!!QrCode::size(300)->generate( URL::to('download-pdf') ) !!}
+
 <table class="table table-bordered mb-5">
     <thead>
         <tr class="table-danger">

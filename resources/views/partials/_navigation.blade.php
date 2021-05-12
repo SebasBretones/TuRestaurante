@@ -25,7 +25,12 @@
           <li class="nav-item dropdown">
               <a class="nav-link" href="{{route('tapas.index')}}">Tapas</a>
           </li>
-      </ul>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+              <a class="nav-link" href="{{route('bebidas.index')}}">Bebidas</a>
+          </li>
+        </ul>
       </div>
     </div>
 </nav>

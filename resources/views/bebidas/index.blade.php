@@ -5,10 +5,10 @@ Todas los platos
 @section('content')
 <div class="row mt-4">
   <div class="col-lg-4">
-   <a href="{{route('tapas.create')}}" class="btn btn-success">Crear</a>
+    <a href="{{route('bebidas.create')}}" class="btn btn-success">Crear</a>
   </div>
 </div>
-<div class="row mt-4">
+<div class="row mt-2">
   <div class="col-md-12">
       <table class="table table-striped table-hover">
           <thead>
@@ -20,19 +20,19 @@ Todas los platos
               </tr>
           </thead>
           <tbody>
-            @foreach ($tapas as $tapa)
+            @foreach ($bebidas as $bebida)
             <tr>
-              <td>{{$tapa->nombre}}</td>
-              <td>{{$tapa->precio}}</td>
+              <td>{{$bebida->nombre}}</td>
+              <td>{{$bebida->precio}}</td>
               <td>
                 @php
-                    $tipo = '\App\Models\TipoTapa'::find($tapa->tipotapa_id);
+                    $tipo = '\App\Models\Tipobebida'::find($bebida->tipobebida_id);
                 @endphp
                 {{$tipo->nombre}}
               </td>
               <td>
-                <div class="col-s6" ><a href="{{route('tapas.edit',$tapa)}}">Editar</a></div>
-                <form name="f" action="{{route('tapas.destroy', $tapa)}}"  method="POST">
+                <div class="col-s6" ><a href="{{route('bebidas.edit',$bebida)}}">Editar</a></div>
+                <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
                   @csrf
                   @method('DELETE')
                   <div class="col-s6" ><button type="Submit">Borrar</a></div>         

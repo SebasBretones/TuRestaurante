@@ -14,7 +14,10 @@ class BebidaController extends Controller
      */
     public function index()
     {
-        //
+        $bebidas = Bebida::orderBy('nombre')
+        ->paginate(10)->withQueryString();
+
+        return view ('bebidas.index', compact('bebidas'));
     }
 
     /**
@@ -24,7 +27,7 @@ class BebidaController extends Controller
      */
     public function create()
     {
-        //
+        return view('bebidas.create');
     }
 
     /**
@@ -35,7 +38,13 @@ class BebidaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $bebida = new Bebida();
+        $bebida->nombre = $request->nombre;
+        $bebida->precio = $request->precio;
+        $bebida->tipobebida_id = $request->tipobebida_id;
+
+        $bebida->save();
+        return redirect()->route('bebidas.index');
     }
 
     /**
@@ -57,7 +66,7 @@ class BebidaController extends Controller
      */
     public function edit(Bebida $bebida)
     {
-        //
+        return view('bebidas.edit', compact('bebida'));
     }
 
     /**
@@ -69,7 +78,12 @@ class BebidaController extends Controller
      */
     public function update(Request $request, Bebida $bebida)
     {
-        //
+        $bebida->nombre = $request->nombre;
+        $bebida->precio = $request->precio;
+        $bebida->tipobebida_id = $request->tipobebida_id;
+
+        $bebida->update();
+        return redirect()->route('bebidas.index');
     }
 
     /**
@@ -80,6 +94,7 @@ class BebidaController extends Controller
      */
     public function destroy(Bebida $bebida)
     {
-        //
+        $bebida->delete();
+        return redirect()->route('bebidas.index');
     }
 }

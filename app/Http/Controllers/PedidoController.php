@@ -105,7 +105,6 @@ class PedidoController extends Controller
      */
     public function edit(Pedido $pedido)
     {
-        //
     }
 
     /**

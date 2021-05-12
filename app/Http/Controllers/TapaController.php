@@ -27,7 +27,7 @@ class TapaController extends Controller
      */
     public function create()
     {
-        //
+        return view('tapas.create');
     }
 
     /**
@@ -38,7 +38,13 @@ class TapaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $tapa = new Tapa();
+        $tapa->nombre = $request->nombre;
+        $tapa->precio = $request->precio;
+        $tapa->tipotapa_id = $request->tipotapa_id;
+
+        $tapa->save();
+        return redirect()->route('tapas.index');
     }
 
     /**
@@ -60,7 +66,7 @@ class TapaController extends Controller
      */
     public function edit(Tapa $tapa)
     {
-        //
+        return view('tapas.edit', compact('tapa'));
     }
 
     /**
@@ -72,7 +78,12 @@ class TapaController extends Controller
      */
     public function update(Request $request, Tapa $tapa)
     {
-        //
+        $tapa->nombre = $request->nombre;
+        $tapa->precio = $request->precio;
+        $tapa->tipotapa_id = $request->tipotapa_id;
+
+        $tapa->update();
+        return redirect()->route('tapas.index');
     }
 
     /**
@@ -83,6 +94,7 @@ class TapaController extends Controller
      */
     public function destroy(Tapa $tapa)
     {
-        //
+        $tapa->delete();
+        return redirect()->route('tapas.index');
     }
 }
