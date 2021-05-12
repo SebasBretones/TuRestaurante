@@ -26,7 +26,7 @@ Todas los platos
               <td>{{$tapa->precio}}</td>
               <td>
                 @php
-                    $tipo = '\App\Models\TipoTapa'::find($tapa->tipotapa_id);
+                    $tipo = '\App\Models\Tipotapa'::find($tapa->tipotapa_id);
                 @endphp
                 {{$tipo->nombre}}
               </td>
