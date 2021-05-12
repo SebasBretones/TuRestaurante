@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
         $this->call(TapaSeeder::class);
         $this->call(TipobebidaSeeder::class);
         $this->call(BebidaSeeder::class);
-        Factura::factory(30)->create();
+        $this->call(FacturaSeeder::class);
         $this->call(MesaSeeder::class);
     }
 }
