@@ -23,6 +23,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('inicio');
 
+Route::get('/home',function(){
+    return view('home');
+})->middleware('auth','verified');
+
 Route::resource('distribucionmesas', DistribucionController::class);
 Route::resource('mesas', MesaController::class);
 Route::resource('tapas', TapaController::class);
