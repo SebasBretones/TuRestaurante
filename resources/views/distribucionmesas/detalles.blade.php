@@ -112,5 +112,5 @@ Mesas de {{$distribucionmesa->nombre}}
 @endsection
 @section('js')
     <script src="{{ asset('js/edit_mesa.js') }}"></script>
-    <!--<script src="{{ asset('js/validate_mesa.js') }}"></script>-->
+    <script src="{{ asset('js/validate_mesa.js') }}"></script>
 @endsection
