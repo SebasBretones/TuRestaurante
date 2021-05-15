@@ -86,7 +86,6 @@ Distribuciones de mesas
                     <div class="invalid-feedback">Debe insertar un nombre</div>
                 </div>
                 <input type="hidden" id="distribucion_id" name="distribucion_id">
-                <input type="hidden" id="distribuciones" name="distribuciones">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Editar</button>
@@ -95,7 +94,7 @@ Distribuciones de mesas
         </div>
       </div>
     </div>
-  </div>
+</div>
 @endsection
 
 @section('js')

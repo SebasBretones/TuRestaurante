@@ -28,7 +28,9 @@ Mesas de {{$distribucionmesa->nombre}}
                             $factura= '\App\Models\Factura'::find($mesa->factura_id)
                         @endphp
                         <a href="{{route('facturas.show',$factura)}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
-                        <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button" href="{{route('mesas.edit',$mesa)}}">Editar</a>
+                        <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button" 
+                        data-mesa_id="{{$mesa->id}}" data-num_asientos="{{$mesa->num_asientos}}" data-ocupada="{{$mesa->ocupada}}"
+                        data-distribucion_id="{{$mesa->distribucion_id}}"  data-bs-toggle="modal" data-bs-target="#editarMesa">Editar</a>
                     </div>
                     @php
                     $numMesas = DB::table('mesas')
@@ -51,4 +53,64 @@ Mesas de {{$distribucionmesa->nombre}}
     </div>
     @endforeach
 </div>
+<!--Modal editar-->
+<div class="modal fade" id="editarMesa" tabindex="-1" aria-labelledby="editarMesaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editarMesaLabel">Editar</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form name="f" action="{{route('mesas.update','mesa_id')}}" class="needs-validation row g-3" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="col">
+                    <label for="num_asientos" class="col-form-label">Número de asientos</label>
+                    <input type="number" class="form-control" name="num_asientos" placeholder="Número de asientos" id="num_asientos" value="">
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ocupada" id="ocupada" value="0">
+                            <label class="form-check-label" for="ocupada">
+                            Sin ocupar
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="ocupada" id="ocupada2" value="1">
+                            <label class="form-check-label" for="ocupada2">
+                            Ocupada
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    @php
+                        $distribucions = DB::table('distribucions')->get();
+                    @endphp
+                    <div class="col">
+                        <select name="distribucion_id" id="distribucion_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            @foreach ($distribucions as $item)
+                                <option value="{{$item->id}}"
+                                    @if(($item->id)==($mesa->distribucion_id)) selected @endif>
+                                {{$item->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <input type="hidden" id="mesa_id" name="mesa_id">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+@endsection
+@section('js')
+    <script src="{{ asset('js/edit_mesa.js') }}"></script>
+    <!--<script src="{{ asset('js/validate_mesa.js') }}"></script>-->
 @endsection

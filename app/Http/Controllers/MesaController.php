@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MesaRequest;
 use App\Models\Distribucion;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
@@ -69,37 +70,18 @@ class MesaController extends Controller
      * @param  \App\Models\Mesa  $mesa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Mesa $mesa)
+    public function update(MesaRequest $request)
     {
-         /*$res = array('msg'=>"Algo ha ido mal");
-         $data = $request->all();
+        //$mesa = $request->validated();
+        $mesa = array(
+            'num_asientos' => $request->num_asientos,
+            'ocupada' => $request->ocupada,
+            'distribucion_id' => $request->distribucion_id,
+        );
+        Mesa::find($request->mesa_id)->update($mesa);  
 
-         $save = $mesa->update($data);
-
-         if($save){
-             $res = array('msg' => 'Form data successfully updated');
-         }
-         return response()->json($res);*/
-
-        $request->validate([
-            'num_asientos' => ['required'],
-        ]);
-
-        $mesa->update($request->all());
-        $distribucionmesa = DB::table('distribucions')->find($mesa->distribucion_id);
-        $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)
-        ->paginate(6)->withQueryString();
-
-        return view('distribucionmesas.detalles', compact('distribucionmesa','mesas'));
-
-         $message = 'La mesa '.$mesa->id.' ha sido editada correctamente.';
-
-         if($request->ajax()){
-            return response()->json([
-                'num_asientos'=>$mesa->num_asientos,
-                'message'=>$message
-            ]);
-         }
+        return redirect()
+        ->back()->with('mensaje', 'Mesa editada correctamente');
 
     }
 
