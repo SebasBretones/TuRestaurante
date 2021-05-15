@@ -33,7 +33,7 @@ Route::resource('tapas', TapaController::class);
 Route::resource('bebidas', BebidaController::class);
 
 Route::get('pedidos/{mesa}/create','App\Http\Controllers\PedidoController@create')->name('pedidos.create');
-Route::post('pedidos/{mesa}','App\Http\Controllers\PedidoController@store')->name('pedidos.store');
+Route::post('pedidos','App\Http\Controllers\PedidoController@store')->name('pedidos.store');
 Route::put('pedidos/{pedido}','App\Http\Controllers\PedidoController@actualizarEstado')->name('pedidos.actualizarEstado');
 Route::resource('pedidos', PedidoController::class)->except([
 'create', 'store']);

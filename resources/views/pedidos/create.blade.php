@@ -4,7 +4,7 @@ Pedidos mesa {{$mesa->id}}
 @endsection
 @section('content')
 <div class="mt-3 mx-auto p-2 w-4/5">
-    <form name="f" action="{{route('pedidos.store',$mesa)}}" method="POST">
+    <form name="f" action="{{route('pedidos.store')}}" method="POST">
         @csrf
         <div class="row mt-4">
             @php
@@ -30,6 +30,8 @@ Pedidos mesa {{$mesa->id}}
             <div class="col-md-2">
                 <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Cantidad">
             </div>
+            <input type="hidden" name='mesa_id' value="{{$mesa->id}}">
+            <input type="hidden" name='estado_id' value="1">
         </div>
         <div class="row mt-4">
             <div class="col">
@@ -122,6 +124,7 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
                                     <td>
                                         <input type="number" class="form-control" id="cantidad" name="cantidad" value={{$ped->cantidad}}>
                                     </td>
+                                    <input type="hidden" name='mesa_id' value="{{$mesa->id}}">
                                     <td>
                                         <div class="row">
                                             <div class="col-lg-6">
@@ -143,4 +146,7 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
 @endif
 @endsection
 
+@section('js')
+    <script src="{{ asset('js/validate_pedido.js') }}"></script>
+@endsection
 
