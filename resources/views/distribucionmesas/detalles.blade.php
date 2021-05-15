@@ -44,7 +44,6 @@ Mesas de {{$distribucionmesa->nombre}}
                         @else
                         <span class="duracionSalto badge bg-success">Libre</span>
                         @endif
-                        <!--<div class="col-auto"><small class="text-muted">Mesa {{$cont}}-{{$numMesas}}</small></div>-->
                     </div>
                 </div>
             </div>
