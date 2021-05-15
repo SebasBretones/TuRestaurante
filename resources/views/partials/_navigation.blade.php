@@ -17,8 +17,6 @@
                         @endforeach
                     </ul>
                   </li>
-                  <li><hr class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="{{route('distribucionmesas.create')}}">Crear nuevo tipo de distribución</a></li>
                 </ul>
             </li>
           <li class="nav-item">

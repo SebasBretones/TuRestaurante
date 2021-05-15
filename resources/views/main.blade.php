@@ -9,6 +9,17 @@
         <div class="container">
             <div class="py-5 text-center">
                 <h1>@yield('title')</h1>
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </div>
+                @elseif(Session::has('mensaje'))
+                    <div class="alert alert-success">
+                        <li>{{Session::get('mensaje')}}</li>
+                    </div>
+                @endif
             </div>
 
             @yield('content')
@@ -18,6 +29,7 @@
         </div>
 
         @include('partials._js')
+        @yield('js')
 
     </body>
 </html>
