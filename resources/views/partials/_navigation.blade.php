@@ -4,6 +4,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      @if (Auth::check())
       <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
@@ -30,6 +31,9 @@
               <a class="nav-link" href="#">Carta</a>
           </li>
         </ul>
+        @else 
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        @endif
         <ul class="navbar-nav ml-auto">
           @guest
               @if (Route::has('login'))
