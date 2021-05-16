@@ -67,7 +67,7 @@ class PedidoController extends Controller
         $tapa = DB::table('tapas')->find($pedido->tapa_id);
         $bebida = DB::table('bebidas')->find($pedido->bebida_id);
 
-        if($tapa!=null && $tapa->tipotapa_id==2) {
+        if($tapa!=null && $tapa->tipotapa_id==2 && $bebida!=null) {
             return redirect()->back()->with('mensaje', 'Las raciones deben pedirse sin bebida');
         }
         $pedido->total_pedido=0;
@@ -139,7 +139,7 @@ class PedidoController extends Controller
         $bebida = DB::table('bebidas')->find($pedido->bebida_id);
 
         $pedido->total_pedido=0;
-        if($tapa!=null && $tapa->tipotapa_id==2) {
+        if($tapa!=null && $tapa->tipotapa_id==2 && $bebida!=null) {
             return redirect()->back()->with('mensaje', 'Las raciones deben pedirse sin bebida');
         }
 

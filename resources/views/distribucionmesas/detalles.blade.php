@@ -36,20 +36,27 @@ Mesas de {{$distribucionmesa->nombre}}
                             <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button" 
                             data-mesa_id="{{$mesa->id}}" data-num_asientos="{{$mesa->num_asientos}}" data-ocupada="{{$mesa->ocupada}}"
                             data-distribucion_id="{{$mesa->distribucion_id}}"  data-bs-toggle="modal" data-bs-target="#editarMesa">Editar</a>
+                            <form name="borrar" action="{{route('mesas.destroy',$mesa)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger">Borrar</a>
+                            </form>
                         </div>
                         @php
-                        $numMesas = DB::table('mesas')
-                            ->where('distribucion_id', $distribucionmesa->id)
-                            ->count();
+                            $numMesas = DB::table('mesas')
+                                ->where('distribucion_id', $distribucionmesa->id)
+                                ->count();
                         @endphp
-                        <div class="btn-group">
+                        <div class="btn-group ms-2">
                             @if ($mesa->ocupada)
                             <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create',$mesa)}}">Pedidos</a>
                             @endif
+                        </div>
+                        <div class="ms-1">
                             @if ($mesa->ocupada)
-                            <span class="badge bg-danger">Ocupada</span>
+                                <span class="badge bg-danger">Ocupada</span>
                             @else
-                            <span class="duracionSalto badge bg-success">Libre</span>
+                                <span class="duracionSalto badge bg-success">Libre</span>
                             @endif
                         </div>
                     </div>

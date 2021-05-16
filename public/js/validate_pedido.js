@@ -39,35 +39,3 @@ $(document).ready(function(){
 
   });
 });
-
-/*function validarTapaBebida(){
-  let tapa_id = document.getElementById('tapa_id').value;
-  let bebida_id = document.getElementById('bebida_id').value;
-
-  if (tapa_id!="Seleccione una tapa o ración" && bebida_id!="Seleccione una bebida"){
-    toastr.error('Debe seleccionar al menos una tapa o bebida', {timeOut: 1500});
-    return false;
-  } else
-    return true;
-}
-
-function validarCantidad(){
-  let cantidad = document.querySelector('#cantidad').value;
-  if (cantidad.length==0){
-    toastr.error('Debe indicar la cantidad de pedido que quiere', {timeOut: 1500});
-    return false;
-  }else if(cantidad<0 || cantidad>30){
-    toastr.error('La cantidad del pedido debe estar entre 1 y 30', {timeOut: 1500});
-    return false;
-  } else
-    return true;
-}
-
-function validarFormulario(event) {
-  if(validarTapaBebida() && validarCantidad()){
-    toastr.success('Formulario validado correctamente', {timeOut: 1500})
-  } else{
-    toastr.error('No se ha podido validar el formulario', {timeOut: 1500});
-    event.preventDefault();
-  }
-}*/

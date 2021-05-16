@@ -109,6 +109,8 @@ class MesaController extends Controller
      */
     public function destroy(Mesa $mesa)
     {
-        //
+        Factura::find($mesa->factura_id)->delete();
+        $mesa->delete();
+        return redirect()->back()->with('mensaje','Mesa borrada correctamente');
     }
 }

@@ -1,8 +1,8 @@
-window.onload = iniciar;
+window.onload = iniciar();
 
 function iniciar() {
   document.getElementById('editarMesa').addEventListener('submit', validarFormulario);
-  document.getElementById('crearMesa').addEventListener('submit', validarFormulario);
+  document.getElementById('crearMesa').addEventListener('submit', validarFormularioCrear);
 }
 
 function validaNumAsientos(){
@@ -29,7 +29,6 @@ function validarOcupada(){
 
 function validaNumAsientosCrear(){
   let num_asientos = document.getElementById('num_asientos_crear').value;
-  alert(num_asientos);
   if (num_asientos.length == 0){
     toastr.error('Debe indicar el número de asientos', {timeOut: 1500});
     return false;
@@ -51,7 +50,16 @@ function validarOcupadaCrear(){
 }
 
 function validarFormulario(event) {
-  if((validaNumAsientos() && validarOcupada()) || (validaNumAsientosCrear() && validarOcupadaCrear())){
+  if((validaNumAsientos() && validarOcupada())){
+    toastr.success('Formulario validado correctamente', {timeOut: 1500})
+  } else{
+    toastr.error('No se ha podido validar el formulario', {timeOut: 1500});
+    event.preventDefault();
+  }
+}
+
+function validarFormularioCrear(event) {
+  if((validaNumAsientosCrear() && validarOcupadaCrear())){
     toastr.success('Formulario validado correctamente', {timeOut: 1500})
   } else{
     toastr.error('No se ha podido validar el formulario', {timeOut: 1500});
