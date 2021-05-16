@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\MesaRequest;
 use App\Models\Distribucion;
+use App\Models\Factura;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,9 +37,23 @@ class MesaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MesaRequest $request)
     {
-        //
+        $mesa = new Mesa();
+        $datos = $request->validated();
+        $mesa->num_asientos=$datos['num_asientos'];
+        $mesa->ocupada=$datos['ocupada'];
+        $mesa->distribucion_id=$datos['distribucion_id'];
+
+        if($mesa->save()){
+            $factura = Factura::create([
+                'total_factura' => 0.0
+            ]);
+            Mesa::find($mesa->id)
+            ->update(['factura_id'=>$factura->id]);
+        }
+        return redirect()
+        ->back()->with('mensaje', 'Mesa creada correctamente');
     }
 
     /**
@@ -72,7 +87,6 @@ class MesaController extends Controller
      */
     public function update(MesaRequest $request)
     {
-        //$mesa = $request->validated();
         $mesa = array(
             'num_asientos' => $request->num_asientos,
             'ocupada' => $request->ocupada,

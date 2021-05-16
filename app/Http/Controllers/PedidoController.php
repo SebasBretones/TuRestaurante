@@ -50,17 +50,25 @@ class PedidoController extends Controller
     
         $pedido = new Pedido();
         $pedido->estado_id=$request->estado_id;
-        if($request->tapa_id!="Selecciona una tapa o ración") $pedido->tapa_id=$request->tapa_id;
-        if($request->bebida_id!="Selecciona una bebida") {$pedido->bebida_id=$request->bebida_id;}
+        
+        if($request->tapa_id!="Selecciona una tapa o ración") {
+            $arr = explode('|',$request->tapa_id);
+            $pedido->tapa_id=$arr[0];
+        }else
+            $pedido->tapa_id=null;
+
+        if($request->bebida_id!="Selecciona una bebida") 
+            $pedido->bebida_id=$request->bebida_id;
+        else
+            $pedido->bebida_id=null;
         $pedido->cantidad=$request->cantidad;
         $pedido->mesa_id=$request->mesa_id;
 
         $tapa = DB::table('tapas')->find($pedido->tapa_id);
         $bebida = DB::table('bebidas')->find($pedido->bebida_id);
 
-        if($tapa->tipotapa_id==2) {
-            $bebida=null;
-            $pedido->bebida_id=null;
+        if($tapa!=null && $tapa->tipotapa_id==2) {
+            return redirect()->back()->with('mensaje', 'Las raciones deben pedirse sin bebida');
         }
         $pedido->total_pedido=0;
         for($i=0;$i<($pedido->cantidad);$i++){
@@ -75,7 +83,10 @@ class PedidoController extends Controller
         }
 
 
-        $pedido->save();
+        if($pedido->tapa_id == null && $pedido->bebida_id == null){
+            return redirect()->back()->with('mensaje', 'Debe seleccionar una bebida o tapa');
+        }else
+            $pedido->save();
 
         return redirect()->back();
     }
@@ -112,17 +123,24 @@ class PedidoController extends Controller
     {
         $pedido->estado_id=$request->estado_id;
         $pedido->cantidad=$request->cantidad;
-        if($request->tapa_id!="Selecciona una tapa o ración")  $pedido->tapa_id=$request->tapa_id;
-        if($request->bebida_id!="Selecciona una bebida") $pedido->bebida_id=$request->bebida_id;
+        $pedido->tapa_id=null;
+        $pedido->bebida_id=null;
+        if($request->tapa_id!="Selecciona una tapa o ración") {
+            $arr = explode('|',$request->tapa_id);
+            $pedido->tapa_id=$arr[0];
+        }else
+            $pedido->tapa_id=$request->tapa_id;
+        if($request->bebida_id!="Selecciona una bebida") 
+            $pedido->bebida_id=$request->bebida_id;
+
         $pedido->mesa_id=$request->mesa_id;
 
         $tapa = DB::table('tapas')->find($pedido->tapa_id);
         $bebida = DB::table('bebidas')->find($pedido->bebida_id);
 
         $pedido->total_pedido=0;
-        if($tapa->tipotapa_id==2) {
-            $bebida=null;
-            $pedido->bebida_id=null;
+        if($tapa!=null && $tapa->tipotapa_id==2) {
+            return redirect()->back()->with('mensaje', 'Las raciones deben pedirse sin bebida');
         }
 
         for($i=0;$i<($pedido->cantidad);$i++){
@@ -143,8 +161,10 @@ class PedidoController extends Controller
                 ->where('id', $factura->id)
                 ->update(['total_factura' => $pedido->total_pedido]);
         }
-
-        $pedido->update();
+        if($pedido->tapa_id == null && $pedido->bebida_id == null){
+            return redirect()->back()->with('mensaje', 'Debe seleccionar una bebida o tapa');
+        }else
+            $pedido->update();
 
         return redirect()->back();
     }

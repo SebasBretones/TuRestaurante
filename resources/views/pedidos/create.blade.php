@@ -4,7 +4,7 @@ Pedidos mesa {{$mesa->id}}
 @endsection
 @section('content')
 <div class="mt-3 mx-auto p-2 w-4/5">
-    <form name="f" action="{{route('pedidos.store')}}" method="POST">
+    <form name="f" id="editarPedido" action="{{route('pedidos.store')}}" method="POST">
         @csrf
         <div class="row mt-4">
             @php
@@ -12,15 +12,16 @@ Pedidos mesa {{$mesa->id}}
                 $bebidas = DB::table('bebidas')->get();
             @endphp
             <div class="col-md-4">
-                <select name="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                <select name="tapa_id" id="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona una tapa o ración</option>
                     @foreach ($tapas as $item)
-                    <option value="{{$item->id}}">{{$item->nombre}}</option>
+                    <option value="{{$item->id}}|{{$item->tipotapa_id}}">{{$item->nombre}}</option>
                     @endforeach
                 </select>
             </div>
+            <input type="hidden" name="tapas" id="tapas" value="{{$tapas}}">
             <div class="col-md-4">
-                <select name="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                <select name="bebida_id" id="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona una bebida</option>
                     @foreach ($bebidas as $item)
                     <option value="{{$item->id}}">{{$item->nombre}}</option>
@@ -68,7 +69,7 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
                         @php
                         $pedido= '\App\Models\Pedido'::find($ped->id)
                         @endphp
-                        <form name="f" action="{{route('pedidos.update',$pedido)}}" method="POST">
+                        <form name="fo" id="editarPedido" action="{{route('pedidos.update',$pedido)}}" method="POST">
                             @csrf
                             @method('PUT')
                                 <tr>
@@ -77,7 +78,7 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
                                         @php
                                         $estados = DB::table('estados')->get();
                                         @endphp
-                                        <select name="estado_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                                        <select name="estado_id" id="estado_id" class="form-select form-select-md" aria-label=".form-select-md example">
                                             @foreach ($estados as $item)
                                                 <option value="{{$item->id}}"
                                                     @if ($item->id==$pedido->estado_id)
@@ -93,10 +94,10 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
                                         @php
                                         $tapa = DB::table('tapas')->find($ped->tapa_id)
                                         @endphp
-                                        <select name="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
-                                            <option>Seleccione una tapa</option>
+                                        <select name="tapa_id" id="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                                            <option>Selecciona una tapa o ración</option>
                                             @foreach ($tapas as $item)
-                                                <option value="{{$item->id}}"
+                                                <option value="{{$item->id}}|{{$item->tipotapa_id}}"
                                                     @if ($tapa!=null && $item->id==$tapa->id)
                                                     selected
                                                     @endif>
@@ -109,8 +110,8 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
                                         @php
                                         $bebida = DB::table('bebidas')->find($ped->bebida_id)
                                         @endphp
-                                        <select name="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
-                                            <option>Seleccione una bebida</option>
+                                        <select name="bebida_id" id="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
+                                            <option>Selecciona una bebida</option>
                                             @foreach ($bebidas as $item)
                                                 <option value="{{$item->id}}"
                                                     @if ($bebida!=null && $item->id==$bebida->id)

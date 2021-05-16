@@ -23,6 +23,7 @@ function validarNombreEdit(){
 
 function validarFormulario(event) {
   if(validarNombre() || validarNombreEdit()){
+    toastr.warning('Comprobando que el nombre sea único...', {timeOut: 1500})
   } else{
     toastr.error('Debe escribir un nombre', {timeOut: 1500});
     event.preventDefault();
