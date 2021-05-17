@@ -71,7 +71,7 @@ Todas los platos
           </div>
           <div class="col">
             <label for="precio" class="col-form-label">Precio</label>
-            <input type="number" class="form-control" name="precio" placeholder="Precio" id="nombre" step="any">
+            <input type="number" class="form-control" name="precio" placeholder="Precio" id="precio" step="any">
          </div>
           <div class="row mt-4">
               @php
@@ -107,13 +107,14 @@ Todas los platos
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form name="f" idaction="{{route('tapas.update','tapa_id')}}" method="POST">
+        <form name="f" id="editarTapa" action="{{route('tapas.update','tapa_id')}}" method="POST">
           @csrf
           @method('PUT')
           <div class="col">
               <label for="nombre" class="col-form-label">Nombre</label>
               <input type="text" class="form-control" name="nombre" placeholder="Nombre" id="nombre_edit">
           </div>
+          <input type="hidden" name="id" id="tapa_id" value="">
           <div class="col">
             <label for="precio" class="col-form-label">Precio</label>
             <input type="number" class="form-control" name="precio" placeholder="Precio" id="precio_edit" step="any">
