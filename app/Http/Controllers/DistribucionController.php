@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\DistribucionesRequest;
 use App\Models\Distribucion;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
@@ -38,16 +39,14 @@ class DistribucionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DistribucionesRequest $request)
     {
+        $datos = $request->validated();
         $distribucion = new Distribucion();
-        $request->validate([
-            'nombre'=>'required'
-        ]);
 
-        $distribucion->nombre=ucwords($request->nombre);
+        $distribucion->nombre=$datos['nombre'];
         $distribucion->save();
-        return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución guardada");
+        return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución creada correctamente");
     }
 
     /**
@@ -70,9 +69,9 @@ class DistribucionController extends Controller
      * @param  \App\Models\Distribucion  $distribucion
      * @return \Illuminate\Http\Response
      */
-    public function edit(Distribucion $distribucion)
+    public function edit(Distribucion $distribucionmesa)
     {
-        return view('distribucionmesas.edit', $distribucion);
+        return view('distribucionmesas.edit', compact('distribucionmesa'));
     }
 
     /**
@@ -82,9 +81,11 @@ class DistribucionController extends Controller
      * @param  \App\Models\Distribucion  $distribucion
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Distribucion $distribucion)
+    public function update(DistribucionesRequest $request)
     {
-        //
+        $datos = $request->validated();
+        Distribucion::find($request->distribucion_id)->update($datos);
+        return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución creada correctamente");
     }
 
     /**
@@ -93,8 +94,9 @@ class DistribucionController extends Controller
      * @param  \App\Models\Distribucion  $distribucion
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Distribucion $distribucion)
+    public function destroy(Distribucion $distribucionmesa)
     {
-        //
+        $distribucionmesa->delete();
+        return redirect()->route('distribucionmesas.index');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TapaRequest;
 use App\Models\Tapa;
 use Illuminate\Http\Request;
 
@@ -36,7 +37,7 @@ class TapaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TapaRequest $request)
     {
         $tapa = new Tapa();
         $tapa->nombre = $request->nombre;
@@ -76,13 +77,16 @@ class TapaController extends Controller
      * @param  \App\Models\Tapa  $tapa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tapa $tapa)
+    public function update(TapaRequest $request)
     {
+        $tapa = Tapa::find($request->id);
+
         $tapa->nombre = $request->nombre;
         $tapa->precio = $request->precio;
         $tapa->tipotapa_id = $request->tipotapa_id;
 
         $tapa->update();
+        
         return redirect()->route('tapas.index');
     }
 

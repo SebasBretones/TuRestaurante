@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\BebidaRequest;
+use App\Http\Requests\TapaRequest;
 use App\Models\Bebida;
 use Illuminate\Http\Request;
 
@@ -36,7 +38,7 @@ class BebidaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BebidaRequest $request)
     {
         $bebida = new Bebida();
         $bebida->nombre = $request->nombre;
@@ -76,8 +78,9 @@ class BebidaController extends Controller
      * @param  \App\Models\Bebida  $bebida
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Bebida $bebida)
+    public function update(BebidaRequest $request)
     {
+        $bebida = Bebida::find($request->id);
         $bebida->nombre = $request->nombre;
         $bebida->precio = $request->precio;
         $bebida->tipobebida_id = $request->tipobebida_id;
