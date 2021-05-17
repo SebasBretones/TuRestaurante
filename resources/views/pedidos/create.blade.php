@@ -45,7 +45,7 @@ Pedidos mesa {{$mesa->id}}
 </div>
 
 @php
-$pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
+$pedidos = DB::table('pedidos')->where('estado_id','!=',4)->get();
 @endphp
 @if (count($pedidos)!=0)   
     <hr/>
@@ -65,7 +65,6 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
                 </thead>
                 <tbody>
                     @foreach ($pedidos as $ped)
-                    @if ($ped->estado_id!=4)
                         @php
                         $pedido= '\App\Models\Pedido'::find($ped->id)
                         @endphp
@@ -138,7 +137,6 @@ $pedidos = DB::table('pedidos')->where('mesa_id',$mesa->id)->get();
                                     </td>
                                 </tr>
                             </form>
-                        @endif
                     @endforeach
                 </tbody>
             </table>

@@ -45,7 +45,7 @@ class TapaController extends Controller
         $tapa->tipotapa_id = $request->tipotapa_id;
 
         $tapa->save();
-        return redirect()->route('tapas.index');
+        return redirect()->route('tapas.index')->with('mensaje', 'Plato creado correctamente');
     }
 
     /**
@@ -87,7 +87,7 @@ class TapaController extends Controller
 
         $tapa->update();
         
-        return redirect()->route('tapas.index');
+        return redirect()->route('tapas.index')->with('mensaje', 'Plato editado correctamente');
     }
 
     /**
@@ -99,6 +99,6 @@ class TapaController extends Controller
     public function destroy(Tapa $tapa)
     {
         $tapa->delete();
-        return redirect()->route('tapas.index');
+        return redirect()->route('tapas.index')->with('mensaje', 'Plato borrado correctamente');
     }
 }

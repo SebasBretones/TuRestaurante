@@ -9,7 +9,7 @@ $(document).ready(function(){
     let tipo = arr[1];
 
     function validarTapaBebida(){
-      if (tapa=="Selecciona una tapa" && bebida_id=="Selecciona una bebida"){
+      if (tapa=="Selecciona una tapa o ración" && bebida_id=="Selecciona una bebida"){
         toastr.error('Debe seleccionar al menos una tapa o bebida', {timeOut: 1500});
         return false;
       } else if (tipo!=null && tipo == '2' && bebida_id != "Selecciona una bebida") {

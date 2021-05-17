@@ -4,7 +4,9 @@ Factura {{$factura->id}}
 @endsection
 @section('content')
 @php
-    $pedidos=$factura->pedidos;
+    $todosPedidos=$factura->pedidos;
+    $pedidos = $todosPedidos->where('estado_id',4)->all();
+
 @endphp
 @if (count($pedidos)==0)
     No hay pedidos
@@ -18,13 +20,13 @@ Factura {{$factura->id}}
                     <th scope="col">Estado</th>
                     <th scope="col">Precio</th>
                     <th scope="col">Tapa</th>
+                    <th scope="col">Bebida</th>
                     <th scope="col">Cantidad</th>
                     <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($pedidos as $ped)
-                    @if ($ped->estado_id==4)
                         @php
                         $pedido= '\App\Models\Pedido'::find($ped->id)
                         @endphp
@@ -99,7 +101,6 @@ Factura {{$factura->id}}
                                     </td>
                                 </tr>
                             </form>
-                        @endif
                     @endforeach
                 </tbody>
             </table>

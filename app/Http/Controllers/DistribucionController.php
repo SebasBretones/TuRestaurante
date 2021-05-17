@@ -97,6 +97,6 @@ class DistribucionController extends Controller
     public function destroy(Distribucion $distribucionmesa)
     {
         $distribucionmesa->delete();
-        return redirect()->route('distribucionmesas.index');
+        return redirect()->route('distribucionmesas.index')->with('mensaje','Distribución borrada correctamente');
     }
 }
