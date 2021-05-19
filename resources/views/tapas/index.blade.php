@@ -1,6 +1,6 @@
 @extends('main')
 @section('title')
-Todas los platos
+Todos los platos
 @endsection
 @section('content')
 <div class="row mt-4">
