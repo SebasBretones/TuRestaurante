@@ -8,51 +8,53 @@ Todos los platos
    <button data-bs-toggle="modal" data-bs-target="#crearTapa" type="button" class="btn btn-success">Crear</a>
   </div>
 </div>
+
 <div class="row mt-4">
   <div class="col-md-12">
-      <table class="table table-striped table-hover">
-          <thead>
-              <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Tipo</th>
-              <th scope="col"></th>
-              </tr>
-          </thead>
-          <tbody>
-            @foreach ($tapas as $tapa)
-            <tr>
-              <td>{{$tapa->nombre}}</td>
-              <td>{{$tapa->precio}}</td>
-              <td>
-                @php
-                    $tipo = '\App\Models\Tipotapa'::find($tapa->tipotapa_id);
-                @endphp
-                {{$tipo->nombre}}
-              </td>
-              <td>
-                <div class="row">
-                  <div class="col-md-6">
-                    <button class="btn btn-success" type="button"
-                    data-tapa_id="{{$tapa->id}}" data-nombre="{{$tapa->nombre}}" data-precio="{{$tapa->precio}}"
-                    data-tipotapa_id="{{$tapa->tipotapa_id}}" data-bs-toggle="modal" data-bs-target="#editarTapa">Editar</button>
-                  </div>
-                  <div class="col-md-6">
-                    <form name="f" action="{{route('tapas.destroy', $tapa)}}"  method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button class="btn btn-danger" type="submit">Borrar</button>
-                    </form>    
-                  </div>
-                </div>
-              </div>
-              </td>
+    <div class="table100 ver3 res m-b-110">
+      <table data-vertable="ver3">
+        <thead>
+            <tr class="row100 head">
+            <th class="column100 column1">Nombre</th>
+            <th class="column100 column2">Precio</th>
+            <th class="column100 column3">Tipo</th>
+            <th class="column100 column4"></th>
             </tr>
-            @endforeach
-          </tbody>
+        </thead>
+        <tbody>
+          @foreach ($tapas as $tapa)
+          <tr class="row100">
+            <td class="column100 column1">{{$tapa->nombre}}</td>
+            <td class="column100 column2">{{$tapa->precio}} €</td>
+            <td class="column100 column3">
+              @php
+                  $tipo = '\App\Models\Tipotapa'::find($tapa->tipotapa_id);
+              @endphp
+              {{$tipo->nombre}}
+            </td>
+            <td class="column100 column4">
+              <div class="btn-group">
+                <button class="btn btn-success" type="button"
+                data-tapa_id="{{$tapa->id}}" data-nombre="{{$tapa->nombre}}" data-precio="{{$tapa->precio}}"
+                data-tipotapa_id="{{$tapa->tipotapa_id}}" data-bs-toggle="modal" data-bs-target="#editarTapa">Editar</button>
+                <form name="f" action="{{route('tapas.destroy', $tapa)}}"  method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <div class="ms-2">
+                  <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el plato {{$tapa->nombre}}?')">Borrar</button>
+                  </div>
+                </form>  
+              </div>
+            </td>  
+          </tr>
+          @endforeach
+        </tbody>
       </table>
+    </div>    
   </div>
 </div>
+
+@include('partials._paginator', ['array' => $tapas])
 
 <!--Modal crear-->
 <div class="modal fade" id="crearTapa" tabindex="-1" aria-labelledby="crearTapaLabel" aria-hidden="true">
@@ -78,6 +80,7 @@ Todos los platos
                   $tipos = DB::table('tipotapas')->get();
               @endphp
               <div class="col">
+                  <label for="tipo_tapa_id" class="col-form-label">Tipo de plato</label>
                   <select name="tipotapa_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
                       @foreach ($tipos as $item)
                           <option value="{{$item->id}}">{{$item->nombre}}</option>
@@ -111,8 +114,8 @@ Todos los platos
           @csrf
           @method('PUT')
           <div class="col">
-              <label for="nombre" class="col-form-label">Nombre</label>
-              <input type="text" class="form-control" name="nombre" placeholder="Nombre" id="nombre_edit">
+            <label for="nombre" class="col-form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombre" placeholder="Nombre" id="nombre_edit">
           </div>
           <input type="hidden" name="id" id="tapa_id" value="">
           <div class="col">
@@ -124,17 +127,18 @@ Todos los platos
                   $tipos = DB::table('tipotapas')->get();
               @endphp
               <div class="col">
-                  <select name="tipotapa_id" id="tipotapa_id_edit" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      @foreach ($tipos as $item)
-                          <option value="{{$item->id}}">{{$item->nombre}}</option>
-                      @endforeach
-                  </select>
+                <label for="tipo_tapa_id" class="col-form-label">Tipo de plato</label>
+                <select name="tipotapa_id" id="tipotapa_id_edit" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    @foreach ($tipos as $item)
+                        <option value="{{$item->id}}">{{$item->nombre}}</option>
+                    @endforeach
+                </select>
               </div>
           </div>
           <div class="row mt-4">
               <div class="col">
                   <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Editar</button>
-                  <button class="btn btn-warning" type="reset"><i class="fa fa-brush"></i> Limpiar</button>
+                  <button class="btn btn-warning" type="reset"><i class="fas fa-trash-alt"></i> Limpiar</button>
                   <a href="{{route('tapas.index')}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Volver</a>
               </div>
           </div>

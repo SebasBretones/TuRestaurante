@@ -3,6 +3,14 @@
 Pedidos mesa {{$mesa->id}}
 @endsection
 @section('content')
+<div class="col s12">
+    <a id="listb" href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}">
+      <span class="back-to-index">
+        <i class="material-icons back-arrow">keyboard_backspace</i>
+        <span>Volver al listado</span>
+      </span>
+    </a>
+</div>
 <div class="mt-3 mx-auto p-2 w-4/5">
     <form name="f" id="editarPedido" action="{{route('pedidos.store')}}" method="POST">
         @csrf

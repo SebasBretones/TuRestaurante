@@ -10,49 +10,50 @@ Todas las bebidas
 </div>
 <div class="row mt-2">
   <div class="col-md-12">
-      <table class="table table-striped table-hover">
+    <div class="table100 ver3 res m-b-110">
+      <table data-vertable="ver3">
           <thead>
-              <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Tipo</th>
-              <th scope="col"></th>
+              <tr class="row100 head">
+                <th class="column100 column1">Nombre</th>
+                <th class="column100 column2">Precio</th>
+                <th class="column100 column3">Tipo</th>
+                <th class="column100 column4"></th>
               </tr>
           </thead>
           <tbody>
             @foreach ($bebidas as $bebida)
-            <tr>
-              <td>{{$bebida->nombre}}</td>
-              <td>{{$bebida->precio}}</td>
-              <td>
+            <tr class="row100">
+              <td class="column100 column1">{{$bebida->nombre}}</td>
+              <td class="column100 column2">{{$bebida->precio}}</td>
+              <td class="column100 column3">
                 @php
                     $tipo = '\App\Models\Tipobebida'::find($bebida->tipobebida_id);
                 @endphp
                 {{$tipo->nombre}}
               </td>
-              <td>
-                <div class="row">
-                  <div class="col-md-6">
-                    <button class="btn btn-success" type="button"
-                    data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
-                    data-tipobebida_id="{{$bebida->tipobebida_id}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
-                  </div>
-                  <div class="col-md-6">
-                    <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button class="btn btn-danger" type="submit">Borrar</button>
-                    </form>    
-                  </div>
-                </div>
-              </div>
+              <td class="column100 column4">
+                <div class="btn-group">
+                  <button class="btn btn-success" type="button"
+                  data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
+                  data-tipobebida_id="{{$bebida->tipobebida_id}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
+                  <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="ms-2">
+                      <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar la bebida {{$bebida->nombre}}?')">Borrar</button>
+                    </div>
+                  </form>  
+                </div>  
               </td>
             </tr>
             @endforeach
           </tbody>
       </table>
+    </div>
   </div>
 </div>
+
+@include('partials._paginator', ['array' => $bebidas])
 
 <!--Modal crear-->
 <div class="modal fade" id="crearBebida" tabindex="-1" aria-labelledby="crearBebidaLabel" aria-hidden="true">

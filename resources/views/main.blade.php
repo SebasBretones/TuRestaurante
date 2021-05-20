@@ -8,7 +8,7 @@
 
         <div class="container">
             <div class="py-5 text-center">
-                <h1>@yield('title')</h1>
+                <p class="title">@yield('title')</p>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         @foreach ($errors->all() as $error)

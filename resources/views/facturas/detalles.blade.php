@@ -6,10 +6,19 @@ Factura {{$factura->id}}
 @php
     $todosPedidos=$factura->pedidos;
     $pedidos = $todosPedidos->where('estado_id',4)->all();
-
 @endphp
+<div class="col s12">
+    <a id="listb" href="{{url()->previous()}}">
+      <span class="back-to-index">
+        <i class="material-icons back-arrow">keyboard_backspace</i>
+        <span>Volver</span>
+      </span>
+    </a>
+</div>
 @if (count($pedidos)==0)
+<div class="row mt-4">
     No hay pedidos
+</div>
 @else   
     <div class="row mt-4">
         <div class="col-md-12">
