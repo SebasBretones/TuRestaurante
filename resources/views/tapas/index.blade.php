@@ -15,24 +15,24 @@ Todos los platos
       <table data-vertable="ver3">
         <thead>
             <tr class="row100 head">
-            <th class="column100 column1">Nombre</th>
-            <th class="column100 column2">Precio</th>
-            <th class="column100 column3">Tipo</th>
-            <th class="column100 column4"></th>
+            <th class="column1">Nombre</th>
+            <th class="column2">Precio</th>
+            <th class="column3">Tipo</th>
+            <th class="column4"></th>
             </tr>
         </thead>
         <tbody>
           @foreach ($tapas as $tapa)
           <tr class="row100">
-            <td class="column100 column1">{{$tapa->nombre}}</td>
-            <td class="column100 column2">{{$tapa->precio}} €</td>
-            <td class="column100 column3">
+            <td class="column1">{{$tapa->nombre}}</td>
+            <td class="column2">{{$tapa->precio}} €</td>
+            <td class="column3">
               @php
                   $tipo = '\App\Models\Tipotapa'::find($tapa->tipotapa_id);
               @endphp
               {{$tipo->nombre}}
             </td>
-            <td class="column100 column4">
+            <td class="column4">
               <div class="btn-group">
                 <button class="btn btn-success" type="button"
                 data-tapa_id="{{$tapa->id}}" data-nombre="{{$tapa->nombre}}" data-precio="{{$tapa->precio}}"

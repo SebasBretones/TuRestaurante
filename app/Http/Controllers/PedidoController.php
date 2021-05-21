@@ -51,7 +51,7 @@ class PedidoController extends Controller
         $pedido = new Pedido();
         $pedido->estado_id=$request->estado_id;
         
-        if($request->tapa_id!="Selecciona una tapa o ración") {
+        if($request->tapa_id!="Selecciona un plato") {
             $arr = explode('|',$request->tapa_id);
             $pedido->tapa_id=$arr[0];
         }else
@@ -119,13 +119,14 @@ class PedidoController extends Controller
      * @param  \App\Models\Pedido  $pedido
      * @return \Illuminate\Http\Response
      */
-    public function update(PedidoRequest $request, Pedido $pedido)
+    public function update(PedidoRequest $request)
     {
+        $pedido = Pedido::find($request->pedido_id);
         $pedido->estado_id=$request->estado_id;
         $pedido->cantidad=$request->cantidad;
         $pedido->tapa_id=null;
         $pedido->bebida_id=null;
-        if($request->tapa_id!="Selecciona una tapa o ración") {
+        if($request->tapa_id!="Selecciona un plato") {
             $arr = explode('|',$request->tapa_id);
             $pedido->tapa_id=$arr[0];
         }else
@@ -177,9 +178,12 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
+        $pedido->delete();
+
+        return redirect()->back()->with('mensaje', 'Pedido borrado correctamente');
     }
 
-    public function actualizarEstado(Request $request, Pedido $pedido)
+    public function actualizarEstado(PedidoRequest $request, Pedido $pedido)
     {
         $pedido->estado_id=$request->estado_id;
         $pedido->cantidad=$pedido->cantidad;
@@ -193,6 +197,5 @@ class PedidoController extends Controller
 
         $pedido->update();
 
-        return redirect()->back();
     }
 }

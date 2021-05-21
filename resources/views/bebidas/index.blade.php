@@ -14,24 +14,24 @@ Todas las bebidas
       <table data-vertable="ver3">
           <thead>
               <tr class="row100 head">
-                <th class="column100 column1">Nombre</th>
-                <th class="column100 column2">Precio</th>
-                <th class="column100 column3">Tipo</th>
-                <th class="column100 column4"></th>
+                <th class="column1">Nombre</th>
+                <th class="column2">Precio</th>
+                <th class="column3">Tipo</th>
+                <th class="column4"></th>
               </tr>
           </thead>
           <tbody>
             @foreach ($bebidas as $bebida)
             <tr class="row100">
-              <td class="column100 column1">{{$bebida->nombre}}</td>
-              <td class="column100 column2">{{$bebida->precio}}</td>
-              <td class="column100 column3">
+              <td class="column1">{{$bebida->nombre}}</td>
+              <td class="column2">{{$bebida->precio}}</td>
+              <td class="column3">
                 @php
                     $tipo = '\App\Models\Tipobebida'::find($bebida->tipobebida_id);
                 @endphp
                 {{$tipo->nombre}}
               </td>
-              <td class="column100 column4">
+              <td class="column4">
                 <div class="btn-group">
                   <button class="btn btn-success" type="button"
                   data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
