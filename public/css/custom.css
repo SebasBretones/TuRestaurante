@@ -70,16 +70,6 @@ body
     padding-left: 0;
 }
 
-.footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: grey;
-    color: #fff;
-    text-align: center;
-}
-
 .centrado {
     margin: 0 auto;
 }
@@ -251,6 +241,10 @@ table {
 
 #left{
   float:left;
+}
+
+#center {
+  float: center;
 }
 
 #right{

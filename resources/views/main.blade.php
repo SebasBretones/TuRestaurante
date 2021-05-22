@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 
     @include('partials._head')
+    @yield('css')
 
     <body>
 
         @include('partials._navigation')
 
         <div class="container">
-            <div class="py-5 text-center">
+            <div class="text-center">
                 <p class="title">@yield('title')</p>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -27,6 +28,9 @@
             <!--@include('partials._footer')-->
 
         </div>
+
+        @yield('noContainer')
+
 
         @include('partials._js')
         @yield('js')
