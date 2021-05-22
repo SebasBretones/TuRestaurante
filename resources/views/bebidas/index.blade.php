@@ -13,6 +13,12 @@
 @endsection
 
 @section('content')
+
+<div class="row mt-4">
+  <div class="col-lg-4">
+    <button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</button></div>
+</div>
+
 <div class="row mt-2">
   <div class="col-md-12">
     <div class="table100 ver3 res m-b-110">
@@ -22,8 +28,7 @@
                 <th class="column1">Nombre</th>
                 <th class="column2">Precio</th>
                 <th class="column3">Tipo</th>
-                <th class="column4"><button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</a>
-                </th>
+                <th class="column4"></th>
               </tr>
           </thead>
           <tbody>
