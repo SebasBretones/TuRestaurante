@@ -31,15 +31,14 @@ class DistribucionesRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required', 'unique:distribucions,nombre,'.$this->id]
+            'nombre' => ['required']
         ];
     }
 
     public function messages()
     {
         return [
-            'nombre.required' => 'Debe escribir un nombre',
-            'nombre.unique' => 'Esta distribución ya existe'
+            'nombre.required' => 'Debe escribir un nombre'
         ];
 
     }

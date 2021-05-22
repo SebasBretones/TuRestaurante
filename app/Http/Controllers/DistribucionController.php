@@ -83,8 +83,10 @@ class DistribucionController extends Controller
      */
     public function update(DistribucionesRequest $request)
     {
-        $datos = $request->validated();
-        Distribucion::find($request->distribucion_id)->update($datos);
+        $distribucion = Distribucion::find($request->id);
+        $distribucion->nombre = $request->nombre;
+
+        $distribucion->update();
         return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución creada correctamente");
     }
 
