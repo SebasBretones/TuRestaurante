@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PedidoRequest;
+use App\Models\Factura;
 use App\Models\Mesa;
 use App\Models\Pedido;
 use App\Models\Tapa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use PDF;
 class PedidoController extends Controller
@@ -21,13 +23,6 @@ class PedidoController extends Controller
         $pedidos = Pedido::all();
         return view('pedidos.index', compact('pedidos'));
     }
-
-    public function downloadPDF() {
-        $pedidos = Pedido::all();
-        $pdf= PDF::loadview('pedidos.index',compact('pedidos'));
-        return $pdf->download('pedidos.pdf');
-
-      }
 
     /**
      * Show the form for creating a new resource.
@@ -126,9 +121,8 @@ class PedidoController extends Controller
         $pedido->cantidad=$request->cantidad;
         $pedido->tapa_id=null;
         $pedido->bebida_id=null;
-        if($request->tapa_id!="Selecciona un plato") {
-            $arr = explode('|',$request->tapa_id);
-            $pedido->tapa_id=$arr[0];
+        if($request->tapa_id=="Selecciona un plato") {
+            $pedido->tapa_id=null;
         }else
             $pedido->tapa_id=$request->tapa_id;
         if($request->bebida_id!="Selecciona una bebida") 
@@ -160,7 +154,7 @@ class PedidoController extends Controller
             $factura=DB::table('facturas')->find($mesa->factura_id);
             DB::table('facturas')
                 ->where('id', $factura->id)
-                ->update(['total_factura' => $pedido->total_pedido]);
+                ->update(['total_factura' => $factura->total_factura + $pedido->total_pedido]);
         }
         if($pedido->tapa_id == null && $pedido->bebida_id == null){
             return redirect()->back()->with('mensaje', 'Debe seleccionar una bebida o tapa');
@@ -198,4 +192,12 @@ class PedidoController extends Controller
         $pedido->update();
 
     }
+
+    public function downloadPDF(Factura $factura) {
+        $todosPedidos=$factura->pedidos;
+        $pedidos = $todosPedidos->where('estado_id',4)->all();
+
+        $pdf= PDF::loadview('pdf.pedidos',compact('pedidos','factura'));
+        return $pdf->download('factura.pdf');
+      }
 }

@@ -23,6 +23,9 @@ Factura {{$factura->id}}
     No hay pedidos
 </div>
 @else   
+<div class="d-flex justify-content-end mb-4">
+    <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>
+</div>
 <div class="row mt-4">
     <div class="col-md-12">
         <div class="table100 ver3 res m-b-110">

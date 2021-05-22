@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BebidaController;
+use App\Http\Controllers\CartaController;
 use App\Http\Controllers\DistribucionController;
 use App\Http\Controllers\FacturaController;
 use App\Http\Controllers\MesaController;
@@ -40,14 +41,15 @@ Route::middleware(['auth','verified'])->group(function(){
         Route::post('','App\Http\Controllers\PedidoController@store')->name('pedidos.store');
         Route::put('/{pedido}','App\Http\Controllers\PedidoController@actualizarEstado')->name('pedidos.actualizarEstado');
     });
+
     Route::resource('pedidos', PedidoController::class)->except([
         'create', 'store']);
- 
+    
+    Route::get('/download-pdf/{factura}', [PedidoController::class, 'downloadPDF']);
 });
 
+Route::get('/descargar-carta', [CartaController::class, 'descargarCarta']);
 
 
 
-
-Route::get('/download-pdf', [PedidoController::class, 'downloadPDF']);
 
