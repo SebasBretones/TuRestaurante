@@ -1,7 +1,4 @@
 @extends('main')
-@section('title')
-Factura {{$factura->id}}
-@endsection
 @section('content')
 @php
     $todosPedidos=$factura->pedidos;
@@ -10,7 +7,7 @@ Factura {{$factura->id}}
     $tapas = DB::table('tapas')->get();
     $bebidas = DB::table('bebidas')->get();
 @endphp
-<div class="col s12">
+<div class="col s12 mt-4">
     <a id="listb" href="{{url()->previous()}}">
       <span class="back-to-index">
         <i class="material-icons back-arrow">keyboard_backspace</i>
@@ -22,7 +19,7 @@ Factura {{$factura->id}}
 <div class="row mt-4">
     No hay pedidos
 </div>
-@else   
+@else
 <div class="d-flex justify-content-end mb-4">
     <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>
 </div>
@@ -45,7 +42,7 @@ Factura {{$factura->id}}
                     @foreach ($pedidos as $ped)
                         @php
                             $pedido= '\App\Models\Pedido'::find($ped->id)
-                        @endphp   
+                        @endphp
                         <tr class="row100">
                             <td class="pColumn1">{{$ped->id}}</th>
                             <td class="pColumn2">
@@ -176,7 +173,7 @@ Factura {{$factura->id}}
             </form>
         </div>
     </div>
-@endif    
+@endif
 @endsection
 @section('js')
     <script src="{{ asset('js/edit_pedido.js') }}"></script>

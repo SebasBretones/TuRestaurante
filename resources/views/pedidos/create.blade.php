@@ -1,12 +1,9 @@
 @extends('main')
-@section('title')
-Pedidos mesa {{$mesa->id}}
-@endsection
 @section('content')
 @php
     $estados = DB::table('estados')->get();
 @endphp
-<div class="col s12">
+<div class="col s12 mt-4">
     <a id="listb" href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}">
       <span class="back-to-index">
         <i class="material-icons back-arrow">keyboard_backspace</i>
@@ -57,9 +54,12 @@ Pedidos mesa {{$mesa->id}}
 </div>
 
 @php
-$pedidos = DB::table('pedidos')->where('estado_id','!=',4)->get();
+$pedidos = DB::table('pedidos')->where([
+    ['mesa_id',$mesa->id],
+    ['estado_id','!=',4],
+    ])->get();
 @endphp
-@if (count($pedidos)!=0)   
+@if (count($pedidos)!=0)
     <hr/>
     <div class="row mt-4">
         <div class="col-md-12">
@@ -80,7 +80,7 @@ $pedidos = DB::table('pedidos')->where('estado_id','!=',4)->get();
                         @foreach ($pedidos as $ped)
                             @php
                                 $pedido= '\App\Models\Pedido'::find($ped->id)
-                            @endphp   
+                            @endphp
                             <tr class="row100">
                                 <td class="pColumn1">{{$ped->id}}</td>
                                 <td class="pColumn2">
