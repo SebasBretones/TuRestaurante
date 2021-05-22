@@ -4,113 +4,173 @@ Factura {{$factura->id}}
 @endsection
 @section('content')
 @php
-    $pedidos=$factura->pedidos;
+    $todosPedidos=$factura->pedidos;
+    $pedidos = $todosPedidos->where('estado_id',4)->all();
+    $estados = DB::table('estados')->get();
+    $tapas = DB::table('tapas')->get();
+    $bebidas = DB::table('bebidas')->get();
 @endphp
+<div class="col s12">
+    <a id="listb" href="{{url()->previous()}}">
+      <span class="back-to-index">
+        <i class="material-icons back-arrow">keyboard_backspace</i>
+        <span>Volver</span>
+      </span>
+    </a>
+</div>
 @if (count($pedidos)==0)
+<div class="row mt-4">
     No hay pedidos
+</div>
 @else   
-    <div class="row mt-4">
-        <div class="col-md-12">
-            <table class="table table-striped table-hover">
+<div class="d-flex justify-content-end mb-4">
+    <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>
+</div>
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="table100 ver3 res m-b-110">
+            <table data-vertable="ver3">
                 <thead>
-                    <tr>
-                    <th scope="col">Nº Pedido</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Precio</th>
-                    <th scope="col">Tapa</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col"></th>
+                    <tr class="row100 head">
+                        <th class="pColumn1">Nº Pedido</th>
+                        <th class="pColumn2">Estado</th>
+                        <th class="pColumn3">Precio</th>
+                        <th class="pColumn4">Tapa</th>
+                        <th class="pColumn5">Bebida</th>
+                        <th class="pColumn6">Cantidad</th>
+                        <th class="pColumn7"></th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($pedidos as $ped)
-                    @if ($ped->estado_id==4)
                         @php
-                        $pedido= '\App\Models\Pedido'::find($ped->id)
-                        @endphp
-                        <form name="fo" id="editarPedido" action="{{route('pedidos.update',$pedido)}}" method="POST">
-                            @csrf
-                            @method('PUT')
-                                <tr>
-                                    <th scope="row">{{$ped->id}}</th>
-                                    <td>
-                                        @php
-                                        $estados = DB::table('estados')->get();
-                                        @endphp
-                                        <select name="estado_id" id="estado_id" class="form-select form-select-md" aria-label=".form-select-md example">
-                                            @foreach ($estados as $item)
-                                                <option value="{{$item->id}}"
-                                                    @if ($item->id==$pedido->estado_id)
-                                                    selected
-                                                    @endif>
-                                                {{$item->nombre}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>{{$ped->total_pedido}}</td>
-                                    <td>
-                                        @php
-                                        $tapa = DB::table('tapas')->find($ped->tapa_id);
-                                        $tapas = DB::table('tapas')->get();
-                                        $bebidas = DB::table('bebidas')->get();
-                                        @endphp
-                                        <select name="tapa_id" id="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
-                                            <option>Selecciona una tapa o ración</option>
-                                            @foreach ($tapas as $item)
-                                                <option value="{{$item->id}}|{{$item->tipotapa_id}}"
-                                                    @if ($tapa!=null && $item->id==$tapa->id)
-                                                    selected
-                                                    @endif>
-                                                {{$item->nombre}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        @php
-                                        $bebida = DB::table('bebidas')->find($ped->bebida_id)
-                                        @endphp
-                                        <select name="bebida_id" id="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
-                                            <option>Selecciona una bebida</option>
-                                            @foreach ($bebidas as $item)
-                                                <option value="{{$item->id}}"
-                                                    @if ($bebida!=null && $item->id==$bebida->id)
-                                                    selected
-                                                    @endif>
-                                                {{$item->nombre}}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" id="cantidad" name="cantidad" value={{$ped->cantidad}}>
-                                    </td>
-                                    <input type="hidden" name='mesa_id' value="{{$pedido->mesa_id}}">
-                                    <td>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Actualizar</button>
-                                            </div>
-                                            <div class="col-lg-6">
-                                            <button class="btn btn-warning" type="reset"><i class="fa fa-brush"></i>Resetear</button>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </form>
-                        @endif
+                            $pedido= '\App\Models\Pedido'::find($ped->id)
+                        @endphp   
+                        <tr class="row100">
+                            <td class="pColumn1">{{$ped->id}}</th>
+                            <td class="pColumn2">
+                                @php
+                                    $est = '\App\Models\Estado'::find($ped->estado_id)
+                                @endphp
+                                {{$est->nombre}}
+                            </td>
+                            <td class="pColumn3">{{$ped->total_pedido}} €</td>
+                            <td class="pColumn4">
+                                @php
+                                    $tapa = DB::table('tapas')->find($ped->tapa_id)
+                                @endphp
+                                @if ($tapa!=null)
+                                    {{$tapa->nombre}}
+                                @endif
+                            </td>
+                            <td class="pColumn5">
+                                @php
+                                    $bebida = DB::table('bebidas')->find($ped->bebida_id)
+                                @endphp
+                                @if ($bebida!=null)
+                                    {{$bebida->nombre}}
+                                @endif
+                            </td>
+                            <td class="pColumn6">{{$ped->cantidad}}</td>
+                            <input type="hidden" name='mesa_id' value="{{$ped->mesa_id}}">
+                            <td class="pColumn7">
+                                <div class="btn-group">
+                                    <a class="btn btn-success" role="button"
+                                    data-id="{{$ped->id}}" data-estado_id="{{$ped->estado_id}}"
+                                    data-tapa_id="{{$ped->tapa_id}}" data-bebida_id="{{$ped->bebida_id}}" data-cantidad="{{$ped->cantidad}}"
+                                    data-mesa_id="{{$ped->mesa_id}}" data-bs-toggle="modal" data-bs-target="#editarPedido"><i class="fa fa-plus"></i>Editar</a>
+                                    <div class="ms-2">
+                                        <form name="f" action="{{route('pedidos.destroy', $ped)}}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                          <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el pedido nº {{$ped->id}}?')"><i class="fa fa-brush"></i>Borrar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
     </div>
+</div>
+<!--Modal editar-->
+<div class="modal fade" id="editarPedido" tabindex="-1" aria-labelledby="editarPedidoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="editarPedidoLabel">Editar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form name="fo" action="{{route('pedidos.update','pedido_id')}}" class="needs-validation row g-3" method="POST">
+                @csrf
+                @method('PUT')
+                <input type="hidden" name="pedido_id" id="pedido_id">
+                <div class="col">
+                    <select name="estado_id" id="estado_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
+                        @foreach ($estados as $item)
+                            <option value="{{$item->id}}"
+                                @if ($item->id==$pedido->estado_id)
+                                selected
+                                @endif>
+                            {{$item->nombre}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <select name="tapa_id" id="tapa_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
+                            <option>Selecciona un plato</option>
+                            @foreach ($tapas as $item)
+                                <option value="{{$item->id}}"
+                                    @if ($tapa!=null && $item->id==$tapa->id)
+                                    selected
+                                    @endif>
+                                    {{$item->nombre}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <select name="bebida_id" id="bebida_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
+                            <option>Selecciona una bebida</option>
+                            @foreach ($bebidas as $item)
+                                <option value="{{$item->id}}"
+                                    @if ($bebida!=null && $item->id==$bebida->id)
+                                        selected
+                                    @endif>
+                                    {{$item->nombre}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col">
+                        <input type="number" class="form-control" id="cantidad_edit" name="cantidad">
+                    </div>
+                </div>
+                <input type="hidden" name="mesa_id" id="mesa_id_edit">
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="submit" class="btn btn-primary">Editar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</div>
     <div class="row mt-4 center">
         <div class="col-md-12">
             <form name="f" action="{{route('facturas.update',$factura)}}" method="POST">
                 @method("PUT")
                 @csrf
-                <button type="submit" onclick="return confirm('¿Estás seguro? Los pedidos y la factura se eliminarán')" class="btn btn-warning">
+                <button type="submit" onclick="return confirm('¿Estás seguro? Los pedidos y la factura se eliminarán')" class="btn btn-danger">
                     Pagar factura
                 </button>
             </form>
@@ -119,5 +179,6 @@ Factura {{$factura->id}}
 @endif    
 @endsection
 @section('js')
+    <script src="{{ asset('js/edit_pedido.js') }}"></script>
     <script src="{{ asset('js/validate_pedido.js') }}"></script>
 @endsection

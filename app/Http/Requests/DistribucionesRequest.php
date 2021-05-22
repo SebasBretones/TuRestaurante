@@ -31,7 +31,7 @@ class DistribucionesRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required', 'unique:distribucions,nombre']
+            'nombre' => ['required', 'unique:distribucions,nombre,'.$this->id]
         ];
     }
 

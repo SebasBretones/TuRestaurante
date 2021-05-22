@@ -1,6 +1,6 @@
 @extends('main')
 @section('content')
-<div class="row justify-content-center">
+<div class="row justify-content-center" id="registerc">
     <div class="col-md-8">
         <div class="card">
             <div class="card-header">{{ __('Register') }}</div>

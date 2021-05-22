@@ -1,5 +1,5 @@
 $(document).ready(function(){
-  $("#editarPedido").submit(function(event){
+  $("#crearPedido").submit(function(event){
     let form = $(this);
     let tapa_id = form.find("[name='tapa_id']").val();
     let bebida_id = form.find("[name='bebida_id']").val();
@@ -9,7 +9,7 @@ $(document).ready(function(){
     let tipo = arr[1];
 
     function validarTapaBebida(){
-      if (tapa=="Selecciona una tapa" && bebida_id=="Selecciona una bebida"){
+      if (tapa=="Selecciona un plato" && bebida_id=="Selecciona una bebida"){
         toastr.error('Debe seleccionar al menos una tapa o bebida', {timeOut: 1500});
         return false;
       } else if (tipo!=null && tipo == '2' && bebida_id != "Selecciona una bebida") {

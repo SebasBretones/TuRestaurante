@@ -1,8 +1,11 @@
+
 <?php
 
 namespace App\Http\Controllers;
 
+use App\Models\Bebida;
 use App\Models\Factura;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +16,13 @@ class FacturaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function descargarCarta(){
+        $pedidos = Pedido::all();
+        $bebidas = Bebida::all();
+
+        return view('facturas.index', compact('pedidos', 'bebidas'));
+    }
     public function index()
     {
         //

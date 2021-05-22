@@ -46,7 +46,7 @@ class BebidaController extends Controller
         $bebida->tipobebida_id = $request->tipobebida_id;
 
         $bebida->save();
-        return redirect()->route('bebidas.index');
+        return redirect()->route('bebidas.index')->with('mensaje','Bebida creada correctamente');
     }
 
     /**
@@ -86,7 +86,7 @@ class BebidaController extends Controller
         $bebida->tipobebida_id = $request->tipobebida_id;
 
         $bebida->update();
-        return redirect()->route('bebidas.index');
+        return redirect()->route('bebidas.index')->with('mensaje', 'Bebida editada correctamente');
     }
 
     /**
@@ -98,6 +98,6 @@ class BebidaController extends Controller
     public function destroy(Bebida $bebida)
     {
         $bebida->delete();
-        return redirect()->route('bebidas.index');
+        return redirect()->route('bebidas.index')->with('mensaje', 'Bebida borrada correctamente');
     }
 }

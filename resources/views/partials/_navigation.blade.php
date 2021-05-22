@@ -6,7 +6,7 @@
       </button>
       @if (Auth::check())
       <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" id="aNavbar">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Distribución y Mesas  </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -36,13 +36,13 @@
           @guest
               @if (Route::has('login'))
                   <li class="nav-item">
-                      <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                      <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
                   </li>
               @endif
 
               @if (Route::has('register'))
                   <li class="nav-item">
-                      <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                      <a class="nav-link" href="{{ route('register') }}">{{ __('Registrar') }}</a>
                   </li>
               @endif
           @else

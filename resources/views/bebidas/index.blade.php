@@ -1,58 +1,65 @@
 @extends('main')
+
 @section('title')
-Todas los platos
-@endsection
-@section('content')
-<div class="row mt-4">
-  <div class="col-lg-4">
-   <button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</a>
+  <div class="titulo bebidas-header">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Bebidas</h1>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+@endsection
+
+@section('content')
 <div class="row mt-2">
   <div class="col-md-12">
-      <table class="table table-striped table-hover">
+    <div class="table100 ver3 res m-b-110">
+      <table data-vertable="ver3">
           <thead>
-              <tr>
-              <th scope="col">Nombre</th>
-              <th scope="col">Precio</th>
-              <th scope="col">Tipo</th>
-              <th scope="col"></th>
+              <tr class="row100 head">
+                <th class="column1">Nombre</th>
+                <th class="column2">Precio</th>
+                <th class="column3">Tipo</th>
+                <th class="column4"><button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</a>
+                </th>
               </tr>
           </thead>
           <tbody>
             @foreach ($bebidas as $bebida)
-            <tr>
-              <td>{{$bebida->nombre}}</td>
-              <td>{{$bebida->precio}}</td>
-              <td>
+            <tr class="row100">
+              <td class="column1">{{$bebida->nombre}}</td>
+              <td class="column2">{{$bebida->precio}}</td>
+              <td class="column3">
                 @php
                     $tipo = '\App\Models\Tipobebida'::find($bebida->tipobebida_id);
                 @endphp
                 {{$tipo->nombre}}
               </td>
-              <td>
-                <div class="row">
-                  <div class="col-md-6">
-                    <button class="btn btn-success" type="button"
-                    data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
-                    data-tipobebida_id="{{$bebida->tipobebida_id}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
-                  </div>
-                  <div class="col-md-6">
-                    <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
-                      @csrf
-                      @method('DELETE')
-                      <button class="btn btn-danger" type="submit">Borrar</button>
-                    </form>    
-                  </div>
-                </div>
-              </div>
+              <td class="column4">
+                <div class="btn-group">
+                  <button class="btn btn-success" type="button"
+                  data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
+                  data-tipobebida_id="{{$bebida->tipobebida_id}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
+                  <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="ms-2">
+                      <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar la bebida {{$bebida->nombre}}?')">Borrar</button>
+                    </div>
+                  </form>  
+                </div>  
               </td>
             </tr>
             @endforeach
           </tbody>
       </table>
+    </div>
   </div>
 </div>
+
+@include('partials._paginator', ['array' => $bebidas])
 
 <!--Modal crear-->
 <div class="modal fade" id="crearBebida" tabindex="-1" aria-labelledby="crearBebidaLabel" aria-hidden="true">
@@ -60,7 +67,7 @@ Todas los platos
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title" id="crearBebidaLabel">Crear</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="btn-Cerrar" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
         <form name="f" action="{{route('bebidas.store')}}" method="POST">
@@ -104,7 +111,7 @@ Todas los platos
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title" id="editarBebidaLabel">Editar</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="btn-Cerrar" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
         <form name="f" id="editarBebida" action="{{route('bebidas.update','bebida_id')}}" method="POST">
