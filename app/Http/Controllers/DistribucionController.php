@@ -83,7 +83,7 @@ class DistribucionController extends Controller
      */
     public function update(DistribucionesRequest $request)
     {
-        $distribucion = Distribucion::find($request->id);
+        $distribucion = Distribucion::find($request->distribucion_id);
         $distribucion->nombre = $request->nombre;
 
         $distribucion->update();

@@ -91,7 +91,7 @@
                 @csrf
                 @method('PUT')
                 <div class="row mt-4">
-                    <input type="text" class="form-control" name="nombre" id="nombre_edit" placeholder="Nombre" value="">
+                    <input type="text" class="form-control" name="nombre" id="nombre_edit" placeholder="Nombre">
                     <div class="invalid-feedback">Debe insertar un nombre</div>
                 </div>
                 <input type="hidden" id="distribucion_id" name="distribucion_id">
