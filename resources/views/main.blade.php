@@ -6,10 +6,9 @@
     <body>
 
         @include('partials._navigation')
-
+        @yield('title')
         <div class="container">
             <div class="text-center">
-                <p class="title">@yield('title')</p>
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         @foreach ($errors->all() as $error)

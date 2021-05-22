@@ -1,19 +1,21 @@
 @extends('main')
+
 @section('title')
-Mesas de {{$distribucionmesa->nombre}}
+  <div class="titulo distribucion-header">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Mesas</h1>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
+
 @section('content')
 @php
     $cont=0;
 @endphp
-<div class="col s12">
-    <a id="listb" href="{{route('distribucionmesas.index')}}">
-      <span class="back-to-index">
-        <i class="material-icons back-arrow">keyboard_backspace</i>
-        <span>Volver al listado</span>
-      </span>
-    </a>
-</div>
 
 <div class="col mt-4">
     <div class="col-lg-4">
@@ -32,7 +34,7 @@ Mesas de {{$distribucionmesa->nombre}}
         @endphp
         <div class="col animate__animated animate__zoomIn">
             <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="45%" y="50%" fill="#eceeef" dy=".3em">Mesa {{$mesa->id}}</text></svg>
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#eceeef" dy=".3em">Mesa {{$mesa->id}}</text></svg>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group qMesa" data-mesa="{{$mesa->id}}">
@@ -54,18 +56,16 @@ Mesas de {{$distribucionmesa->nombre}}
                                 ->where('distribucion_id', $distribucionmesa->id)
                                 ->count();
                         @endphp
-                        <div class="btn-group ms-2">
-                            @if ($mesa->ocupada)
-                            <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create',$mesa)}}">Pedidos</a>
-                            @endif
-                        </div>
-                        <div class="ms-1">
-                            @if ($mesa->ocupada)
-                                <span class="badge bg-danger">Ocupada</span>
-                            @else
+                        @if ($mesa->ocupada)
+                            <div>
+                                <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create',$mesa)}}">Pedidos</a>
+                            </div>
+                        @else
+                            <div>
                                 <span class="duracionSalto badge bg-success">Libre</span>
-                            @endif
-                        </div>
+                            </div>
+                        @endif
+
                     </div>
                 </div>
             </div>

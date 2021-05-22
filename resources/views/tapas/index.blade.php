@@ -1,8 +1,19 @@
 @extends('main')
+
 @section('title')
-Todos los platos
+  <div class="titulo tapas-header">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Tapas</h1>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
+
 @section('content')
+
 <div class="row mt-4">
   <div class="col-lg-4">
    <button data-bs-toggle="modal" data-bs-target="#crearTapa" type="button" class="btn btn-success">Crear</a>

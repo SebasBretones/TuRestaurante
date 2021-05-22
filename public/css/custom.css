@@ -4,12 +4,69 @@ nav .navbar-nav li a{
 }
 
 nav .navbar-nav li a:hover{
+    background: #d65106;
     color: #fff !important;
 }  
+
+.active{
+	background: #d65106;
+	color: #ffffff !important;
+	border-radius: 4px;
+}
 
 .navbar{
     background: #2B2B2B !important;
     width: 100%;
+}
+
+.tapas-header {
+  padding: 250px 0 150px;
+  background: url(../img/titulos/tapa.jpg) no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 0 0;
+  position: relative;
+}
+
+.distribucion-header {
+  padding: 250px 0 150px;
+  background: url(../img/titulos/mesas.jpg) no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 0 0;
+  position: relative;
+}
+
+.bebidas-header {
+  padding: 250px 0 150px;
+  background: url(../img/titulos/bebida.jpg) no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: 0 0;
+  position: relative;
+}
+
+.titulo .container{
+	position: relative;
+	z-index: 2;
+}
+.titulo::before{
+	background: #010101;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
+	opacity: 0.8;	
+}
+.titulo h1{
+	font-size: 38px;
+	color: #ffffff;
+  font-family: 'Playfair Display', serif !important;
+	padding: 0px;
+	font-weight: 500;
 }
 
 .title {
@@ -258,4 +315,24 @@ table {
 #listb{
   color: rgb(139, 146, 177) ;
   text-decoration:none;
+}
+
+#loginc {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin: auto;
+  height: 100px;
+}
+
+#registerc {
+  position: absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  margin: auto;
+  height: 180px;
 }

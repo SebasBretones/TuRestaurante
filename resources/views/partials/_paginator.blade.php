@@ -4,4 +4,5 @@
   </div>
   <div class="small" id="right">
     {{$array->firstItem()}} - {{$array->lastItem()}} de {{$array->total()}}
+  </div>
 </div>

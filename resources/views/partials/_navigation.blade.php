@@ -6,7 +6,7 @@
       </button>
       @if (Auth::check())
       <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav mr-auto" id="aNavbar">
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Distribución y Mesas  </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">

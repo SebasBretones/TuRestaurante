@@ -1,13 +1,18 @@
 @extends('main')
+
 @section('title')
-Todas las bebidas
-@endsection
-@section('content')
-<div class="row mt-4">
-  <div class="col-lg-4">
-   <button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</a>
+  <div class="titulo bebidas-header">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1>Bebidas</h1>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+@endsection
+
+@section('content')
 <div class="row mt-2">
   <div class="col-md-12">
     <div class="table100 ver3 res m-b-110">
@@ -17,7 +22,8 @@ Todas las bebidas
                 <th class="column1">Nombre</th>
                 <th class="column2">Precio</th>
                 <th class="column3">Tipo</th>
-                <th class="column4"></th>
+                <th class="column4"><button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</a>
+                </th>
               </tr>
           </thead>
           <tbody>
@@ -61,7 +67,7 @@ Todas las bebidas
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title" id="crearBebidaLabel">Crear</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="btn-Cerrar" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
         <form name="f" action="{{route('bebidas.store')}}" method="POST">
@@ -105,7 +111,7 @@ Todas las bebidas
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title" id="editarBebidaLabel">Editar</h5>
-      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <button type="button" class="btn-Cerrar" data-bs-dismiss="modal" aria-label="Cerrar"></button>
       </div>
       <div class="modal-body">
         <form name="f" id="editarBebida" action="{{route('bebidas.update','bebida_id')}}" method="POST">
