@@ -57,7 +57,7 @@ class DistribucionController extends Controller
      */
     public function show(Distribucion $distribucionmesa, Request $request)
     {
-        $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)->orderBy('distribucion_id')
+        $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)->orderBy('id')
         ->paginate(6)->withQueryString();
 
         return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
