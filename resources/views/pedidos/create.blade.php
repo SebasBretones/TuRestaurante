@@ -2,6 +2,8 @@
 @section('content')
 @php
     $estados = DB::table('estados')->get();
+    $tapas = DB::table('tapas')->where('user_id', auth()->user()->id)->get();
+    $bebidas = DB::table('bebidas')->where('user_id', auth()->user()->id)->get();
 @endphp
 <div class="col s12">
     <a id="listb" href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}">
@@ -16,10 +18,6 @@
     <form name="f" id="crearPedido" action="{{route('pedidos.store')}}" method="POST">
         @csrf
         <div class="row mt-4">
-            @php
-                $tapas = DB::table('tapas')->get();
-                $bebidas = DB::table('bebidas')->get();
-            @endphp
             <div class="col-md-4">
                 <select name="tapa_id" id="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona un plato</option>
@@ -45,9 +43,9 @@
         </div>
         <div class="row mt-4">
             <div class="col">
-                <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Crear pedido</button>
-                <button class="btn btn-warning" type="reset"><i class="fa fa-brush"></i> Limpiar</button>
-                <a href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Volver</a>
+                <button class="btn btn-success" type="submit">Crear pedido</button>
+                <button class="btn btn-warning" type="reset">Limpiar</button>
+                <a href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}" class="btn btn-primary">Volver</a>
             </div>
         </div>
     </form>
@@ -59,7 +57,7 @@ $pedidos = DB::table('pedidos')->where([
     ['estado_id','!=',4],
     ])->get();
 @endphp
-@if (count($pedidos)!=0)   
+@if (count($pedidos)!=0)
     <hr/>
     <div class="row mt-4">
         <div class="col-md-12">
@@ -80,7 +78,7 @@ $pedidos = DB::table('pedidos')->where([
                         @foreach ($pedidos as $ped)
                             @php
                                 $pedido= '\App\Models\Pedido'::find($ped->id)
-                            @endphp   
+                            @endphp
                             <tr class="row100">
                                 <td class="pColumn1">{{$ped->id}}</td>
                                 <td class="pColumn2">
@@ -113,12 +111,12 @@ $pedidos = DB::table('pedidos')->where([
                                         <a class="btn btn-success" role="button"
                                         data-id="{{$ped->id}}" data-estado_id="{{$ped->estado_id}}"
                                         data-tapa_id="{{$ped->tapa_id}}" data-bebida_id="{{$ped->bebida_id}}" data-cantidad="{{$ped->cantidad}}"
-                                        data-mesa_id="{{$ped->mesa_id}}" data-bs-toggle="modal" data-bs-target="#editarPedido"><i class="fa fa-plus"></i>Editar</a>
+                                        data-mesa_id="{{$ped->mesa_id}}" data-bs-toggle="modal" data-bs-target="#editarPedido">Editar</a>
                                         <div class="ms-2">
                                             <form name="d" action="{{route('pedidos.destroy', $pedido)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                              <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el pedido nº {{$ped->id}}?')"><i class="fa fa-brush"></i>Borrar</button>
+                                              <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el pedido nº {{$ped->id}}?')">Borrar</button>
                                             </form>
                                         </div>
                                     </div>

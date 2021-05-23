@@ -17,6 +17,7 @@ class DistribucionController extends Controller
     public function index(Request $request)
     {
         $distribuciones = Distribucion::orderBy('id')
+        ->where('user_id', auth()->user()->id)
         ->id($request->get('id'))
         ->paginate(6)->withQueryString();
 

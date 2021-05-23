@@ -1,15 +1,15 @@
 @extends('main')
 @section('content')
-<div class="card login-card">
-    <div class="row no-gutters">
+<div class="card login-card" id="mtg">
+    <div class="row no-gutters"">
         <div class="col-md-12">
             <div class="card-body">
                 @if (! auth()->user()->two_factor_secret)
-                    You have not enabled 2fa
+                    No ha activado la autenticación en dos pasos
                     <form method="POST" action="{{ url('user/two-factor-authentication') }}">
                         @csrf
                         <button type="submit" class="btn btn-primary">
-                            Enable
+                            Activar
                         </button>
                     </form>
                 @else
@@ -23,11 +23,11 @@
                     </form>
                 @endif
 
-                
+
                 @if(session('status') == 'two-factor-authentication-enabled')
-                    You have now enabled 2fa, plase scan the following QR code into your phone authenticator application
+                    Ha activado la autenticación en dos pasos, por favor, escanee el siguiente código QR
                     {{!! auth()->user()->twoFactorQrCodeSvg() !!}}
-                    <p>Please store these recovery codes in a secure location</p>
+                    <p>Por favor, guarde estos códigos de recuperación en una localización segura</p>
                     @foreach (json_decode(decrypt(auth()->user()->two_factor_recovery_codes, true)) as $code)
                         {{trim($code)}}<br>
                     @endforeach

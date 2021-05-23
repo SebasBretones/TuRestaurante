@@ -17,6 +17,7 @@ class BebidaController extends Controller
     public function index()
     {
         $bebidas = Bebida::orderBy('nombre')
+        ->where('user_id', auth()->user()->id)
         ->paginate(10)->withQueryString();
 
         return view ('bebidas.index', compact('bebidas'));
@@ -44,6 +45,7 @@ class BebidaController extends Controller
         $bebida->nombre = $request->nombre;
         $bebida->precio = $request->precio;
         $bebida->tipobebida_id = $request->tipobebida_id;
+        $bebida->user_id=auth()->user()->id;
 
         $bebida->save();
         return redirect()->route('bebidas.index')->with('mensaje','Bebida creada correctamente');

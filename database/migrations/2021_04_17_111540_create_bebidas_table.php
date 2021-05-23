@@ -22,6 +22,11 @@ class CreateBebidasTable extends Migration
             ->on('tipobebidas')
             ->onUpdate('cascade')
             ->onDelete('cascade');
+            $table->ForeignId('user_id');
+            $table->foreign('user_id')->references('id')
+            ->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

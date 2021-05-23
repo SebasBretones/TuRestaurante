@@ -4,8 +4,8 @@
     $todosPedidos=$factura->pedidos;
     $pedidos = $todosPedidos->where('estado_id',4)->all();
     $estados = DB::table('estados')->get();
-    $tapas = DB::table('tapas')->get();
-    $bebidas = DB::table('bebidas')->get();
+    $tapas = DB::table('tapas')->where('user_id', auth()->user()->id)->get();
+    $bebidas = DB::table('bebidas')->where('user_id', auth()->user()->id)->get();
 @endphp
 <div class="col s12">
     <a id="listb" href="{{url()->previous()}}">
@@ -19,7 +19,7 @@
 <div class="row mt-4">
     No hay pedidos
 </div>
-@else   
+@else
 <div class="d-flex justify-content-end mb-4">
     <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>
 </div>
@@ -42,7 +42,7 @@
                     @foreach ($pedidos as $ped)
                         @php
                             $pedido= '\App\Models\Pedido'::find($ped->id)
-                        @endphp   
+                        @endphp
                         <tr class="row100">
                             <td class="pColumn1">{{$ped->id}}</th>
                             <td class="pColumn2">
@@ -75,12 +75,12 @@
                                     <a class="btn btn-success" role="button"
                                     data-id="{{$ped->id}}" data-estado_id="{{$ped->estado_id}}"
                                     data-tapa_id="{{$ped->tapa_id}}" data-bebida_id="{{$ped->bebida_id}}" data-cantidad="{{$ped->cantidad}}"
-                                    data-mesa_id="{{$ped->mesa_id}}" data-bs-toggle="modal" data-bs-target="#editarPedido"><i class="fa fa-plus"></i>Editar</a>
+                                    data-mesa_id="{{$ped->mesa_id}}" data-bs-toggle="modal" data-bs-target="#editarPedido">Editar</a>
                                     <div class="ms-2">
                                         <form name="f" action="{{route('pedidos.destroy', $ped)}}" method="POST">
                                             @csrf
                                             @method('DELETE')
-                                          <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el pedido nº {{$ped->id}}?')"><i class="fa fa-brush"></i>Borrar</button>
+                                          <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el pedido nº {{$ped->id}}?')">Borrar</button>
                                         </form>
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@
             </form>
         </div>
     </div>
-@endif    
+@endif
 @endsection
 @section('js')
     <script src="{{ asset('js/edit_pedido.js') }}"></script>

@@ -88,7 +88,7 @@ class FacturaController extends Controller
         $factura->total_factura=0;
         $factura->update();
 
-        return redirect()->route('distribucionmesas.index');
+        return redirect()->route('distribucionmesas.index')->with('mensaje', 'Factura borrada correctamente');
     }
 
     /**
