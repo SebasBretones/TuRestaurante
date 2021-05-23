@@ -15,7 +15,7 @@ class CreateBebidasTable extends Migration
     {
         Schema::create('bebidas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',120)->unique();
+            $table->string('nombre',120);
             $table->double('precio',8,2)->default(3);
             $table->ForeignId('tipobebida_id');
             $table->foreign('tipobebida_id')->references('id')

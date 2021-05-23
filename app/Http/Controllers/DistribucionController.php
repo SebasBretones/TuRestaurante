@@ -47,6 +47,13 @@ class DistribucionController extends Controller
 
         $distribucion->nombre=$datos['nombre'];
         $distribucion->user_id=auth()->user()->id;
+
+        $distribuciones = Distribucion::where('user_id', auth()->user()->id)->get();
+        foreach($distribuciones as $t){
+            if ($t->nombre == $distribucion->nombre)
+                return redirect()->route('distribucionmesas.index')->with('mensaje', 'Debe indicar una distribución que no exista');
+        }
+
         $distribucion->save();
         return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución creada correctamente");
     }
@@ -85,8 +92,16 @@ class DistribucionController extends Controller
      */
     public function update(DistribucionesRequest $request)
     {
-        $datos = $request->validated();
-        Distribucion::find($request->distribucion_id)->update($datos);
+        $distribucion = Distribucion::find($request->distribucion_id);
+        $distribucion->nombre = $request->nombre;
+
+        $distribuciones = Distribucion::where('user_id', auth()->user()->id)->get();
+        foreach($distribuciones as $t){
+            if ($t->nombre == $distribucion->nombre)
+                return redirect()->route('distribucionmesas.index')->with('mensaje', 'Debe indicar una distribución que no exista');
+        }
+
+        $distribucion->update();
         return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución creada correctamente");
     }
 

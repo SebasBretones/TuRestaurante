@@ -27,10 +27,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('*', function($view){
+            if(auth()->user()){
             $dist = Distribucion::orderBy('nombre')
             ->where('user_id', auth()->user()->id)
             ->paginate(10);
             View::share('distribucionV', $dist);
+            }
         });
 
 

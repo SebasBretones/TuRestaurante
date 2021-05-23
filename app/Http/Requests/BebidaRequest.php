@@ -19,7 +19,7 @@ class BebidaRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'nombre' => ucwords(trim($this->nombre))
+            'nombre' => trim(ucwords(strtolower($this->nombre)))
         ]);
     }
 
@@ -31,7 +31,7 @@ class BebidaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required','unique:bebidas,nombre,'.$this->id], 
+            'nombre' => ['required'],
             'precio' => ['required', 'numeric', 'min: 0.05', 'max: 200'],
         ];
     }
@@ -40,7 +40,6 @@ class BebidaRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Debe indicar un nombre para la bebida',
-            'nombre.unique' => 'Esta bebida ya existe. Debe indicar un nombre único.',
             'precio.required' => 'Debe indicar un precio para la bebida',
             'precio.numeric' => 'El campo de precio debe ser numérico',
             'precio.min' => 'El precio debe ser como mínimo de 0.05 €',

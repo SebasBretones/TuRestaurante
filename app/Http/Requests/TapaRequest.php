@@ -19,7 +19,7 @@ class TapaRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'nombre' => ucwords(trim($this->nombre))
+            'nombre' => trim(ucwords(strtolower($this->nombre)))
         ]);
     }
 
@@ -31,7 +31,7 @@ class TapaRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required','unique:tapas,nombre,'.$this->id], 
+            'nombre' => ['required'],
             'precio' => ['required', 'numeric', 'min: 0.05', 'max: 200'],
         ];
     }
@@ -40,7 +40,6 @@ class TapaRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Debe indicar un nombre para el plato',
-            'nombre.unique' => 'Este plato ya existe. Debe indicar un nombre único.',
             'precio.required' => 'Debe indicar un precio para el plato',
             'precio.numeric' => 'El campo de precio debe ser numérico',
             'precio.min' => 'El precio debe ser como mínimo de 0.05 €',

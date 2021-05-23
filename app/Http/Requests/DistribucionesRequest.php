@@ -19,7 +19,7 @@ class DistribucionesRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'nombre' => ucwords(trim($this->nombre))
+            'nombre' => trim(ucwords(strtolower($this->nombre)))
         ]);
     }
 
@@ -31,7 +31,7 @@ class DistribucionesRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required', 'unique:distribucions,nombre,'.$this->id]
+            'nombre' => ['required']
         ];
     }
 
@@ -39,7 +39,6 @@ class DistribucionesRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Debe escribir un nombre',
-            'nombre.unique' => 'Esta distribución ya existe'
         ];
 
     }
