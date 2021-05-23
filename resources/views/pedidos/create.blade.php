@@ -1,7 +1,4 @@
 @extends('main')
-@section('title')
-Pedidos mesa {{$mesa->id}}
-@endsection
 @section('content')
 @php
     $estados = DB::table('estados')->get();
@@ -57,7 +54,10 @@ Pedidos mesa {{$mesa->id}}
 </div>
 
 @php
-$pedidos = DB::table('pedidos')->where('estado_id','!=',4)->get();
+$pedidos = DB::table('pedidos')->where([
+    ['mesa_id',$mesa->id],
+    ['estado_id','!=',4],
+    ])->get();
 @endphp
 @if (count($pedidos)!=0)   
     <hr/>

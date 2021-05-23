@@ -1,7 +1,4 @@
 @extends('main')
-@section('title')
-Factura {{$factura->id}}
-@endsection
 @section('content')
 @php
     $todosPedidos=$factura->pedidos;

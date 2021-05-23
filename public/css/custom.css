@@ -158,17 +158,17 @@ body
   }
 
   body {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .table100.ver3 td {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
     color: #808080;
     line-height: 1.4;
   }
   
   .table100.ver3 th {
-    font-size: 0.5rem !important;
+    font-size: 0.9rem !important;
     color: #fff;
     line-height: 1.4;
     text-transform: uppercase;

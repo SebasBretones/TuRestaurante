@@ -45,6 +45,7 @@ class DistribucionController extends Controller
         $distribucion = new Distribucion();
 
         $distribucion->nombre=$datos['nombre'];
+        $distribucion->user_id=auth()->user()->id;
         $distribucion->save();
         return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución creada correctamente");
     }
