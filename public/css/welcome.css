@@ -170,6 +170,7 @@
 		font-size: 14px;
 	}
 	.slides-navigation a{
+        opacity: 0.4;
 		height: 42px;
 		width: 38px;
 		line-height: 33px;
@@ -178,7 +179,7 @@
   .contact-imfo-box .col-md-4{
 		margin-bottom: 15px;
 	}
-	
+
 }
 
 
@@ -281,7 +282,7 @@
 }
 .arrow-right::before {
     content: "\f101";
-	font-family: 'FontAwesome';	
+	font-family: 'FontAwesome';
 	position: absolute;
 	right: 0px;
 	top: 0;

@@ -23,7 +23,7 @@
     </div>
 </div>
 
-@if (count($mesas)==0)     
+@if (count($mesas)==0)
     <p>No hay mesas</p>
     <div id="editarMesa"></div>
 @else
@@ -42,7 +42,7 @@
                                 $factura= '\App\Models\Factura'::find($mesa->factura_id)
                             @endphp
                             <a href="{{route('facturas.show',$factura)}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
-                            <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button" 
+                            <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button"
                             data-mesa_id="{{$mesa->id}}" data-num_asientos="{{$mesa->num_asientos}}" data-ocupada="{{$mesa->ocupada}}"
                             data-distribucion_id="{{$mesa->distribucion_id}}"  data-bs-toggle="modal" data-bs-target="#editarMesa">Editar</a>
                             <form name="borrar" action="{{route('mesas.destroy',$mesa)}}" method="POST">
@@ -104,24 +104,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        @php
-                            $distribucions = DB::table('distribucions')->get();
-                        @endphp
-                        <div class="col">
-                            <select name="distribucion_id" id="distribucion_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                @foreach ($distribucions as $item)
-                                    <option value="{{$item->id}}"
-                                        @if(($item->id)==($mesa->distribucion_id)) selected @endif>
-                                    {{$item->nombre}}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    @php
+                        $distribucions = DB::table('distribucions')->get();
+                    @endphp
+                    <div class="col">
+                        <label for="distribucion_id" class="col-form-label">Distribución</label>
+                        <select name="distribucion_id" id="distribucion_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            @foreach ($distribucions as $item)
+                                <option value="{{$item->id}}"
+                                    @if(($item->id)==($mesa->distribucion_id)) selected @endif>
+                                {{$item->nombre}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <input type="hidden" id="mesa_id" name="mesa_id">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button class="btn btn-warning" type="reset">Resetear</button>
+                        <button type="submit" class="btn btn-success">Editar</button>
                     </div>
                 </form>
             </div>
@@ -129,7 +128,7 @@
         </div>
     </div>
 @endif
-    
+
 
 @include('partials._paginator', ['array' => $mesas])
 
@@ -166,8 +165,8 @@
                 </div>
                 <input type="hidden" name="distribucion_id" value="{{$distribucionmesa->id}}">
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button class="btn btn-warning" type="reset">Resetear</button>
+                    <button type="submit" class="btn btn-success">Crear</button>
                 </div>
             </form>
         </div>

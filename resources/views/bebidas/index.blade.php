@@ -72,7 +72,7 @@
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title" id="crearBebidaLabel">Crear</h5>
-      <button type="button" class="btn-Cerrar" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form name="f" action="{{route('bebidas.store')}}" method="POST">
@@ -85,25 +85,21 @@
             <label for="precio" class="col-form-label">Precio</label>
             <input type="number" class="form-control" name="precio" placeholder="Precio" id="precio" step="any">
          </div>
-          <div class="row mt-4">
-              @php
-                  $tipos = DB::table('tipobebidas')->get();
-              @endphp
-              <div class="col">
-                  <select name="tipobebida_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      @foreach ($tipos as $item)
-                          <option value="{{$item->id}}">{{$item->nombre}}</option>
-                      @endforeach
-                  </select>
-              </div>
-          </div>
-          <div class="row mt-4">
-              <div class="col">
-                  <button class="btn btn-success" type="submit">Crear</button>
-                  <button class="btn btn-warning" type="reset">Limpiar</button>
-                  <a href="{{route('bebidas.index')}}" class="btn btn-primary">Volver</a>
-              </div>
-          </div>
+            @php
+            $tipos = DB::table('tipobebidas')->get();
+            @endphp
+            <div class="col">
+            <label for="tipobebida_id" class="col-form-label">Tipo de bebida</label>
+            <select name="tipobebida_id" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                @foreach ($tipos as $item)
+                    <option value="{{$item->id}}">{{$item->nombre}}</option>
+                @endforeach
+            </select>
+            </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning" type="reset">Resetear</button>
+            <button type="submit" class="btn btn-success">Crear</button>
+        </div>
       </form>
       </div>
   </div>
@@ -116,7 +112,7 @@
   <div class="modal-content">
       <div class="modal-header">
       <h5 class="modal-title" id="editarBebidaLabel">Editar</h5>
-      <button type="button" class="btn-Cerrar" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form name="f" id="editarBebida" action="{{route('bebidas.update','bebida_id')}}" method="POST">
@@ -131,25 +127,21 @@
             <label for="precio" class="col-form-label">Precio</label>
             <input type="number" class="form-control" name="precio" placeholder="Precio" id="precio_edit" step="any">
          </div>
-          <div class="row mt-4">
-              @php
-                  $tipos = DB::table('tipobebidas')->get();
-              @endphp
-              <div class="col">
-                  <select name="tipobebida_id" id="tipobebida_id_edit" class="form-select form-select-sm" aria-label=".form-select-sm example">
-                      @foreach ($tipos as $item)
-                          <option value="{{$item->id}}">{{$item->nombre}}</option>
-                      @endforeach
-                  </select>
-              </div>
-          </div>
-          <div class="row mt-4">
-              <div class="col">
-                  <button class="btn btn-success" type="submit">Editar</button>
-                  <button class="btn btn-warning" type="reset">Limpiar</button>
-                  <a href="{{route('bebidas.index')}}" class="btn btn-primary">Volver</a>
-              </div>
-          </div>
+            @php
+                $tipos = DB::table('tipobebidas')->get();
+            @endphp
+            <div class="col">
+                <label for="tipobebida_id" class="col-form-label">Tipo de bebida</label>
+                <select name="tipobebida_id" id="tipobebida_id_edit" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                    @foreach ($tipos as $item)
+                        <option value="{{$item->id}}">{{$item->nombre}}</option>
+                    @endforeach
+                </select>
+            </div>
+          <div class="modal-footer">
+            <button class="btn btn-warning" type="reset">Resetear</button>
+            <button type="submit" class="btn btn-success">Editar</button>
+        </div>
       </form>
       </div>
   </div>

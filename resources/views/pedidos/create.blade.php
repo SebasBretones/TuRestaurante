@@ -43,9 +43,8 @@
         </div>
         <div class="row mt-4">
             <div class="col">
+                <button class="btn btn-warning" type="reset">Resetear</button>
                 <button class="btn btn-success" type="submit">Crear pedido</button>
-                <button class="btn btn-warning" type="reset">Limpiar</button>
-                <a href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}" class="btn btn-primary">Volver</a>
             </div>
         </div>
     </form>
@@ -137,7 +136,7 @@ $pedidos = DB::table('pedidos')->where([
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form name="fo" action="{{route('pedidos.update','pedido_id')}}" class="needs-validation row g-3" method="POST">
+                <form name="fo" action="{{route('pedidos.update','pedido_id')}}" method="POST">
                     @csrf
                     @method('PUT')
                     <input type="hidden" name="pedido_id" id="pedido_id">
@@ -153,7 +152,7 @@ $pedidos = DB::table('pedidos')->where([
                             @endforeach
                         </select>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-2">
                         <div class="col">
                             <select name="tapa_id" id="tapa_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                                 <option>Selecciona un plato</option>
@@ -168,7 +167,7 @@ $pedidos = DB::table('pedidos')->where([
                             </select>
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-2">
                         <div class="col">
                             <select name="bebida_id" id="bebida_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                                 <option>Selecciona una bebida</option>
@@ -183,7 +182,7 @@ $pedidos = DB::table('pedidos')->where([
                             </select>
                         </div>
                     </div>
-                    <div class="row mt-4">
+                    <div class="row mt-2">
                         <div class="col">
                             <input type="number" class="form-control" id="cantidad_edit" name="cantidad">
                         </div>
@@ -191,7 +190,7 @@ $pedidos = DB::table('pedidos')->where([
                     <input type="hidden" name="mesa_id" id="mesa_id_edit">
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-success">Editar</button>
                     </div>
                 </form>
             </div>

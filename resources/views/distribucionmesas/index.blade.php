@@ -35,7 +35,7 @@
                         <form name="f" action="{{route('distribucionmesas.destroy', $distribucionmesa)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Borrar</button>
+                            <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar la distribución {{$distribucionmesa->nombre}}?')">Borrar</button>
                         </form>
                     </div>
                     @php
@@ -69,8 +69,8 @@
                     <div class="invalid-feedback">Debe insertar un nombre</div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button class="btn btn-warning" type="reset">Resetear</button>
+                    <button type="submit" class="btn btn-success">Crear</button>
                 </div>
             </form>
         </div>
@@ -96,8 +96,8 @@
                 </div>
                 <input type="hidden" id="distribucion_id" name="distribucion_id">
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-primary">Editar</button>
+                    <button class="btn btn-warning" type="reset">Resetear</button>
+                    <button type="submit" class="btn btn-success">Editar</button>
                 </div>
             </form>
         </div>

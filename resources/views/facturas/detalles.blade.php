@@ -101,7 +101,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form name="fo" action="{{route('pedidos.update','pedido_id')}}" class="needs-validation row g-3" method="POST">
+            <form name="fo" action="{{route('pedidos.update','pedido_id')}}" method="POST">
                 @csrf
                 @method('PUT')
                 <input type="hidden" name="pedido_id" id="pedido_id">
@@ -117,7 +117,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-2">
                     <div class="col">
                         <select name="tapa_id" id="tapa_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                             <option>Selecciona un plato</option>
@@ -132,7 +132,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-2">
                     <div class="col">
                         <select name="bebida_id" id="bebida_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                             <option>Selecciona una bebida</option>
@@ -147,7 +147,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="row mt-4">
+                <div class="row mt-2">
                     <div class="col">
                         <input type="number" class="form-control" id="cantidad_edit" name="cantidad">
                     </div>
