@@ -15,7 +15,12 @@ class CreateDistribucionsTable extends Migration
     {
         Schema::create('distribucions', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',40)->unique;
+            $table->string('nombre',40);
+            $table->ForeignId('user_id');
+            $table->foreign('user_id')->references('id')
+            ->on('users')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
             $table->timestamps();
         });
     }

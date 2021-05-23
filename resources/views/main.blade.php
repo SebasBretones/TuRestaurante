@@ -10,13 +10,13 @@
         <div class="container">
             <div class="text-center">
                 @if ($errors->any())
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger mt-2">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
                     </div>
                 @elseif(Session::has('mensaje'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-success mt-2">
                         <li>{{Session::get('mensaje')}}</li>
                     </div>
                 @endif

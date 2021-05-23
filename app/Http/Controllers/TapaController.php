@@ -16,6 +16,7 @@ class TapaController extends Controller
     public function index()
     {
         $tapas = Tapa::orderBy('nombre')
+        ->where('user_id', auth()->user()->id)
         ->paginate(10)->withQueryString();
 
         return view ('tapas.index', compact('tapas'));
@@ -43,6 +44,13 @@ class TapaController extends Controller
         $tapa->nombre = $request->nombre;
         $tapa->precio = $request->precio;
         $tapa->tipotapa_id = $request->tipotapa_id;
+        $tapa->user_id=auth()->user()->id;
+
+        $tapas = Tapa::where('user_id', auth()->user()->id)->get();
+        foreach($tapas as $t){
+            if ($t->nombre == $tapa->nombre)
+                return redirect()->route('tapas.index')->with('mensaje', 'Debe indicar un plato que no exista');
+        }
 
         $tapa->save();
         return redirect()->route('tapas.index')->with('mensaje', 'Plato creado correctamente');
@@ -85,8 +93,13 @@ class TapaController extends Controller
         $tapa->precio = $request->precio;
         $tapa->tipotapa_id = $request->tipotapa_id;
 
+        $tapas = Tapa::where('user_id', auth()->user()->id)->get();
+        foreach($tapas as $t){
+            if ($t->nombre == $tapa->nombre)
+                return redirect()->route('tapas.index')->with('mensaje', 'Debe indicar un plato que no exista');
+        }
         $tapa->update();
-        
+
         return redirect()->route('tapas.index')->with('mensaje', 'Plato editado correctamente');
     }
 

@@ -6,7 +6,7 @@
             <div class="card-header">{{ __('Confirm Password') }}</div>
 
             <div class="card-body">
-              {{ __('Enter your recovery code.') }}
+              {{ __('Introduce tu código de recuperación.') }}
 
               <form method="POST" action="{{ url('/two-factor-challenge') }}">
                   @csrf

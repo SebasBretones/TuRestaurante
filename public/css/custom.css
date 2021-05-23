@@ -6,7 +6,7 @@ nav .navbar-nav li a{
 nav .navbar-nav li a:hover{
     background: #d65106;
     color: #fff !important;
-}  
+}
 
 .active{
 	background: #d65106;
@@ -59,7 +59,7 @@ nav .navbar-nav li a:hover{
 	top: 0;
 	width: 100%;
 	z-index: 1;
-	opacity: 0.8;	
+	opacity: 0.8;
 }
 .titulo h1{
 	font-size: 38px;
@@ -158,17 +158,17 @@ body
   }
 
   body {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
 
   .table100.ver3 td {
-    font-size: 0.8rem !important;
+    font-size: 0.7rem !important;
     color: #808080;
     line-height: 1.4;
   }
-  
+
   .table100.ver3 th {
-    font-size: 0.5rem !important;
+    font-size: 0.9rem !important;
     color: #fff;
     line-height: 1.4;
     text-transform: uppercase;
@@ -189,23 +189,23 @@ table {
     background-color: #fff;
     text-align: center;
   }
-  
+
   th, td {
     font-weight: unset;
     padding-right: 0.5rem;
   }
-  
+
   .column1 {
     width: 40%;
   }
-  
+
   .column2 {
     width: 10%;
   }
   .column3 {
     width: 30%;
   }
-  
+
   .column4 {
     width: 20%;
   }
@@ -214,7 +214,7 @@ table {
     padding-top: 1.75rem;
     padding-bottom: 1.75rem;
   }
-  
+
   .row100 td {
     padding-top: 18px;
     padding-bottom: 14px;
@@ -223,13 +223,13 @@ table {
 .table100.ver3 tbody tr {
     border-bottom: 1px solid #e5e5e5;
   }
-  
+
   .table100.ver3 td {
     font-size: 1.1rem;
     color: rgba(0, 0, 0, 0.863);
     line-height: 1.4;
   }
-  
+
   .table100.ver3 th {
     font-size: 1rem;
     color: #fff;
@@ -237,19 +237,19 @@ table {
     text-transform: uppercase;
     background-color: #6c7ae0;
   }
-  
+
   .table100.ver3 .row100:hover td {
     background-color: #fcebf5;
   }
-  
+
   .table100.ver3 .hov-column-ver3 {
     background-color: #fcebf5;
   }
-  
+
   .table100.ver3 .hov-column-head-ver3 {
     background-color: #7b88e3 !important;
   }
-  
+
   .table100.ver3 .row100 td:hover {
     background-color: #e03e9c;
     color: #fff;
@@ -262,11 +262,11 @@ table {
   .pColumn1 {
     width: 13%;
   }
-  
+
   .pColumn2 {
     width: 14%;
   }
-  
+
   .pColumn3 {
     width: 8%;
   }
@@ -286,7 +286,7 @@ table {
   .pColumn7 {
     width: 20%;
   }
-  
+
 
   /*----------*/
 
@@ -336,3 +336,12 @@ table {
   margin: auto;
   height: 180px;
 }
+
+#mtg {
+    margin-top: 150px;
+}
+
+li.dropdown:last-child .dropdown-menu {
+    right: 0;
+    left: auto;
+  }

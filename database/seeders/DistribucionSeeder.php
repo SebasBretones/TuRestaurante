@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Distribucion;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DistribucionSeeder extends Seeder
@@ -14,8 +15,9 @@ class DistribucionSeeder extends Seeder
      */
     public function run()
     {
-        Distribucion::create(['nombre'=>'Terraza']);
-        Distribucion::create(['nombre'=>'Barra']);
-        Distribucion::create(['nombre'=>'Interior']);
+        $user_ids=User::pluck('id')->toArray();
+        Distribucion::create(['nombre'=>'Terraza','user_id'=>$user_ids[0]]);
+        Distribucion::create(['nombre'=>'Barra','user_id'=>$user_ids[0]]);
+        Distribucion::create(['nombre'=>'Interior','user_id'=>$user_ids[0]]);
     }
 }

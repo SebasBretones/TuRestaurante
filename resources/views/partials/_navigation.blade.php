@@ -29,7 +29,7 @@
               <a class="nav-link" href="#">Carta</a>
           </li>
         </ul>
-        @else 
+        @else
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
         @endif
         <ul class="navbar-nav ml-auto">
@@ -55,7 +55,7 @@
                       <a class="dropdown-item" href="{{ route('logout') }}"
                          onclick="event.preventDefault();
                                        document.getElementById('logout-form').submit();">
-                          {{ __('Logout') }}
+                          {{ __('Cerrar sesión') }}
                       </a>
 
                       <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

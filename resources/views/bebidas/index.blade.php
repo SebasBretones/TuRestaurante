@@ -13,6 +13,12 @@
 @endsection
 
 @section('content')
+
+<div class="row mt-4">
+  <div class="col-lg-4">
+    <button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</button></div>
+</div>
+
 <div class="row mt-2">
   <div class="col-md-12">
     <div class="table100 ver3 res m-b-110">
@@ -22,8 +28,7 @@
                 <th class="column1">Nombre</th>
                 <th class="column2">Precio</th>
                 <th class="column3">Tipo</th>
-                <th class="column4"><button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</a>
-                </th>
+                <th class="column4"></th>
               </tr>
           </thead>
           <tbody>
@@ -48,8 +53,8 @@
                     <div class="ms-2">
                       <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar la bebida {{$bebida->nombre}}?')">Borrar</button>
                     </div>
-                  </form>  
-                </div>  
+                  </form>
+                </div>
               </td>
             </tr>
             @endforeach
@@ -94,9 +99,9 @@
           </div>
           <div class="row mt-4">
               <div class="col">
-                  <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Crear</button>
-                  <button class="btn btn-warning" type="reset"><i class="fa fa-brush"></i> Limpiar</button>
-                  <a href="{{route('bebidas.index')}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Volver</a>
+                  <button class="btn btn-success" type="submit">Crear</button>
+                  <button class="btn btn-warning" type="reset">Limpiar</button>
+                  <a href="{{route('bebidas.index')}}" class="btn btn-primary">Volver</a>
               </div>
           </div>
       </form>
@@ -140,9 +145,9 @@
           </div>
           <div class="row mt-4">
               <div class="col">
-                  <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Editar</button>
-                  <button class="btn btn-warning" type="reset"><i class="fa fa-brush"></i> Limpiar</button>
-                  <a href="{{route('bebidas.index')}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Volver</a>
+                  <button class="btn btn-success" type="submit">Editar</button>
+                  <button class="btn btn-warning" type="reset">Limpiar</button>
+                  <a href="{{route('bebidas.index')}}" class="btn btn-primary">Volver</a>
               </div>
           </div>
       </form>

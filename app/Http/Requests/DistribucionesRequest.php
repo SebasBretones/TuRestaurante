@@ -19,7 +19,7 @@ class DistribucionesRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'nombre' => ucwords(trim($this->nombre))
+            'nombre' => trim(ucwords(strtolower($this->nombre)))
         ]);
     }
 
@@ -38,7 +38,7 @@ class DistribucionesRequest extends FormRequest
     public function messages()
     {
         return [
-            'nombre.required' => 'Debe escribir un nombre'
+            'nombre.required' => 'Debe escribir un nombre',
         ];
 
     }

@@ -15,11 +15,16 @@ class CreateBebidasTable extends Migration
     {
         Schema::create('bebidas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',120)->unique();
+            $table->string('nombre',120);
             $table->double('precio',8,2)->default(3);
             $table->ForeignId('tipobebida_id');
             $table->foreign('tipobebida_id')->references('id')
             ->on('tipobebidas')
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
+            $table->ForeignId('user_id');
+            $table->foreign('user_id')->references('id')
+            ->on('users')
             ->onUpdate('cascade')
             ->onDelete('cascade');
             $table->timestamps();

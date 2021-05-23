@@ -16,11 +16,11 @@
 
 <div class="row mt-4">
   <div class="col-lg-4">
-   <button data-bs-toggle="modal" data-bs-target="#crearTapa" type="button" class="btn btn-success">Crear</a>
+   <button data-bs-toggle="modal" data-bs-target="#crearTapa" type="button" class="btn btn-success">Crear</button>
   </div>
 </div>
 
-<div class="row mt-4">
+<div class="row mt-2">
   <div class="col-md-12">
     <div class="table100 ver3 res m-b-110">
       <table data-vertable="ver3">
@@ -54,14 +54,14 @@
                   <div class="ms-2">
                   <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el plato {{$tapa->nombre}}?')">Borrar</button>
                   </div>
-                </form>  
+                </form>
               </div>
-            </td>  
+            </td>
           </tr>
           @endforeach
         </tbody>
       </table>
-    </div>    
+    </div>
   </div>
 </div>
 
@@ -101,8 +101,8 @@
           </div>
           <div class="row mt-4">
               <div class="col">
-                  <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Crear</button>
-                  <button class="btn btn-warning" type="reset"><i class="fa fa-brush"></i> Limpiar</button>
+                  <button class="btn btn-success" type="submit">Crear</button>
+                  <button class="btn btn-warning" type="reset">Limpiar</button>
                   <a href="{{route('tapas.index')}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Volver</a>
               </div>
           </div>
@@ -148,9 +148,9 @@
           </div>
           <div class="row mt-4">
               <div class="col">
-                  <button class="btn btn-success" type="submit"><i class="fa fa-plus"></i>Editar</button>
-                  <button class="btn btn-warning" type="reset"><i class="fas fa-trash-alt"></i> Limpiar</button>
-                  <a href="{{route('tapas.index')}}" class="btn btn-primary"><i class="fa fa-house-user"></i> Volver</a>
+                  <button class="btn btn-success" type="submit">Editar</button>
+                  <button class="btn btn-warning" type="reset">Limpiar</button>
+                  <a href="{{route('tapas.index')}}" class="btn btn-primary">Volver</a>
               </div>
           </div>
       </form>
