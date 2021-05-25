@@ -3,12 +3,13 @@
 @php
     $todosPedidos=$factura->pedidos;
     $pedidos = $todosPedidos->where('estado_id',4)->all();
+    $mesa = '\App\Models\Mesa'::find($pedidos[0]->mesa_id);
     $estados = DB::table('estados')->get();
     $tapas = DB::table('tapas')->where('user_id', auth()->user()->id)->get();
     $bebidas = DB::table('bebidas')->where('user_id', auth()->user()->id)->get();
 @endphp
 <div class="col s12 mt-4">
-    <a id="listb" href="{{url()->previous()}}">
+    <a id="listb" href="{{route('distribucionmesas.show',$mesa->id)}}">
       <span class="back-to-index">
         <i class="material-icons back-arrow">keyboard_backspace</i>
         <span>Volver</span>
