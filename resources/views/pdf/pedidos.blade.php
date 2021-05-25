@@ -99,10 +99,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($pedidos as $ped)
-                @php
-                    $pedido= '\App\Models\Pedido'::find($ped->id)
-                @endphp   
+            @foreach ($pedidos as $ped) 
                 <tr class="row100">
                     <td class="pColumn4">
                         @php
