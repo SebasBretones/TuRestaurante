@@ -22,7 +22,12 @@
                 <select name="tapa_id" id="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona un plato</option>
                     @foreach ($tapas as $item)
-                    <option value="{{$item->id}}|{{$item->tipotapa_id}}">{{$item->nombre}}</option>
+                    <option value="{{$item->id}}|{{$item->tipotapa_id}}">
+                        @php
+                            $tipo = '\App\Models\TipoTapa'::find($item->tipotapa_id);
+                        @endphp
+                        {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
+                    </option>
                     @endforeach
                 </select>
             </div>
@@ -31,7 +36,12 @@
                 <select name="bebida_id" id="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona una bebida</option>
                     @foreach ($bebidas as $item)
-                    <option value="{{$item->id}}">{{$item->nombre}}</option>
+                    <option value="{{$item->id}}">
+                        @php
+                            $tipo = '\App\Models\TipoBebida'::find($item->tipobebida_id);
+                        @endphp
+                        {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
+                    </option>
                     @endforeach
                 </select>
             </div>
@@ -141,6 +151,7 @@ $pedidos = DB::table('pedidos')->where([
                     @method('PUT')
                     <input type="hidden" name="pedido_id" id="pedido_id">
                     <div class="col">
+                        <label for="estado_id" class="col-form-label">Estado</label>
                         <select name="estado_id" id="estado_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                             @foreach ($estados as $item)
                                 <option value="{{$item->id}}"
@@ -154,6 +165,7 @@ $pedidos = DB::table('pedidos')->where([
                     </div>
                     <div class="row mt-2">
                         <div class="col">
+                            <label for="tapa_id" class="col-form-label">Plato</label>
                             <select name="tapa_id" id="tapa_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                                 <option>Selecciona un plato</option>
                                 @foreach ($tapas as $item)
@@ -161,7 +173,10 @@ $pedidos = DB::table('pedidos')->where([
                                         @if ($tapa!=null && $item->id==$tapa->id)
                                         selected
                                         @endif>
-                                        {{$item->nombre}}
+                                        @php
+                                            $tipo = '\App\Models\TipoTapa'::find($item->tipotapa_id);
+                                        @endphp
+                                        {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€  
                                     </option>
                                 @endforeach
                             </select>
@@ -169,6 +184,7 @@ $pedidos = DB::table('pedidos')->where([
                     </div>
                     <div class="row mt-2">
                         <div class="col">
+                            <label for="bebida_id" class="col-form-label">Bebida</label>
                             <select name="bebida_id" id="bebida_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                                 <option>Selecciona una bebida</option>
                                 @foreach ($bebidas as $item)
@@ -176,7 +192,10 @@ $pedidos = DB::table('pedidos')->where([
                                         @if ($bebida!=null && $item->id==$bebida->id)
                                             selected
                                         @endif>
-                                        {{$item->nombre}}
+                                        @php
+                                            $tipo = '\App\Models\TipoBebida'::find($item->tipobebida_id);
+                                        @endphp
+                                        {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                                     </option>
                                 @endforeach
                             </select>
@@ -184,6 +203,7 @@ $pedidos = DB::table('pedidos')->where([
                     </div>
                     <div class="row mt-2">
                         <div class="col">
+                            <label for="cantidad" class="col-form-label">Cantidad</label>
                             <input type="number" class="form-control" id="cantidad_edit" name="cantidad">
                         </div>
                     </div>

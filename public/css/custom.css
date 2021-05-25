@@ -158,7 +158,7 @@ body
   }
 
   body {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
   }
 
   .table100.ver3 td {
@@ -196,10 +196,6 @@ body
         margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
     }
 
-    body {
-      font-size: 0.55rem;
-    }
-
     .table100.ver3 td {
       font-size: 0.55rem !important;
       color: #808080;
@@ -218,10 +214,6 @@ body
   @media (max-width: 430px) {
     .dropdown-menu .dropdown-menu{
         margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
-    }
-
-    body {
-      font-size: 0.45rem;
     }
 
     th, td {
@@ -247,10 +239,6 @@ body
   @media (max-width: 330px) {
     .dropdown-menu .dropdown-menu{
         margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
-    }
-
-    body {
-      font-size: 0.45rem;
     }
 
     th, td {
