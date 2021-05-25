@@ -197,7 +197,9 @@ class PedidoController extends Controller
         $todosPedidos=$factura->pedidos;
         $pedidos = $todosPedidos->where('estado_id',4)->all();
 
-        $pdf= PDF::loadview('pdf.pedidos',compact('pedidos','factura'));
-        return $pdf->download('factura.pdf');
+        $pedidos->duplicates('tapa_id');
+
+        //$pdf= PDF::loadview('pdf.pedidos',compact('pedidos','factura'));
+        //return $pdf->download('factura.pdf');
       }
 }
