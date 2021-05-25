@@ -195,7 +195,23 @@ class PedidoController extends Controller
 
     public function downloadPDF(Factura $factura) {
         $todosPedidos=$factura->pedidos;
-        $pedidos = $todosPedidos->where('estado_id',4)->all();
+        $pedidosT = $todosPedidos->where('estado_id',4)->all();
+        $pedidos = array();
+        array_push($pedidos, $pedidosT[0]);
+        $cont = 0;
+        for($i=1; $i<count($pedidosT); $i++) {
+            $cont = 0;
+            for($z=0; $z<count($pedidos);$z++){
+                if($pedidos[$z]->tapa_id==$pedidosT[$i]->tapa_id && $pedidos[$z]->bebida_id==$pedidosT[$i]->bebida_id){
+                    $pedidos[$z]->cantidad += $pedidosT[$i]->cantidad;
+                    $pedidos[$z]->total_pedido += $pedidosT[$i]->total_pedido;
+                    $cont = 1;
+                    break;
+                }
+            }
+            if($cont==0)
+              array_push($pedidos, $pedidosT[$i]);
+        }
 
         $pdf= PDF::loadview('pdf.pedidos',compact('pedidos','factura'));
         return $pdf->download('factura.pdf');

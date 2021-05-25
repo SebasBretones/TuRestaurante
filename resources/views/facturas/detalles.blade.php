@@ -3,12 +3,13 @@
 @php
     $todosPedidos=$factura->pedidos;
     $pedidos = $todosPedidos->where('estado_id',4)->all();
+    $mesa = '\App\Models\Mesa'::find($pedidos[0]->mesa_id);
     $estados = DB::table('estados')->get();
     $tapas = DB::table('tapas')->where('user_id', auth()->user()->id)->get();
     $bebidas = DB::table('bebidas')->where('user_id', auth()->user()->id)->get();
 @endphp
 <div class="col s12 mt-4">
-    <a id="listb" href="{{url()->previous()}}">
+    <a id="listb" href="{{route('distribucionmesas.show',$mesa->id)}}">
       <span class="back-to-index">
         <i class="material-icons back-arrow">keyboard_backspace</i>
         <span>Volver</span>
@@ -17,7 +18,7 @@
 </div>
 @if (count($pedidos)==0)
 <div class="row mt-4">
-    No hay pedidos
+    No hay pedidos entregados
 </div>
 @else
 <div class="d-flex justify-content-end mb-4">
@@ -30,7 +31,6 @@
                 <thead>
                     <tr class="row100 head">
                         <th class="pColumn1">Nº Pedido</th>
-                        <th class="pColumn2">Estado</th>
                         <th class="pColumn3">Precio</th>
                         <th class="pColumn4">Tapa</th>
                         <th class="pColumn5">Bebida</th>
@@ -45,12 +45,6 @@
                         @endphp
                         <tr class="row100">
                             <td class="pColumn1">{{$ped->id}}</th>
-                            <td class="pColumn2">
-                                @php
-                                    $est = '\App\Models\Estado'::find($ped->estado_id)
-                                @endphp
-                                {{$est->nombre}}
-                            </td>
                             <td class="pColumn3">{{$ped->total_pedido}} €</td>
                             <td class="pColumn4">
                                 @php
@@ -92,6 +86,7 @@
         </div>
     </div>
 </div>
+
 <!--Modal editar-->
 <div class="modal fade" id="editarPedido" tabindex="-1" aria-labelledby="editarPedidoLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -104,8 +99,10 @@
             <form name="fo" action="{{route('pedidos.update','pedido_id')}}" method="POST">
                 @csrf
                 @method('PUT')
+                <input type="hidden" name="mesa_id" id="mesa_id_edit">
                 <input type="hidden" name="pedido_id" id="pedido_id">
                 <div class="col">
+                    <label for="estado_id" class="col-form-label">Estado</label>
                     <select name="estado_id" id="estado_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                         @foreach ($estados as $item)
                             <option value="{{$item->id}}"
@@ -119,6 +116,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col">
+                        <label for="tapa_id" class="col-form-label">Plato</label>
                         <select name="tapa_id" id="tapa_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                             <option>Selecciona un plato</option>
                             @foreach ($tapas as $item)
@@ -126,7 +124,10 @@
                                     @if ($tapa!=null && $item->id==$tapa->id)
                                     selected
                                     @endif>
-                                    {{$item->nombre}}
+                                    @php
+                                        $tipo = '\App\Models\Tipotapa'::find($item->tipotapa_id);
+                                    @endphp
+                                    {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                                 </option>
                             @endforeach
                         </select>
@@ -134,6 +135,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col">
+                        <label for="bebida_id" class="col-form-label">Bebida</label>
                         <select name="bebida_id" id="bebida_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                             <option>Selecciona una bebida</option>
                             @foreach ($bebidas as $item)
@@ -141,7 +143,10 @@
                                     @if ($bebida!=null && $item->id==$bebida->id)
                                         selected
                                     @endif>
-                                    {{$item->nombre}}
+                                    @php
+                                        $tipo = '\App\Models\TipoBebida'::find($item->tipobebida_id);
+                                    @endphp
+                                    {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                                 </option>
                             @endforeach
                         </select>
@@ -149,10 +154,10 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col">
+                        <label for="cantidad" class="col-form-label">Cantidad</label>
                         <input type="number" class="form-control" id="cantidad_edit" name="cantidad">
                     </div>
                 </div>
-                <input type="hidden" name="mesa_id" id="mesa_id_edit">
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Editar</button>
