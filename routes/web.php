@@ -48,8 +48,7 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::get('/download-pdf/{factura}', [PedidoController::class, 'downloadPDF']);
 });
 
-Route::get('/descargar-carta', [CartaController::class, 'descargarCarta']);
+Route::get('/download-carta', [CartaController::class, 'downloadCarta']);
 
-
-
+Route::resource('cartas', CartaController::class)->only('index');
 

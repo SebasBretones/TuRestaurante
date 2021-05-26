@@ -26,7 +26,7 @@
               <a class="nav-link" href="{{route('bebidas.index')}}">Bebidas</a>
           </li>
           <li class="nav-item">
-              <a class="nav-link" href="#">Carta</a>
+              <a class="nav-link" href="{{route('cartas.index')}}">Carta</a>
           </li>
         </ul>
         @else

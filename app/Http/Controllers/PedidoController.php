@@ -215,5 +215,5 @@ class PedidoController extends Controller
 
         $pdf= PDF::loadview('pdf.pedidos',compact('pedidos','factura'));
         return $pdf->download('factura.pdf');
-      }
+    }
 }
