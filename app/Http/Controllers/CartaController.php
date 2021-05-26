@@ -16,16 +16,38 @@ class CartaController extends Controller
         return view ('cartas.index');
     }
 
-    public function downloadCarta() {
-        $tapas = Tapa::where('tipotapa_id',1)->orderBy('nombre')->get();
-        $raciones = Tapa::where('tipotapa_id',2)->orderBy('nombre')->get();
+    public function generateCarta() {
+        $tapas = Tapa::where([
+            ['tipotapa_id',1],
+            ['user_id',auth()->user()->id]
+        ])->orderBy('nombre')->get();
 
-        $bebidasC = Bebida::where('tipobebida_id',1)->orderBy('nombre')->get();
-        $bebidasS = Bebida::where('tipobebida_id',2)->orderBy('nombre')->get();
+        $raciones = Tapa::where([
+            ['tipotapa_id',2],
+            ['user_id',auth()->user()->id]
+        ])->orderBy('nombre')->get();
+
+        $bebidasC = Bebida::where([
+            ['tipobebida_id',1],
+            ['user_id',auth()->user()->id]
+        ])->orderBy('nombre')->get();
+
+        $bebidasS = Bebida::where([
+            ['tipobebida_id',2],
+            ['user_id',auth()->user()->id]
+        ])->orderBy('nombre')->get();
+
         $user = auth()->user()->name;
 
-        //return view('pdf.carta', compact('tapas','raciones','bebidasC','bebidasS'));
         $pdf= PDF::loadview('pdf.carta',compact('tapas','raciones','bebidasC','bebidasS','user'));
-        return $pdf->download('carta.pdf');
+        $output = $pdf->output();
+        file_put_contents('pdf/Carta.pdf', $output);
+        return redirect()->route('cartas.index')->with('mensaje' , 'Carta generada correctamente');
+    }
+
+    public function downloadCarta(){
+        $file = public_path()."/pdf/Carta.pdf";
+        $headers = array('Content-Type: application/pdf',);
+        return response()->download($file, 'Carta.pdf', $headers); 
     }
 }
