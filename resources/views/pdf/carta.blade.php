@@ -81,7 +81,7 @@
         <thead>
           <tr>
             <th> </th>
-            <th class="titulo">Carta {{$user}}</th>
+            <th class="titulo">Carta {{$user->name}}</th>
             <th> </th>
           </tr>
         </thead>
