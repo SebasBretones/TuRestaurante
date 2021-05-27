@@ -49,7 +49,7 @@ class CartaController extends Controller
     }
 
     public function downloadCarta(User $user){
-        $file = public_path()."/pdf/".$user->id."/Carta.pdf";
+        $file = public_path()."/pdf/user".$user->id."/Carta.pdf";
         $headers = array('Content-Type: application/pdf',);
         return response()->download($file, 'Carta.pdf', $headers); 
     }
