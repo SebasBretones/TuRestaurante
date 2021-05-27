@@ -17,15 +17,26 @@
     $cont=0;
 @endphp
 
-<div class="col mt-4">
-    <div class="col-lg-4">
+<div class="row justify-content-between mt-4">
+    <div class="col-md-4">
         <button class="btn btn-success me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#crearMesa">Crear</button>
+    </div>
+    <div class="col-md-3">
+        <form class="input-group" action="{{route('distribucionmesas.show',$distribucionmesa)}}" target="#" method="GET">
+            <input type="number" class="form-control" name="search" placeholder="Buscar nº mesa" value="{{request()->query('search')}}">
+        </form> 
     </div>
 </div>
 
 @if (count($mesas)==0)
-    <p>No hay mesas</p>
-    <div id="editarMesa"></div>
+    <p>
+    @if (request()->query('search'))
+      No se han encontrado registros para la busqueda de la mesa <strong>{{request()->query('search')}}</strong>
+    @else
+      No se han encontrado registros
+    @endif
+  </p>
+  <div id="editarMesa"></div>
 @else
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 centrado">
         @foreach ($mesas as $mesa)
@@ -39,9 +50,13 @@
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group qMesa" data-mesa="{{$mesa->id}}">
                             @php
-                                $factura= '\App\Models\Factura'::find($mesa->factura_id)
+                                $factura= '\App\Models\Factura'::find($mesa->factura_id);
+                                $todosPedidos=$factura->pedidos;
+                                $pedidos = $todosPedidos->where('estado_id',4)->all();
                             @endphp
-                            <a href="{{route('facturas.show',$factura)}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
+                            @if (count($pedidos)!=0)
+                                <a href="{{route('facturas.show',$factura)}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
+                            @endif
                             <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button"
                             data-mesa_id="{{$mesa->id}}" data-num_asientos="{{$mesa->num_asientos}}" data-ocupada="{{$mesa->ocupada}}"
                             data-distribucion_id="{{$mesa->distribucion_id}}"  data-bs-toggle="modal" data-bs-target="#editarMesa">Editar</a>

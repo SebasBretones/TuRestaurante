@@ -14,55 +14,72 @@
 
 @section('content')
 
-<div class="row mt-4">
-  <div class="col-lg-4">
-    <button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</button></div>
-</div>
-
-<div class="row mt-2">
-  <div class="col-md-12">
-    <div class="table100 ver3 res m-b-110">
-      <table data-vertable="ver3">
-          <thead>
-              <tr class="row100 head">
-                <th class="column1">Nombre</th>
-                <th class="column2">Precio</th>
-                <th class="column3">Tipo</th>
-                <th class="column4"></th>
-              </tr>
-          </thead>
-          <tbody>
-            @foreach ($bebidas as $bebida)
-            <tr class="row100">
-              <td class="column1">{{$bebida->nombre}}</td>
-              <td class="column2">{{$bebida->precio}}</td>
-              <td class="column3">
-                @php
-                    $tipo = '\App\Models\Tipobebida'::find($bebida->tipobebida_id);
-                @endphp
-                {{$tipo->nombre}}
-              </td>
-              <td class="column4">
-                <div class="btn-group">
-                  <button class="btn btn-success" type="button"
-                  data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
-                  data-tipobebida_id="{{$bebida->tipobebida_id}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
-                  <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <div class="ms-2">
-                      <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar la bebida {{$bebida->nombre}}?')">Borrar</button>
-                    </div>
-                  </form>
-                </div>
-              </td>
-            </tr>
-            @endforeach
-          </tbody>
-      </table>
-    </div>
+<div class="row justify-content-between mt-4">
+  <div class="col-md-4">
+    <button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</button>
+  </div>
+  <div class="col-md-3">
+    <form class="input-group" action="{{route('bebidas.index')}}" target="#" method="GET">
+      <input type="text" class="form-control" name="search" placeholder="Buscar" value="{{request()->query('search')}}">
+    </form>
   </div>
 </div>
+
+@if (count($bebidas)==0)
+  <p>
+    @if (request()->query('search'))
+      No se han encontrado registros para la busqueda de <strong>{{request()->query('search')}}</strong>
+    @else
+      No se han encontrado registros
+    @endif
+  </p>
+@else
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <div class="table100 ver3 res m-b-110">
+        <table data-vertable="ver3">
+            <thead>
+                <tr class="row100 head">
+                  <th class="column1">Nombre</th>
+                  <th class="column2">Precio</th>
+                  <th class="column3">Tipo</th>
+                  <th class="column4"></th>
+                </tr>
+            </thead>
+            <tbody>
+              @foreach ($bebidas as $bebida)
+              <tr class="row100">
+                <td class="column1">{{$bebida->nombre}}</td>
+                <td class="column2">{{$bebida->precio}}</td>
+                <td class="column3">
+                  @php
+                      $tipo = '\App\Models\Tipobebida'::find($bebida->tipobebida_id);
+                  @endphp
+                  {{$tipo->nombre}}
+                </td>
+                <td class="column4">
+                  <div class="btn-group">
+                    <button class="btn btn-success" type="button"
+                    data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
+                    data-tipobebida_id="{{$bebida->tipobebida_id}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
+                    <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <div class="ms-2">
+                        <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar la bebida {{$bebida->nombre}}?')">Borrar</button>
+                      </div>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+              @endforeach
+            </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+@endif
+
 
 @include('partials._paginator', ['array' => $bebidas])
 

@@ -16,9 +16,22 @@ class BebidaController extends Controller
      */
     public function index()
     {
-        $bebidas = Bebida::orderBy('nombre')
-        ->where('user_id', auth()->user()->id)
-        ->paginate(10)->withQueryString();
+
+        $search = request()->query('search');
+
+        if ($search){
+           $bebidas = Bebida::orderBy('nombre')
+           ->where([
+               ['user_id', auth()->user()->id],
+               ["nombre","LIKE","%{$search}%"]
+            ])->paginate(10)->withQueryString();
+
+        } else {
+            $bebidas = Bebida::orderBy('nombre')
+            ->where('user_id', auth()->user()->id)
+            ->paginate(10)->withQueryString();
+        }
+
 
         return view ('bebidas.index', compact('bebidas'));
     }

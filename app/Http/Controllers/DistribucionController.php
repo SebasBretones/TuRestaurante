@@ -16,10 +16,24 @@ class DistribucionController extends Controller
      */
     public function index(Request $request)
     {
-        $distribuciones = Distribucion::orderBy('id')
-        ->where('user_id', auth()->user()->id)
-        ->id($request->get('id'))
-        ->paginate(6)->withQueryString();
+
+        $search = request()->query('search');
+
+        if ($search){
+           $distribuciones = Distribucion::orderBy('nombre')
+           ->where([
+               ['user_id', auth()->user()->id],
+               ["nombre","LIKE","%{$search}%"]
+            ])->paginate(10)->withQueryString();
+
+        } else {
+            $distribuciones = Distribucion::orderBy('nombre')
+            ->where('user_id', auth()->user()->id)
+            ->id($request->get('id'))
+            ->paginate(6)->withQueryString();
+        }
+
+        
 
         return view ('distribucionmesas.index', compact('distribuciones'));
     }
@@ -66,8 +80,20 @@ class DistribucionController extends Controller
      */
     public function show(Distribucion $distribucionmesa, Request $request)
     {
-        $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)->orderBy('id')
-        ->paginate(6)->withQueryString();
+
+        $search = request()->query('search');
+
+        if ($search){
+           $mesas = Mesa::orderBy('id')
+           ->where([
+               ['distribucion_id', $distribucionmesa->id],
+               ["id","LIKE","%{$search}%"]
+            ])->paginate(6)->withQueryString();
+
+        } else {
+            $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)
+            ->orderBy('id')->paginate(6)->withQueryString();
+        }
 
         return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
     }

@@ -14,57 +14,72 @@
 
 @section('content')
 
-<div class="row mt-4">
-  <div class="col-lg-4">
+<div class="row justify-content-between mt-4">
+  <div class="col-md-4">
    <button data-bs-toggle="modal" data-bs-target="#crearTapa" type="button" class="btn btn-success">Crear</button>
   </div>
-</div>
-
-<div class="row mt-2">
-  <div class="col-md-12">
-    <div class="table100 ver3 res m-b-110">
-      <table data-vertable="ver3">
-        <thead>
-            <tr class="row100 head">
-            <th class="column1">Nombre</th>
-            <th class="column2">Precio</th>
-            <th class="column3">Tipo</th>
-            <th class="column4"></th>
-            </tr>
-        </thead>
-        <tbody>
-          @foreach ($tapas as $tapa)
-          <tr class="row100">
-            <td class="column1">{{$tapa->nombre}}</td>
-            <td class="column2">{{$tapa->precio}} €</td>
-            <td class="column3">
-              @php
-                  $tipo = '\App\Models\Tipotapa'::find($tapa->tipotapa_id);
-              @endphp
-              {{$tipo->nombre}}
-            </td>
-            <td class="column4">
-              <div class="btn-group">
-                <button class="btn btn-success" type="button"
-                data-tapa_id="{{$tapa->id}}" data-nombre="{{$tapa->nombre}}" data-precio="{{$tapa->precio}}"
-                data-tipotapa_id="{{$tapa->tipotapa_id}}" data-bs-toggle="modal" data-bs-target="#editarTapa">Editar</button>
-                <form name="f" action="{{route('tapas.destroy', $tapa)}}"  method="POST">
-                  @csrf
-                  @method('DELETE')
-                  <div class="ms-2">
-                  <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el plato {{$tapa->nombre}}?')">Borrar</button>
-                  </div>
-                </form>
-              </div>
-            </td>
-          </tr>
-          @endforeach
-        </tbody>
-      </table>
-    </div>
+  <div class="col-md-3">
+    <form class="input-group" action="{{route('tapas.index')}}" target="#" method="GET">
+      <input type="text" class="form-control" name="search" placeholder="Buscar" value="{{request()->query('search')}}">
+    </form> 
   </div>
 </div>
 
+@if (count($tapas)==0)
+  <p>
+    @if (request()->query('search'))
+      No se han encontrado registros para la busqueda de <strong>{{request()->query('search')}}</strong>
+    @else
+      No se han encontrado registros
+    @endif
+  </p>
+@else
+  <div class="row mt-2">
+    <div class="col-md-12">
+      <div class="table100 ver3 res m-b-110">
+        <table data-vertable="ver3">
+          <thead>
+              <tr class="row100 head">
+              <th class="column1">Nombre</th>
+              <th class="column2">Precio</th>
+              <th class="column3">Tipo</th>
+              <th class="column4">
+              </th>
+              </tr>
+          </thead>
+          <tbody>
+            @foreach ($tapas as $tapa)
+              <tr class="row100">
+                <td class="column1">{{$tapa->nombre}}</td>
+                <td class="column2">{{$tapa->precio}} €</td>
+                <td class="column3">
+                  @php
+                      $tipo = '\App\Models\Tipotapa'::find($tapa->tipotapa_id);
+                  @endphp
+                  {{$tipo->nombre}}
+                </td>
+                <td class="column4">
+                  <div class="btn-group">
+                    <button class="btn btn-success" type="button"
+                    data-tapa_id="{{$tapa->id}}" data-nombre="{{$tapa->nombre}}" data-precio="{{$tapa->precio}}"
+                    data-tipotapa_id="{{$tapa->tipotapa_id}}" data-bs-toggle="modal" data-bs-target="#editarTapa">Editar</button>
+                    <form name="f" action="{{route('tapas.destroy', $tapa)}}"  method="POST">
+                      @csrf
+                      @method('DELETE')
+                      <div class="ms-2">
+                      <button class="btn btn-danger" type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar el plato {{$tapa->nombre}}?')">Borrar</button>
+                      </div>
+                    </form>
+                  </div>
+                </td>
+              </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+@endif
 @include('partials._paginator', ['array' => $tapas])
 
 <!--Modal crear-->
