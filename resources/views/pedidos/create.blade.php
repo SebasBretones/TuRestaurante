@@ -2,19 +2,40 @@
 @section('content')
 @php
     $estados = DB::table('estados')->get();
-    $tapas = DB::table('tapas')->where('user_id', auth()->user()->id)->get();
-    $bebidas = DB::table('bebidas')->where('user_id', auth()->user()->id)->get();
+    $tapas = DB::table('tapas')->orderBy('nombre')->where('user_id', auth()->user()->id)->get();
+    $bebidas = DB::table('bebidas')->orderBy('nombre')->where('user_id', auth()->user()->id)->get();
+    $pedidos = DB::table('pedidos')->where([
+    ['mesa_id',$mesa->id],
+    ['estado_id','!=',4],
+    ])->get();
+
+    $pfact = DB::table('pedidos')->where([
+    ['mesa_id',$mesa->id],
+    ['estado_id', 4],
+    ])->get();
 @endphp
-<div class="col s12 mt-4">
-    <a id="listb" href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}">
-      <span class="back-to-index">
-        <i class="material-icons back-arrow">keyboard_backspace</i>
-        <span>Volver al listado</span>
-      </span>
-    </a>
+<div class="row justify-content-between mt-4">
+    <div class="col-sm-4 left">
+        <a id="listb" href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}">
+            <span class="back-to-index">
+                <i class="material-icons back-arrow">keyboard_backspace</i>
+                <span>Volver al listado</span>
+            </span>
+        </a>
+    </div>
+    @if (count($pfact)!=0)
+        <div class="col-sm-4 right">
+            <a id="listb" href="{{route('facturas.show',$mesa->factura_id)}}">
+                <span>Ir a la factura</span>
+                <span class="material-icons">
+                    arrow_forward
+                </span>    
+            </a>
+        </div>
+    @endif
 </div>
 
-<div class="mt-3 mx-auto p-2 w-4/5">
+<div class="row mt-3 mx-auto p-2 w-4/5">
     <form name="f" id="crearPedido" action="{{route('pedidos.store')}}" method="POST">
         @csrf
         <div class="row mt-4">
@@ -60,12 +81,6 @@
     </form>
 </div>
 
-@php
-$pedidos = DB::table('pedidos')->where([
-    ['mesa_id',$mesa->id],
-    ['estado_id','!=',4],
-    ])->get();
-@endphp
 @if (count($pedidos)!=0)
     <hr/>
     <div class="row mt-4">

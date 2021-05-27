@@ -117,6 +117,9 @@ class PedidoController extends Controller
     public function update(PedidoRequest $request)
     {
         $pedido = Pedido::find($request->pedido_id);
+        $estado_inicial = $pedido->estado_id;
+        $precio_inicial = $pedido->total_pedido;
+
         $pedido->estado_id=$request->estado_id;
         $pedido->cantidad=$request->cantidad;
         $pedido->tapa_id=null;
@@ -149,19 +152,31 @@ class PedidoController extends Controller
                 $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
         }
 
-        if($pedido->estado_id==4){
-            $mesa=DB::table('mesas')->find($pedido->mesa_id);
-            $factura=DB::table('facturas')->find($mesa->factura_id);
+        $mesa=DB::table('mesas')->find($pedido->mesa_id);
+        $factura=DB::table('facturas')->find($mesa->factura_id);
+        if($estado_inicial!=4) {
+            if($pedido->estado_id==4){
+                DB::table('facturas')
+                    ->where('id', $factura->id)
+                    ->update(['total_factura' => $factura->total_factura + $pedido->total_pedido]);
+            }
+        } else {
             DB::table('facturas')
                 ->where('id', $factura->id)
-                ->update(['total_factura' => $factura->total_factura + $pedido->total_pedido]);
+                ->update(['total_factura' => $factura->total_factura + $pedido->total_pedido - $precio_inicial]);
         }
+
+
         if($pedido->tapa_id == null && $pedido->bebida_id == null){
             return redirect()->back()->with('mensaje', 'Debe seleccionar una bebida o tapa');
         }else
             $pedido->update();
 
-        return redirect()->back();
+        if($pedido->estado_id==4 && $estado_inicial!=4)
+            return redirect()->back()->with('mensaje','Pedido actualizado con éxito y enviado a la factura');
+        else
+            return redirect()->back()->with('mensaje','Pedido actualizado con éxito');
+
     }
 
     /**
@@ -172,6 +187,12 @@ class PedidoController extends Controller
      */
     public function destroy(Pedido $pedido)
     {
+        $mesa=DB::table('mesas')->find($pedido->mesa_id);
+        $factura=DB::table('facturas')->find($mesa->factura_id);
+        DB::table('facturas')
+            ->where('id', $factura->id)
+            ->update(['total_factura' => $factura->total_factura - $pedido->total_pedido]);
+       
         $pedido->delete();
 
         return redirect()->back()->with('mensaje', 'Pedido borrado correctamente');

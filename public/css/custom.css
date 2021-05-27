@@ -19,6 +19,16 @@ nav .navbar-nav li a:hover{
     width: 100%;
 }
 
+.right {
+  float: right;
+  text-align: right;
+}
+
+.left{
+  float: left;
+  text-align: left;
+}
+
 .tapas-header {
   padding: 250px 0 150px;
   background: url(../img/titulos/tapa.jpg) no-repeat;
