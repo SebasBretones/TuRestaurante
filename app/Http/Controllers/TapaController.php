@@ -15,9 +15,21 @@ class TapaController extends Controller
      */
     public function index()
     {
-        $tapas = Tapa::orderBy('nombre')
-        ->where('user_id', auth()->user()->id)
-        ->paginate(10)->withQueryString();
+        $search = request()->query('search');
+
+        if ($search){
+           $tapas = Tapa::orderBy('nombre')
+           ->where([
+               ['user_id', auth()->user()->id],
+               ["nombre","LIKE","%{$search}%"]
+            ])->paginate(10)->withQueryString();
+
+        } else {
+            $tapas = Tapa::orderBy('nombre')
+            ->where('user_id', auth()->user()->id)
+            ->paginate(10)->withQueryString();
+        }
+        
 
         return view ('tapas.index', compact('tapas'));
     }
