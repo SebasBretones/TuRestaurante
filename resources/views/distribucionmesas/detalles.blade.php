@@ -22,9 +22,9 @@
         <button class="btn btn-success me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#crearMesa">Crear</button>
     </div>
     <div class="col-md-3">
-        <form class="input-group" action="{{route('distribucionmesas.show',$distribucionmesa)}}" target="#" method="GET">
+        <form class="input-group" action="{{route('distribucionmesas.show',$distribucionmesa)}}" method="GET">
             <input type="number" class="form-control" name="search" placeholder="Buscar nº mesa" value="{{request()->query('search')}}">
-        </form> 
+        </form>
     </div>
 </div>
 

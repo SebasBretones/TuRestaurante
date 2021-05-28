@@ -19,9 +19,9 @@
    <button data-bs-toggle="modal" data-bs-target="#crearTapa" type="button" class="btn btn-success">Crear</button>
   </div>
   <div class="col-md-3">
-    <form class="input-group" action="{{route('tapas.index')}}" target="#" method="GET">
+    <form class="input-group" action="{{route('tapas.index')}}" method="GET">
       <input type="text" class="form-control" name="search" placeholder="Buscar" value="{{request()->query('search')}}">
-    </form> 
+    </form>
   </div>
 </div>
 
