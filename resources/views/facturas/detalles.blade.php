@@ -11,7 +11,7 @@
 @endphp
 <div class="col s12 mt-4">
     @if (count($pedidos)!=0)
-        <a id="listb" href="{{route('distribucionmesas.show',$mesa ->id)}}">
+        <a id="listb" href="{{route('distribucionmesas.show', $mesa ->distribucion_id)}}">
             <span class="back-to-index">
                 <i class="material-icons back-arrow">keyboard_backspace</i>
                 <span>Volver al listado de mesas</span>

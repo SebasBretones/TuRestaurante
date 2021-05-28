@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PedidoRequest;
+use App\Models\Distribucion;
 use App\Models\Factura;
 use App\Models\Mesa;
 use App\Models\Pedido;
@@ -29,9 +30,12 @@ class PedidoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Mesa $mesa)
+    public function create(Mesa $mesa, Distribucion $distribucionmesa)
     {
-        return view('pedidos.create', compact('mesa'));
+        if($distribucionmesa->user_id!=auth()->user()->id || $mesa->distribucion_id != $distribucionmesa->id)
+            return redirect()->back()->with('mensaje', '¡Solo puedes acceder a tus pedidos!');
+        else
+            return view('pedidos.create', compact('mesa'));
     }
 
     /**
@@ -42,17 +46,17 @@ class PedidoController extends Controller
      */
     public function store(PedidoRequest $request)
     {
-    
+
         $pedido = new Pedido();
         $pedido->estado_id=$request->estado_id;
-        
+
         if($request->tapa_id!="Selecciona un plato") {
             $arr = explode('|',$request->tapa_id);
             $pedido->tapa_id=$arr[0];
         }else
             $pedido->tapa_id=null;
 
-        if($request->bebida_id!="Selecciona una bebida") 
+        if($request->bebida_id!="Selecciona una bebida")
             $pedido->bebida_id=$request->bebida_id;
         else
             $pedido->bebida_id=null;
@@ -73,7 +77,7 @@ class PedidoController extends Controller
                 } else {
                     $pedido->total_pedido= $pedido->total_pedido + $bebida->precio + $tapa->precio;
                 }
-            } else if($tapa!=null) 
+            } else if($tapa!=null)
                 $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
         }
 
@@ -128,7 +132,7 @@ class PedidoController extends Controller
             $pedido->tapa_id=null;
         }else
             $pedido->tapa_id=$request->tapa_id;
-        if($request->bebida_id!="Selecciona una bebida") 
+        if($request->bebida_id!="Selecciona una bebida")
             $pedido->bebida_id=$request->bebida_id;
 
         $pedido->mesa_id=$request->mesa_id;
@@ -148,7 +152,7 @@ class PedidoController extends Controller
                 } else {
                     $pedido->total_pedido= $pedido->total_pedido + $bebida->precio + $tapa->precio;
                 }
-            } else if($tapa!=null) 
+            } else if($tapa!=null)
                 $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
         }
 
@@ -192,7 +196,7 @@ class PedidoController extends Controller
         DB::table('facturas')
             ->where('id', $factura->id)
             ->update(['total_factura' => $factura->total_factura - $pedido->total_pedido]);
-       
+
         $pedido->delete();
 
         return redirect()->back()->with('mensaje', 'Pedido borrado correctamente');

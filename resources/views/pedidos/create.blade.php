@@ -25,11 +25,11 @@
     </div>
     @if (count($pfact)!=0)
         <div class="col-sm-4 right">
-            <a id="listb" href="{{route('facturas.show',$mesa->factura_id)}}">
+            <a id="listb" href="{{route('facturas.show',[$mesa->factura_id, $mesa->distribucion_id])}}">
                 <span>Ir a la factura</span>
                 <span class="material-icons">
                     arrow_forward
-                </span>    
+                </span>
             </a>
         </div>
     @endif
@@ -191,7 +191,7 @@
                                         @php
                                             $tipo = '\App\Models\TipoTapa'::find($item->tipotapa_id);
                                         @endphp
-                                        {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€  
+                                        {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                                     </option>
                                 @endforeach
                             </select>

@@ -5,7 +5,7 @@
     <div class="container text-center">
       <div class="row">
         <div class="col-lg-12">
-          <h1>Mesas</h1>
+          <h1>Mesas de {{$distribucionmesa->nombre}}</h1>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
                                 $pedidos = $todosPedidos->where('estado_id',4)->all();
                             @endphp
                             @if (count($pedidos)!=0)
-                                <a href="{{route('facturas.show',$factura)}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
+                                <a href="{{route('facturas.show',[$factura,$distribucionmesa])}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
                             @endif
                             <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button"
                             data-mesa_id="{{$mesa->id}}" data-num_asientos="{{$mesa->num_asientos}}" data-ocupada="{{$mesa->ocupada}}"
@@ -63,7 +63,7 @@
                             <form name="borrar" action="{{route('mesas.destroy',$mesa)}}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">Borrar</a>
+                                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar la mesa {{$mesa->id}}?')">Borrar</a>
                             </form>
                         </div>
                         @php
@@ -73,7 +73,7 @@
                         @endphp
                         @if ($mesa->ocupada)
                             <div>
-                                <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create',$mesa)}}">Pedidos</a>
+                                <a class="btn btn-sm btn-outline-secondary" role="button" href="{{route('pedidos.create', [$mesa, $distribucionmesa])}}">Pedidos</a>
                             </div>
                         @else
                             <div>
@@ -120,7 +120,7 @@
                         </div>
                     </div>
                     @php
-                        $distribucions = DB::table('distribucions')->get();
+                        $distribucions = DB::table('distribucions')->where('user_id',auth()->user()->id)->get();
                     @endphp
                     <div class="col">
                         <label for="distribucion_id" class="col-form-label">Distribución</label>

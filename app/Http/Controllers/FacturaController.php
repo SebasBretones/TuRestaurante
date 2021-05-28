@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bebida;
+use App\Models\Distribucion;
 use App\Models\Factura;
 use App\Models\Pedido;
 use Illuminate\Http\Request;
@@ -54,8 +55,22 @@ class FacturaController extends Controller
      * @param  \App\Models\Factura  $factura
      * @return \Illuminate\Http\Response
      */
-    public function show(Factura $factura)
+    public function show(Factura $factura, Distribucion $distribucionmesa)
     {
+
+        $todosPedidos=$factura->pedidos;
+        $pedidos = $todosPedidos->where('estado_id',4)->all();
+
+        if(count($pedidos)!=0)
+            $mesa = '\App\Models\Mesa'::find($pedidos[0]->mesa_id);
+        else
+            return redirect()->route('distribucionmesas.show', $distribucionmesa->id)->with('mensaje', 'No tienes pedidos en la factura');
+
+        if(count($pedidos)!=0) {
+            if($distribucionmesa->user_id!=auth()->user()->id || $mesa->distribucion_id != $distribucionmesa->id)
+                return redirect()->route('distribucionmesas.show', $distribucionmesa->id)->with('mensaje', '¡Solo puedes acceder a tus facturas!');
+            }
+
         return view('facturas.detalles', compact('factura'));
     }
 
@@ -90,7 +105,7 @@ class FacturaController extends Controller
 
         $mesa = '\App\Models\Mesa'::find($pedidos[0]->mesa_id);
 
-        return redirect()->route('distribucionmesas.show', $mesa->id)->with('mensaje', 'Factura borrada correctamente');
+        return redirect()->route('distribucionmesas.show', $mesa->distribucion_id)->with('mensaje', 'Factura borrada correctamente');
     }
 
     /**

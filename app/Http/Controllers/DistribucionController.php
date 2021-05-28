@@ -33,8 +33,6 @@ class DistribucionController extends Controller
             ->paginate(6)->withQueryString();
         }
 
-        
-
         return view ('distribucionmesas.index', compact('distribuciones'));
     }
 
@@ -95,7 +93,10 @@ class DistribucionController extends Controller
             ->orderBy('id')->paginate(6)->withQueryString();
         }
 
-        return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
+        if($distribucionmesa->user_id!=auth()->user()->id)
+            return redirect()->route('distribucionmesas.index')->with('mensaje', '¡No puedes acceder a datos de otros usuarios!');
+        else
+            return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
     }
 
     /**
