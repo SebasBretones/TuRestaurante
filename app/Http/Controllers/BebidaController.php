@@ -102,13 +102,14 @@ class BebidaController extends Controller
     public function update(BebidaRequest $request)
     {
         $bebida = Bebida::find($request->id);
+        $nombre_inicial = $bebida->nombre;
         $bebida->nombre = $request->nombre;
         $bebida->precio = $request->precio;
         $bebida->tipobebida_id = $request->tipobebida_id;
 
         $bebidas = Bebida::where('user_id', auth()->user()->id)->get();
         foreach($bebidas as $t){
-            if ($t->nombre == $bebida->nombre)
+            if ($t->nombre == $bebida->nombre && $bebida->nombre != $nombre_inicial)
                 return redirect()->route('bebidas.index')->with('mensaje', 'Debe indicar una bebida que no exista');
         }
 

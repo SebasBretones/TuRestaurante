@@ -29,7 +29,7 @@ class TapaController extends Controller
             ->where('user_id', auth()->user()->id)
             ->paginate(10)->withQueryString();
         }
-        
+
 
         return view ('tapas.index', compact('tapas'));
     }
@@ -100,6 +100,7 @@ class TapaController extends Controller
     public function update(TapaRequest $request)
     {
         $tapa = Tapa::find($request->id);
+        $nombre_inicial = $tapa->nombre;
 
         $tapa->nombre = $request->nombre;
         $tapa->precio = $request->precio;
@@ -107,7 +108,7 @@ class TapaController extends Controller
 
         $tapas = Tapa::where('user_id', auth()->user()->id)->get();
         foreach($tapas as $t){
-            if ($t->nombre == $tapa->nombre)
+            if ($t->nombre == $tapa->nombre && $tapa->nombre != $nombre_inicial)
                 return redirect()->route('tapas.index')->with('mensaje', 'Debe indicar un plato que no exista');
         }
         $tapa->update();
