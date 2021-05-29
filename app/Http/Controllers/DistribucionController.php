@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\DistribucionesRequest;
 use App\Models\Distribucion;
+use App\Models\Factura;
 use App\Models\Mesa;
 use Illuminate\Http\Request;
 
@@ -140,6 +141,12 @@ class DistribucionController extends Controller
      */
     public function destroy(Distribucion $distribucionmesa)
     {
+        $mesas = Mesa::where('distribucion_id',$distribucionmesa->id)->get();
+
+        foreach($mesas as $mesa) {
+            Factura::find($mesa->id)->delete();
+        }
+
         $distribucionmesa->delete();
         return redirect()->route('distribucionmesas.index')->with('mensaje','Distribución borrada correctamente');
     }
