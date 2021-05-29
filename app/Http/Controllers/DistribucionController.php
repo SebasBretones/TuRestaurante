@@ -18,7 +18,7 @@ class DistribucionController extends Controller
     public function index(Request $request)
     {
 
-        $search = request()->query('search');
+        $search = trim(ucwords(strtolower(request()->query('search'))));
 
         if ($search){
            $distribuciones = Distribucion::orderBy('nombre')

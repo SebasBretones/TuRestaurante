@@ -15,7 +15,7 @@ class TapaController extends Controller
      */
     public function index()
     {
-        $search = request()->query('search');
+        $search = trim(ucwords(strtolower(request()->query('search'))));
 
         if ($search){
            $tapas = Tapa::orderBy('nombre')
