@@ -24,7 +24,7 @@ class CreateMesasTable extends Migration
             ->onUpdate('cascade')
             ->onDelete('cascade');
 
-            $table->ForeignId('factura_id')->nullable();
+            $table->ForeignId('factura_id');
             $table->foreign('factura_id')->references('id')
             ->on('facturas')
             ->onUpdate('cascade')

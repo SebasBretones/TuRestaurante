@@ -17,12 +17,7 @@ class FacturaController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function descargarCarta(){
-        $pedidos = Pedido::all();
-        $bebidas = Bebida::all();
 
-        return view('facturas.index', compact('pedidos', 'bebidas'));
-    }
     public function index()
     {
         //

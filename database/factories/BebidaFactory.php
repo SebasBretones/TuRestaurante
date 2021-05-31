@@ -22,7 +22,6 @@ class BebidaFactory extends Factory
      */
     public function definition()
     {
-        $users=User::pluck('id')->toArray();
         return [
             'nombre'=>$this->faker->firstNameMale,
             'precio'=>$this->faker->numberBetween($min=1, $max=10),

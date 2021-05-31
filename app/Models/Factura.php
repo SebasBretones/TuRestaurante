@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Factura extends Model
 {
     use HasFactory;
-    protected $fillable = ['total_factura','pedido_id'];
+    protected $fillable = ['total_factura'];
 
     public function pedidos()
     {

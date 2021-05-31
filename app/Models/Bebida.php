@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Bebida extends Model
 {
     use HasFactory;
-    use HasFactory;
     protected $fillable = ['nombre','precio','tipobebida_id'];
 
     public function pedido(){

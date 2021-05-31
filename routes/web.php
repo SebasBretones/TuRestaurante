@@ -41,7 +41,6 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::group(['prefix' => 'pedidos'], function(){
         Route::get('/{mesa}/{distribucionmesa}/create','App\Http\Controllers\PedidoController@create')->name('pedidos.create');
         Route::post('','App\Http\Controllers\PedidoController@store')->name('pedidos.store');
-        Route::put('/{pedido}','App\Http\Controllers\PedidoController@actualizarEstado')->name('pedidos.actualizarEstado');
     });
 
     Route::resource('pedidos', PedidoController::class)->except([

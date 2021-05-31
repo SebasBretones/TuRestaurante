@@ -202,22 +202,6 @@ class PedidoController extends Controller
         return redirect()->back()->with('mensaje', 'Pedido borrado correctamente');
     }
 
-    public function actualizarEstado(PedidoRequest $request, Pedido $pedido)
-    {
-        $pedido->estado_id=$request->estado_id;
-        $pedido->cantidad=$pedido->cantidad;
-
-        $tapa = DB::table('tapas')->find($pedido->tapa_id);
-
-        $pedido->total_pedido=0;
-        for($i=0;$i<($pedido->cantidad);$i++){
-            $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
-        }
-
-        $pedido->update();
-
-    }
-
     public function downloadPDF(Factura $factura) {
         $todosPedidos=$factura->pedidos;
         $pedidosT = $todosPedidos->where('estado_id',4)->all();
