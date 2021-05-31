@@ -37,15 +37,7 @@ class DistribucionController extends Controller
         return view ('distribucionmesas.index', compact('distribuciones'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('distribucionmesas.create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -100,16 +92,6 @@ class DistribucionController extends Controller
             return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Distribucion  $distribucion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Distribucion $distribucionmesa)
-    {
-        return view('distribucionmesas.edit', compact('distribucionmesa'));
-    }
 
     /**
      * Update the specified resource in storage.

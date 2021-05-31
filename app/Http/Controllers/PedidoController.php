@@ -7,9 +7,6 @@ use App\Models\Distribucion;
 use App\Models\Factura;
 use App\Models\Mesa;
 use App\Models\Pedido;
-use App\Models\Tapa;
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use PDF;
 class PedidoController extends Controller
@@ -88,27 +85,6 @@ class PedidoController extends Controller
             $pedido->save();
 
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Pedido  $pedido
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Pedido $pedido)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Pedido  $pedido
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Pedido $pedido)
-    {
     }
 
     /**

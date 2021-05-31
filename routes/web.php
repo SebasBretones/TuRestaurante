@@ -30,10 +30,10 @@ Route::middleware(['auth','verified'])->group(function(){
         return view('home');
     });
 
-    Route::resource('distribucionmesas', DistribucionController::class);
-    Route::resource('mesas', MesaController::class);
-    Route::resource('tapas', TapaController::class);
-    Route::resource('bebidas', BebidaController::class);
+    Route::resource('distribucionmesas', DistribucionController::class)->except(['create', 'edit']);
+    Route::resource('mesas', MesaController::class)->only(['store','update', 'destroy']);
+    Route::resource('tapas', TapaController::class)->except(['show', 'create', 'edit']);
+    Route::resource('bebidas', BebidaController::class)->except(['show', 'create', 'edit']);
     Route::resource('facturas', FacturaController::class)->only(['update']);
 
     Route::get('facturas/{factura}/{distribucionmesa}','App\Http\Controllers\FacturaController@show')->name('facturas.show');
