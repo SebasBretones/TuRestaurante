@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PedidoRequest;
+use App\Models\Bebida;
 use App\Models\Distribucion;
 use App\Models\Factura;
 use App\Models\Mesa;
 use App\Models\Pedido;
+use App\Models\Tapa;
 use Illuminate\Support\Facades\DB;
 use PDF;
 class PedidoController extends Controller
@@ -104,10 +106,12 @@ class PedidoController extends Controller
         $pedido->cantidad=$request->cantidad;
         $pedido->tapa_id=null;
         $pedido->bebida_id=null;
+
         if($request->tapa_id=="Selecciona un plato") {
             $pedido->tapa_id=null;
         }else
             $pedido->tapa_id=$request->tapa_id;
+
         if($request->bebida_id!="Selecciona una bebida")
             $pedido->bebida_id=$request->bebida_id;
 
@@ -180,25 +184,98 @@ class PedidoController extends Controller
 
     public function downloadPDF(Factura $factura) {
         $todosPedidos=$factura->pedidos;
-        $pedidosT = $todosPedidos->where('estado_id',4)->all();
-        $pedidos = array();
-        array_push($pedidos, $pedidosT[0]);
-        $cont = 0;
-        for($i=1; $i<count($pedidosT); $i++) {
-            $cont = 0;
-            for($z=0; $z<count($pedidos);$z++){
-                if($pedidos[$z]->tapa_id==$pedidosT[$i]->tapa_id && $pedidos[$z]->bebida_id==$pedidosT[$i]->bebida_id){
-                    $pedidos[$z]->cantidad += $pedidosT[$i]->cantidad;
-                    $pedidos[$z]->total_pedido += $pedidosT[$i]->total_pedido;
-                    $cont = 1;
-                    break;
-                }
-            }
-            if($cont==0)
-              array_push($pedidos, $pedidosT[$i]);
-        }
+        $pedidos = $todosPedidos->where('estado_id',4)->all();
 
         $pdf= PDF::loadview('pdf.pedidos',compact('pedidos','factura'));
         return $pdf->download('factura.pdf');
+    }
+
+    public function recalcularFactura(Factura $factura) {
+        $todosPedidos=$factura->pedidos;
+        $pedidosT = $todosPedidos->where('estado_id',4)->all();
+        $cont = 0;
+
+        foreach ($pedidosT as $ped) {
+            $pedidos = Pedido::where('mesa_id', $pedidosT[0]->mesa_id)->get();
+            $cont = 0;
+            foreach($pedidos as $pedido_tapa) {
+                if($pedido_tapa->bebida_id==null) {
+                    $tapa = Tapa::find($pedido_tapa->tapa_id);
+                    if($tapa->tipotapa_id==1)
+                        foreach ($pedidos as $pedido_bebida) {
+                            if($pedido_bebida->tapa_id==null) {
+                                $bebida = Bebida::find($pedido_bebida->bebida_id);
+                                if($bebida->tipobebida_id==1) {
+                                    if($pedido_tapa->cantidad == $pedido_bebida->cantidad) {
+                                        Pedido::find($pedido_tapa->id)->delete();
+                                        Pedido::find($pedido_bebida->id)
+                                        ->update(['tapa_id'=> $tapa->id]);
+                                        $cont = 1;
+                                        break;
+
+                                    } else if($pedido_bebida->cantidad > $pedido_tapa->cantidad) {
+                                        $difcant = $pedido_bebida->cantidad - $pedido_tapa->cantidad;
+                                        Pedido::find($pedido_tapa->id)->delete();
+                                        Pedido::find($pedido_bebida->id)
+                                        ->update(['tapa_id' => $tapa->id,
+                                                'cantidad' => $pedido_tapa->cantidad,
+                                                'total_pedido' => $bebida->precio * $pedido_tapa->cantidad ]);
+                                        Pedido::create(['bebida_id'=> $bebida->id,
+                                        'cantidad' => $difcant,
+                                        'estado_id' => 4,
+                                        'mesa_id' => $pedido_bebida->mesa_id,
+                                        'total_pedido' => $bebida->precio * $difcant ]);
+
+                                        $cont = 1;
+                                        break;
+                                    } else if($pedido_tapa->cantidad > $pedido_bebida->cantidad) {
+                                        $difcant = $pedido_tapa->cantidad - $pedido_bebida->cantidad;
+                                        Pedido::find($pedido_bebida->id)
+                                        ->update(['tapa_id' => $tapa->id,
+                                                'cantidad' => $pedido_bebida->cantidad,
+                                                'total_pedido' => $bebida->precio * $pedido_bebida->cantidad ]);
+                                        Pedido::find($pedido_tapa->id)
+                                        ->update(['cantidad' => $difcant,
+                                                'total_pedido' => $tapa->precio * $difcant  ]);
+
+                                        $cont = 1;
+                                        break;
+                                    }
+                                }
+                        }
+                }
+            } else if ($pedido_tapa->bebida_id!=null && $pedido_tapa->tapa_id!=null) {
+                foreach ($pedidos as $pedido_igual) {
+                    if ($pedido_igual != null) {
+                        if($pedido_tapa->id != $pedido_igual->id) {
+                            if ($pedido_tapa->bebida_id == $pedido_igual->bebida_id && $pedido_tapa->tapa_id == $pedido_igual->tapa_id) {
+                                Pedido::find($pedido_tapa->id)->delete();
+                                Pedido::find($pedido_igual->id)->update([
+                                    'cantidad' => $pedido_igual->cantidad + $pedido_tapa->cantidad,
+                                    'total_pedido' => $pedido_igual->total_pedido + $pedido_tapa->total_pedido
+                                ]);
+                                $cont = 1;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            if ($cont == 1)
+                break;
+        }
+    }
+
+    $pedidos = Pedido::where('mesa_id', $pedidosT[0]->mesa_id)->get();
+
+    $total = 0;
+    foreach ($pedidos as $ped) {
+        $total += $ped->total_pedido;
+    }
+
+    Factura::find($factura->id)
+    ->update(['total_factura' => $total]);
+
+    return redirect()->back()->with('mensaje', 'Pedido recalculado correctamente');
     }
 }

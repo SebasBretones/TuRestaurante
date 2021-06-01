@@ -32,7 +32,10 @@
 </div>
 @else
 <div class="d-flex justify-content-end mb-4">
-    <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>
+    <a class="btn btn-primary" href="{{route('pedidos.recalcular',$factura) }}">Recalcular factura</a>
+    <div class="ms-2">
+        <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>
+    </div>
 </div>
 <div class="row mt-4">
     <div class="col-md-12">
@@ -91,6 +94,10 @@
                             </td>
                         </tr>
                     @endforeach
+                    <tr>
+                        <td class="pColumn1"> </td>
+                        <td class="pColumn3">{{$factura->total_factura}} €</td>
+                    </tr>
                 </tbody>
             </table>
         </div>

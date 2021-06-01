@@ -18,14 +18,14 @@ class DistribucionController extends Controller
     public function index(Request $request)
     {
 
-        $search = trim(ucwords(strtolower(request()->query('search'))));
+        $search = trim(ucwords(strtolower($request->search)));
 
         if ($search){
            $distribuciones = Distribucion::orderBy('nombre')
            ->where([
                ['user_id', auth()->user()->id],
                ["nombre","LIKE","%{$search}%"]
-            ])->paginate(10)->withQueryString();
+            ])->paginate(6)->withQueryString();
 
         } else {
             $distribuciones = Distribucion::orderBy('nombre')
@@ -72,7 +72,7 @@ class DistribucionController extends Controller
     public function show(Distribucion $distribucionmesa, Request $request)
     {
 
-        $search = request()->query('search');
+        $search = trim(ucwords(strtolower($request->search)));
 
         if ($search){
            $mesas = Mesa::orderBy('id')

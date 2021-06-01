@@ -41,12 +41,15 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::group(['prefix' => 'pedidos'], function(){
         Route::get('/{mesa}/{distribucionmesa}/create','App\Http\Controllers\PedidoController@create')->name('pedidos.create');
         Route::post('','App\Http\Controllers\PedidoController@store')->name('pedidos.store');
+        Route::get('/{factura}','App\Http\Controllers\PedidoController@recalcularFactura')->name('pedidos.recalcular');
     });
 
     Route::resource('pedidos', PedidoController::class)->except([
         'create', 'store']);
 
     Route::get('/download-pdf/{factura}', [PedidoController::class, 'downloadPDF']);
+
+
 
     Route::resource('cartas', CartaController::class)->only('index');
     Route::get('/generate-carta/{user}', [CartaController::class, 'generateCarta']);
