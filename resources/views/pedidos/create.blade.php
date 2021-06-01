@@ -45,7 +45,7 @@
                     @foreach ($tapas as $item)
                     <option value="{{$item->id}}|{{$item->tipotapa_id}}">
                         @php
-                            $tipo = '\App\Models\TipoTapa'::find($item->tipotapa_id);
+                            $tipo = '\App\Models\Tipotapa'::find($item->tipotapa_id);
                         @endphp
                         {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                     </option>
@@ -59,7 +59,7 @@
                     @foreach ($bebidas as $item)
                     <option value="{{$item->id}}">
                         @php
-                            $tipo = '\App\Models\TipoBebida'::find($item->tipobebida_id);
+                            $tipo = '\App\Models\Tipobebida'::find($item->tipobebida_id);
                         @endphp
                         {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                     </option>
@@ -189,7 +189,7 @@
                                         selected
                                         @endif>
                                         @php
-                                            $tipo = '\App\Models\TipoTapa'::find($item->tipotapa_id);
+                                            $tipo = '\App\Models\Tipotapa'::find($item->tipotapa_id);
                                         @endphp
                                         {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                                     </option>
@@ -208,7 +208,7 @@
                                             selected
                                         @endif>
                                         @php
-                                            $tipo = '\App\Models\TipoBebida'::find($item->tipobebida_id);
+                                            $tipo = '\App\Models\Tipobebida'::find($item->tipobebida_id);
                                         @endphp
                                         {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                                     </option>

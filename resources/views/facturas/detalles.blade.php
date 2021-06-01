@@ -161,7 +161,7 @@
                                         selected
                                     @endif>
                                     @php
-                                        $tipo = '\App\Models\TipoBebida'::find($item->tipobebida_id);
+                                        $tipo = '\App\Models\Tipobebida'::find($item->tipobebida_id);
                                     @endphp
                                     {{$item->nombre}} - {{$tipo->nombre}} - {{$item->precio}}€
                                 </option>
