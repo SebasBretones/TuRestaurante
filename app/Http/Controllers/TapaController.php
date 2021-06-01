@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TapaRequest;
 use App\Models\Tapa;
-use Illuminate\Http\Request;
 
 class TapaController extends Controller
 {
@@ -35,16 +34,6 @@ class TapaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('tapas.create');
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -66,28 +55,6 @@ class TapaController extends Controller
 
         $tapa->save();
         return redirect()->route('tapas.index')->with('mensaje', 'Plato creado correctamente');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tapa  $tapa
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tapa $tapa)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tapa  $tapa
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tapa $tapa)
-    {
-        return view('tapas.edit', compact('tapa'));
     }
 
     /**

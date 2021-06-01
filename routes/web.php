@@ -30,10 +30,10 @@ Route::middleware(['auth','verified'])->group(function(){
         return view('home');
     });
 
-    Route::resource('distribucionmesas', DistribucionController::class);
-    Route::resource('mesas', MesaController::class);
-    Route::resource('tapas', TapaController::class);
-    Route::resource('bebidas', BebidaController::class);
+    Route::resource('distribucionmesas', DistribucionController::class)->except(['create', 'edit']);
+    Route::resource('mesas', MesaController::class)->only(['store','update', 'destroy']);
+    Route::resource('tapas', TapaController::class)->except(['show', 'create', 'edit']);
+    Route::resource('bebidas', BebidaController::class)->except(['show', 'create', 'edit']);
     Route::resource('facturas', FacturaController::class)->only(['update']);
 
     Route::get('facturas/{factura}/{distribucionmesa}','App\Http\Controllers\FacturaController@show')->name('facturas.show');
@@ -41,12 +41,15 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::group(['prefix' => 'pedidos'], function(){
         Route::get('/{mesa}/{distribucionmesa}/create','App\Http\Controllers\PedidoController@create')->name('pedidos.create');
         Route::post('','App\Http\Controllers\PedidoController@store')->name('pedidos.store');
+        Route::get('/{factura}','App\Http\Controllers\PedidoController@recalcularFactura')->name('pedidos.recalcular');
     });
 
     Route::resource('pedidos', PedidoController::class)->except([
         'create', 'store']);
 
     Route::get('/download-pdf/{factura}', [PedidoController::class, 'downloadPDF']);
+
+
 
     Route::resource('cartas', CartaController::class)->only('index');
     Route::get('/generate-carta/{user}', [CartaController::class, 'generateCarta']);

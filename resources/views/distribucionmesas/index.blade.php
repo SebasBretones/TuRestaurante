@@ -80,7 +80,6 @@
                 @csrf
                 <div class="row mt-4">
                     <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="">
-                    <div class="invalid-feedback">Debe insertar un nombre</div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-warning" type="reset">Resetear</button>
@@ -106,7 +105,6 @@
                 @method('PUT')
                 <div class="row mt-4">
                     <input type="text" class="form-control" name="nombre" id="nombre_edit" placeholder="Nombre">
-                    <div class="invalid-feedback">Debe insertar un nombre</div>
                 </div>
                 <input type="hidden" id="distribucion_id" name="distribucion_id">
                 <div class="modal-footer">

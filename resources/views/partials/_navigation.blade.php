@@ -10,12 +10,14 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">  Distribución y Mesas  </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{{route('distribucionmesas.index')}}">Todos los tipos >></a>
-                    <ul class="submenu dropdown-menu">
-                        @foreach ($distribucionV as $distribucionmesa)
-                        <li><a class="dropdown-item" href="{{route('distribucionmesas.show',$distribucionmesa)}}">{{$distribucionmesa->nombre}}</a></li>
-                        @endforeach
-                    </ul>
+                  <li><a class="dropdown-item" href="{{route('distribucionmesas.index')}}">Todos los tipos...</a>
+                    @if (count($distribucionV)!=0)
+                        <ul class="submenu dropdown-menu">
+                            @foreach ($distribucionV as $distribucionmesa)
+                            <li><a class="dropdown-item" href="{{route('distribucionmesas.show',$distribucionmesa)}}">{{$distribucionmesa->nombre}}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
                   </li>
                 </ul>
             </li>

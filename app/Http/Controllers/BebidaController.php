@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\BebidaRequest;
-use App\Http\Requests\TapaRequest;
 use App\Models\Bebida;
-use Illuminate\Http\Request;
 
 class BebidaController extends Controller
 {
@@ -35,15 +33,6 @@ class BebidaController extends Controller
         return view ('bebidas.index', compact('bebidas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('bebidas.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -67,28 +56,6 @@ class BebidaController extends Controller
 
         $bebida->save();
         return redirect()->route('bebidas.index')->with('mensaje','Bebida creada correctamente');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Bebida  $bebida
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Bebida $bebida)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Bebida  $bebida
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Bebida $bebida)
-    {
-        return view('bebidas.edit', compact('bebida'));
     }
 
     /**

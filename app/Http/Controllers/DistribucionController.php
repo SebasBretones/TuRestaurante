@@ -18,14 +18,14 @@ class DistribucionController extends Controller
     public function index(Request $request)
     {
 
-        $search = trim(ucwords(strtolower(request()->query('search'))));
+        $search = trim(ucwords(strtolower($request->search)));
 
         if ($search){
            $distribuciones = Distribucion::orderBy('nombre')
            ->where([
                ['user_id', auth()->user()->id],
                ["nombre","LIKE","%{$search}%"]
-            ])->paginate(10)->withQueryString();
+            ])->paginate(6)->withQueryString();
 
         } else {
             $distribuciones = Distribucion::orderBy('nombre')
@@ -37,15 +37,7 @@ class DistribucionController extends Controller
         return view ('distribucionmesas.index', compact('distribuciones'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('distribucionmesas.create');
-    }
+
 
     /**
      * Store a newly created resource in storage.
@@ -80,7 +72,7 @@ class DistribucionController extends Controller
     public function show(Distribucion $distribucionmesa, Request $request)
     {
 
-        $search = request()->query('search');
+        $search = trim(ucwords(strtolower($request->search)));
 
         if ($search){
            $mesas = Mesa::orderBy('id')
@@ -100,16 +92,6 @@ class DistribucionController extends Controller
             return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Distribucion  $distribucion
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Distribucion $distribucionmesa)
-    {
-        return view('distribucionmesas.edit', compact('distribucionmesa'));
-    }
 
     /**
      * Update the specified resource in storage.

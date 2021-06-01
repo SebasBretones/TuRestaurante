@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bebida;
-use App\Models\Carta;
 use App\Models\Tapa;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use PDF;
 
@@ -51,6 +49,6 @@ class CartaController extends Controller
     public function downloadCarta(User $user){
         $file = public_path()."/pdf/user".$user->id."/Carta.pdf";
         $headers = array('Content-Type: application/pdf',);
-        return response()->download($file, 'Carta.pdf', $headers); 
+        return response()->download($file, 'Carta.pdf', $headers);
     }
 }
