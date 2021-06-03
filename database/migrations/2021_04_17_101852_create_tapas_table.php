@@ -15,7 +15,7 @@ class CreateTapasTable extends Migration
     {
         Schema::create('tapas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',60);
+            $table->string('nombre',120);
             $table->double('precio',8,2)->default(1.5);
             $table->ForeignId('tipotapa_id');
             $table->foreign('tipotapa_id')->references('id')

@@ -31,7 +31,7 @@ class DistribucionesRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => ['required']
+            'nombre' => ['required', 'max: 40']
         ];
     }
 
@@ -39,6 +39,7 @@ class DistribucionesRequest extends FormRequest
     {
         return [
             'nombre.required' => 'Debe escribir un nombre',
+            'nombre.max' => 'El nombre no puede contener más de 40 caracteres.'
         ];
 
     }

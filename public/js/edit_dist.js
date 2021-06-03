@@ -8,8 +8,5 @@
 
     modal.find('.modal-body #nombre_edit').val(nombre);
     modal.find('.modal-body #distribucion_id').val(distribucion_id);
-
   });
-
-
 });

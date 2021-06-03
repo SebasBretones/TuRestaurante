@@ -196,7 +196,8 @@ class PedidoController extends Controller
         $cont = 0;
 
         foreach ($pedidosT as $ped) {
-            $pedidos = Pedido::where('mesa_id', $pedidosT[0]->mesa_id)->get();
+            $pedidos = Pedido::where(['mesa_id' => $pedidosT[0]->mesa_id,
+                                      'estado_id' => 4  ])->get();
             $cont = 0;
             foreach($pedidos as $pedido_tapa) {
                 if($pedido_tapa->bebida_id==null) {
@@ -266,7 +267,8 @@ class PedidoController extends Controller
         }
     }
 
-    $pedidos = Pedido::where('mesa_id', $pedidosT[0]->mesa_id)->get();
+    $pedidos = Pedido::where(['mesa_id' => $pedidosT[0]->mesa_id,
+                                      'estado_id' => 4  ])->get();
 
     $total = 0;
     foreach ($pedidos as $ped) {

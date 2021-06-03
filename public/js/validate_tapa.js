@@ -7,8 +7,8 @@ function iniciar() {
 
 function validarNombre(){
   let nombre = document.getElementById('nombre').value;
-  if (nombre.length == 0){
-    toastr.error('Debe indicar un nombre');
+  if (nombre.length == 0 || nombre.length > 120){
+    toastr.error('Debe indicar un nombre con un máximo de 120 caracteres');
     return false;
   } else
     return true;
@@ -16,8 +16,8 @@ function validarNombre(){
 
 function validarNombreEdit(){
   let nombre = document.getElementById('nombre_edit').value;
-  if (nombre.length == 0){
-    toastr.error('Debe indicar un nombre');
+  if (nombre.length == 0 || nombre.length > 120){
+    toastr.error('Debe indicar un nombre con un máximo de 120 caracteres');
     return false;
   } else
     return true;
@@ -40,7 +40,7 @@ function validarPrecioEdit() {
   if(precio.length == 0) {
     toastr.error('Debe indicar un precio');
     return false;
-  
+
   } else if(precio < 0.05 || precio > 200) {
     toastr.error('El precio debe estar entre 0.05 y 200');
     return false;
