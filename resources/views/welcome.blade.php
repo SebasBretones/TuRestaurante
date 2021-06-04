@@ -1,7 +1,7 @@
 @extends('main')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}" />   
+    <link rel="stylesheet" href="{{ asset('css/welcome.css') }}" />
 @endsection
 
 @section('noContainer')
@@ -13,7 +13,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> Tu Restaurante</strong></h1>
-                            <p class="m-b-40">Gestiona tu restaurante de la manera<br> 
+                            <p class="m-b-40">Gestiona tu restaurante de la manera<br>
                             más cómoda y fácil.</p>
                             @if (!auth()->user())
                                 <p><a class="btn btn-lg btn-circle btn-outline-new-white" href="{{ route('register') }}">Registro</a></p>
@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> Tu Restaurante</strong></h1>
-                            <p class="m-b-40">Distribuye las mesas de tu restaurante y<br> 
+                            <p class="m-b-40">Distribuye las mesas de tu restaurante y<br>
                             gestiona los pedidos de tus clientes.</p>
                             @if (!auth()->user())
                                 <p><a class="btn btn-lg btn-circle btn-outline-new-white" href="{{ route('register') }}">Registro</a></p>
@@ -43,7 +43,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h1 class="m-b-20"><strong>Bienvenidos a <br> Tu Restaurante</strong></h1>
-                            <p class="m-b-40">Guarda tus platos y bebidas y<br> 
+                            <p class="m-b-40">Guarda tus platos y bebidas y<br>
                             tus clientes podrán acceder a la carta mediante código QR.</p>
                             @if (!auth()->user())
                                 <p><a class="btn btn-lg btn-circle btn-outline-new-white" href="{{ route('register') }}">Registro</a></p>
@@ -59,7 +59,6 @@
         </div>
     </div>
 
-    <!--##################    FOOTER   ###################-->
     <div class="contact-info-box mt-4">
 		<div class="container">
 			<div class="row">
@@ -94,7 +93,6 @@
 		</div>
 	</div>
 
-    <!-- Start Footer -->
 	<footer class="footer-area bg-f mt-4">
 		<div class="container">
 			<div class="row">
@@ -116,23 +114,20 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div class="copyright">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-12">
-						<p class="company-name">All Rights Reserved. &copy; 2021 Tu Restaurante By: Sebastián Bretones Ortiz
+						<p class="company-name">All Rights Reserved. &copy; 2021 Tu Restaurante by Sebastián Bretones Ortiz
 					</div>
 				</div>
 			</div>
 		</div>
-		
 	</footer>
-	<!-- End Footer -->
 @endsection
 
 @section('js')
     <script src="{{asset('js/welcome/jquery.superslides.min.js')}}"></script>
     <script src="{{asset('js/welcome/custom.js')}}"></script>
-
 @endsection
