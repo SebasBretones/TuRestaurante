@@ -4,26 +4,29 @@
     $todosPedidos=$factura->pedidos;
     $pedidos = $todosPedidos->where('estado_id',4)->all();
     if(count($pedidos)!=0)
-        $mesa = '\App\Models\Mesa'::find($pedidos[0]->mesa_id);
+        $mesa = '\App\Models\Mesa'::find($pedidos[array_key_first($pedidos)]->mesa_id);
     $estados = DB::table('estados')->get();
     $tapas = DB::table('tapas')->where('user_id', auth()->user()->id)->get();
     $bebidas = DB::table('bebidas')->where('user_id', auth()->user()->id)->get();
 @endphp
-<div class="col s12 mt-4">
+<div class="row justify-content-between mt-4">
     @if (count($pedidos)!=0)
+    <div class="col-4 enlaces left">
         <a id="listb" href="{{route('distribucionmesas.show', $mesa ->distribucion_id)}}">
             <span class="back-to-index">
                 <i class="material-icons back-arrow">keyboard_backspace</i>
-                <span>Volver al listado de mesas</span>
+                <span>Lista de mesas</span>
             </span>
         </a>
-    @else
-        <a id="listb" href="{{route('distribucionmesas.index')}}">
-            <span class="back-to-index">
-                <i class="material-icons back-arrow">keyboard_backspace</i>
-                <span>Volver al listado de distribuciones</span>
+    </div>
+    <div class="col-4 enlaces right">
+        <a id="listb" href="{{route('pedidos.create', [$mesa, $mesa ->distribucion_id])}}">
+            <span>Lista de pedidos</span>
+            <span class="material-icons">
+                arrow_forward
             </span>
         </a>
+    </div>
     @endif
 </div>
 @if (count($pedidos)==0)
@@ -31,7 +34,7 @@
     No hay pedidos entregados
 </div>
 @else
-<div class="d-flex justify-content-end mb-4">
+<div class="d-flex justify-content-end mb-4 mt-4">
     <a class="btn btn-primary" href="{{route('pedidos.recalcular',$factura) }}">Recalcular factura</a>
     <div class="ms-2">
         <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>

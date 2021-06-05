@@ -9,6 +9,9 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
   />
 
+    <link rel="shortcut icon" type="image/png" href="{{ asset('img/fondo.jpg') }}">
+    <link rel="shortcut icon" sizes="192x192" href="{{ asset('img/fondo.jpg') }}">
+
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital@0;1&display=swap" rel="stylesheet">

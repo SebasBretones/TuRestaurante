@@ -58,3 +58,4 @@ Route::middleware(['auth','verified'])->group(function(){
 Route::get('/download-carta/{user}', [CartaController::class, 'downloadCarta']);
 
 
+app('debugbar')->disable();

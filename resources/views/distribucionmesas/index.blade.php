@@ -15,10 +15,10 @@
 @section('content')
 
 <div class="row justify-content-between mt-4">
-    <div class="col-md-4">
+    <div class="col-4">
         <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#crearDistribucion">Crear</button>
     </div>
-    <div class="col-md-3">
+    <div class="col-4">
         <form class="input-group" action="{{route('distribucionmesas.index')}}" method="GET">
             <input type="text" class="form-control" name="search" placeholder="Buscar" value="{{request()->query('search')}}">
         </form>
@@ -34,7 +34,7 @@
     @endif
   </p>
 @else
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 centrado">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
         @foreach ($distribuciones as $distribucionmesa)
         <div class="col animate__animated animate__zoomIn">
             <div class="card shadow-sm">
@@ -56,7 +56,7 @@
                             ->where('distribucion_id', $distribucionmesa->id)
                             ->count();
                         @endphp
-                        <small class="text-muted">{{$numMesas}} mesas</small>
+                        <small class="text-muted ms-1">{{$numMesas}} mesas</small>
                     </div>
                 </div>
             </div>

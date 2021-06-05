@@ -7,6 +7,13 @@
     <title>Carta</title>
     <style>
 
+    @page { margin: 100px;
+        }
+
+
+      .page-break {
+          page-break-inside: avoid;
+      }
       body {
         font-family: 'Playfair Display', serif;
         font-style: italic;
@@ -27,27 +34,27 @@
       }
 
       .contenedor {
-        padding-top: 50px; 
+        padding-top: 50px;
       }
 
       table {
         width: 100%;
       }
-      
+
       .bCentrado {
         content: "";
         border-bottom: #FFB03B dotted;
       }
 
       .column1Title{
-        text-align: right;
-        padding-left: 45px;
-        width: 40%;
+        text-align: left;
+        padding-left: 35px;
+        width: 100%;
       }
 
       .column1 {;
         padding-left: 70px;
-        text-align: right;
+        text-align: left;
         width: 20%;
       }
 
@@ -58,24 +65,26 @@
       }
 
       .column3 {
-        text-align: left; 
+        text-align: left;
         width: 20%;
         padding-left: 40px;
+        font-size: 14px;
       }
 
-  
+
 
       td {
-        font-size: 22px;
+        font-size: 12px;
         padding-bottom: 10px;
         text-align: center;
       }
 
-      
+
     </style>
   </head>
 
   <body>
+    <div class="page-break">
     <div class="contenedor">
       <table>
         <thead>
@@ -108,7 +117,7 @@
             <td class="column2"><p class="bCentrado"></p></td>
             <td class="column3">{{$item->precio}}&euro;</td>
           </tr>
-        @endforeach 
+        @endforeach
       </tbody>
     </table>
 
@@ -132,7 +141,7 @@
             <td class="column2"><p class="bCentrado"></p></td>
             <td class="column3">{{$item->precio}}&euro;</td>
           </tr>
-        @endforeach 
+        @endforeach
       </tbody>
     </table>
 
@@ -156,7 +165,7 @@
             <td class="column2"><p class="bCentrado"></p></td>
             <td class="column3">{{$item->precio}}&euro;</td>
           </tr>
-        @endforeach 
+        @endforeach
       </tbody>
     </table>
 
@@ -180,9 +189,10 @@
             <td class="column2"><p class="bCentrado"></p></td>
             <td class="column3">{{$item->precio}}&euro;</td>
           </tr>
-        @endforeach 
+        @endforeach
       </tbody>
     </table>
+</div>
 
   </body>
 </html>

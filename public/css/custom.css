@@ -141,6 +141,7 @@ body
     margin: 0 auto;
 }
 
+
 /* ============ desktop view ============ */
 @media all and (min-width: 601px) {
 	.dropdown-menu li{ position: relative; 	}
@@ -163,6 +164,7 @@ body
 
 /* ============ small devices ============ */
 @media (max-width: 600px) {
+
   .dropdown-menu .dropdown-menu{
       margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
   }
@@ -179,10 +181,6 @@ body
 
   .table100.ver3 th {
     font-size: 0.8rem !important;
-    color: #fff;
-    line-height: 1.4;
-    text-transform: uppercase;
-    background-color: #6c7ae0;
   }
 
   .btn {
@@ -199,11 +197,13 @@ body
     padding-top: 12px;
     padding-bottom: 9px;
   }
+
 }
 
 @media (max-width: 500px) {
-    .dropdown-menu .dropdown-menu{
-        margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+
+    .enlaces {
+        font-size: 0.7rem;
     }
 
     .table100.ver3 td {
@@ -222,8 +222,8 @@ body
   }
 
   @media (max-width: 430px) {
-    .dropdown-menu .dropdown-menu{
-        margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+    .enlaces {
+        font-size: 0.6rem;
     }
 
     th, td {
@@ -247,8 +247,9 @@ body
   }
 
   @media (max-width: 330px) {
-    .dropdown-menu .dropdown-menu{
-        margin-left:0.7rem; margin-right:0.7rem; margin-bottom: .5rem;
+
+    .enlaces {
+        font-size: 0.5rem;
     }
 
     th, td {
@@ -257,7 +258,7 @@ body
       }
 
     .table100.ver3 td {
-      font-size: 0.40rem !important;
+      font-size: 0.50rem !important;
       color: #808080;
       line-height: 1.4;
     }

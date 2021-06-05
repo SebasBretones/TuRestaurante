@@ -18,12 +18,12 @@
 @endphp
 
 <div class="row justify-content-between mt-4">
-    <div class="col-md-4">
+    <div class="col-4">
         <button class="btn btn-success me-md-2" type="button" data-bs-toggle="modal" data-bs-target="#crearMesa">Crear</button>
     </div>
-    <div class="col-md-3">
+    <div class="col-4">
         <form class="input-group" action="{{route('distribucionmesas.show',$distribucionmesa)}}" method="GET">
-            <input type="number" class="form-control" name="search" placeholder="Buscar nº mesa" value="{{request()->query('search')}}">
+            <input type="number" class="form-control" name="search" placeholder="Mesa nº" value="{{request()->query('search')}}">
         </form>
     </div>
 </div>
@@ -38,7 +38,7 @@
   </p>
   <div id="editarMesa"></div>
 @else
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 centrado">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
         @foreach ($mesas as $mesa)
         @php
         $cont=$cont+1;

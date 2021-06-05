@@ -7,7 +7,7 @@
     $pedidos = DB::table('pedidos')->where([
     ['mesa_id',$mesa->id],
     ['estado_id','!=',4],
-    ])->get();
+    ])->paginate(10);
 
     $pfact = DB::table('pedidos')->where([
     ['mesa_id',$mesa->id],
@@ -15,7 +15,7 @@
     ])->get();
 @endphp
 <div class="row justify-content-between mt-4">
-    <div class="col-sm-4 left">
+    <div class="col-4 left enlaces">
         <a id="listb" href="{{route('distribucionmesas.show',$mesa->distribucion_id)}}">
             <span class="back-to-index">
                 <i class="material-icons back-arrow">keyboard_backspace</i>
@@ -24,7 +24,7 @@
         </a>
     </div>
     @if (count($pfact)!=0)
-        <div class="col-sm-4 right">
+        <div class="col-4 right enlaces">
             <a id="listb" href="{{route('facturas.show',[$mesa->factura_id, $mesa->distribucion_id])}}">
                 <span>Ir a la factura</span>
                 <span class="material-icons">
@@ -35,7 +35,7 @@
     @endif
 </div>
 
-<div class="row mt-3 mx-auto p-2 w-4/5">
+<div class="row mt-3">
     <form name="f" id="crearPedido" action="{{route('pedidos.store')}}" method="POST">
         @csrf
         <div class="row mt-4">
@@ -152,6 +152,8 @@
             </div>
         </div>
     </div>
+
+    @include('partials._paginator', ['array' => $pedidos])
     <!--Modal editar-->
     <div class="modal fade" id="editarPedido" tabindex="-1" aria-labelledby="editarPedidoLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

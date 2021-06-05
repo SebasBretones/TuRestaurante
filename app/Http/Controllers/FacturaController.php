@@ -24,7 +24,7 @@ class FacturaController extends Controller
         $pedidos = $todosPedidos->where('estado_id',4)->all();
 
         if(count($pedidos)!=0)
-            $mesa = '\App\Models\Mesa'::find($pedidos[0]->mesa_id);
+            $mesa = '\App\Models\Mesa'::find($pedidos[array_key_first($pedidos)]->mesa_id);
         else
             return redirect()->route('distribucionmesas.show', $distribucionmesa->id)->with('mensaje', 'No tienes pedidos en la factura');
 
@@ -54,7 +54,7 @@ class FacturaController extends Controller
         $factura->total_factura=0;
         $factura->update();
 
-        $mesa = '\App\Models\Mesa'::find($pedidos[0]->mesa_id);
+        $mesa = '\App\Models\Mesa'::find($pedidos[array_key_first($pedidos)]->mesa_id);
 
         return redirect()->route('distribucionmesas.show', $mesa->distribucion_id)->with('mensaje', 'Factura borrada correctamente');
     }

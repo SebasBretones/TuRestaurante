@@ -196,7 +196,7 @@ class PedidoController extends Controller
         $cont = 0;
 
         foreach ($pedidosT as $ped) {
-            $pedidos = Pedido::where(['mesa_id' => $pedidosT[0]->mesa_id,
+            $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
                                       'estado_id' => 4  ])->get();
             $cont = 0;
             foreach($pedidos as $pedido_tapa) {
@@ -267,7 +267,7 @@ class PedidoController extends Controller
         }
     }
 
-    $pedidos = Pedido::where(['mesa_id' => $pedidosT[0]->mesa_id,
+    $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
                                       'estado_id' => 4  ])->get();
 
     $total = 0;

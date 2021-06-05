@@ -15,10 +15,10 @@
 @section('content')
 
 <div class="row justify-content-between mt-4">
-  <div class="col-md-4">
+  <div class="col-4">
     <button data-bs-toggle="modal" data-bs-target="#crearBebida" type="button" class="btn btn-success">Crear</button>
   </div>
-  <div class="col-md-3">
+  <div class="col-4">
     <form class="input-group" action="{{route('bebidas.index')}}" method="GET">
       <input type="text" class="form-control" name="search" placeholder="Buscar" value="{{request()->query('search')}}">
     </form>

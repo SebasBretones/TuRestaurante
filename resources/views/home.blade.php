@@ -13,12 +13,12 @@
                         </button>
                     </form>
                 @else
-                    You have 2fa enabled
+                    Has activado la autenticación en dos pasos
                     <form method="POST" action="{{ url('user/two-factor-authentication') }}">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-primary">
-                            Disable
+                            Deshabilitar
                         </button>
                     </form>
                 @endif
