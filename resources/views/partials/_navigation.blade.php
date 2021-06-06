@@ -22,7 +22,7 @@
                 </ul>
             </li>
           <li class="nav-item">
-              <a class="nav-link" href="{{route('tapas.index')}}">Tapas</a>
+              <a class="nav-link" href="{{route('tapas.index')}}">Platos</a>
           </li>
           <li class="nav-item">
               <a class="nav-link" href="{{route('bebidas.index')}}">Bebidas</a>
