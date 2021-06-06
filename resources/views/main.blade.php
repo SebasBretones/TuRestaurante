@@ -19,6 +19,10 @@
                     <div class="alert alert-success mt-2">
                         <li>{{Session::get('mensaje')}}</li>
                     </div>
+                @elseif (Session::has('aviso'))
+                    <div class="alert alert-warning mt-2">
+                        <li>{{Session::get('aviso')}}</li>
+                    </div>
                 @endif
             </div>
 

@@ -26,11 +26,11 @@ class FacturaController extends Controller
         if(count($pedidos)!=0)
             $mesa = '\App\Models\Mesa'::find($pedidos[array_key_first($pedidos)]->mesa_id);
         else
-            return redirect()->route('distribucionmesas.show', $distribucionmesa->id)->with('mensaje', 'No tienes pedidos en la factura');
+            return redirect()->route('distribucionmesas.show', $distribucionmesa->id)->with('aviso', 'No tienes pedidos en la factura');
 
         if(count($pedidos)!=0) {
             if($distribucionmesa->user_id!=auth()->user()->id || $mesa->distribucion_id != $distribucionmesa->id)
-                return redirect()->route('distribucionmesas.show', $distribucionmesa->id)->with('mensaje', '¡Solo puedes acceder a tus facturas!');
+                return redirect()->route('distribucionmesas.show', $distribucionmesa->id)->with('aviso', '¡Solo puedes acceder a tus facturas!');
             }
 
         return view('facturas.detalles', compact('factura'));
@@ -54,8 +54,7 @@ class FacturaController extends Controller
         $factura->total_factura=0;
         $factura->update();
 
-        $mesa = '\App\Models\Mesa'::find($pedidos[array_key_first($pedidos)]->mesa_id);
 
-        return redirect()->route('distribucionmesas.show', $mesa->distribucion_id)->with('mensaje', 'Factura borrada correctamente');
+        return redirect()->route('distribucionmesas.index')->with('mensaje', 'Factura borrada correctamente');
     }
 }

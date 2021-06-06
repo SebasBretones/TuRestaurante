@@ -105,18 +105,6 @@ body
     font-weight: bold;
 }
 
-.jumbotron {
-    background-image: url("../img/fondo.jpg");
-    background-size: cover;
-    height: 500px;
-}
-
-.jumbotron h1, .jumbotron h2 {
-    color: #fff;
-    letter-spacing: -1px;
-    font-weight: bold;
-}
-
 .btn-personalizado {
     background-color: #073B15;
   }

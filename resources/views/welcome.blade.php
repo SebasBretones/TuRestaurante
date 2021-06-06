@@ -105,6 +105,7 @@
 					<p class="lead">111, Calle 0</p>
 					<p class="lead">+34 666666666</p>
 					<p class="lead">sebastianbretonesortiz@gmail.com</p>
+                    <a class="lead" href="https://docs.google.com/document/d/1Wm5emT5ApvCzc86PWDd9gMGw-vIQgw1Duaob_F-u4ts/edit?usp=sharing" target="_blank">Manual de uso</a>
 				</div>
                 <div class="col-lg-2 col-md-6">
 					<h3>Contacto</h3>

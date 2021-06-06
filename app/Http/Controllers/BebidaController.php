@@ -51,7 +51,7 @@ class BebidaController extends Controller
         $bebidas = Bebida::where('user_id', auth()->user()->id)->get();
         foreach($bebidas as $t){
             if ($t->nombre == $bebida->nombre)
-                return redirect()->route('bebidas.index')->with('mensaje', 'Debe indicar una bebida que no exista');
+                return redirect()->route('bebidas.index')->with('aviso', 'Debe indicar una bebida que no exista');
         }
 
         $bebida->save();
@@ -76,7 +76,7 @@ class BebidaController extends Controller
         $bebidas = Bebida::where('user_id', auth()->user()->id)->get();
         foreach($bebidas as $t){
             if ($t->nombre == $bebida->nombre && $bebida->nombre != $nombre_inicial)
-                return redirect()->route('bebidas.index')->with('mensaje', 'Debe indicar una bebida que no exista');
+                return redirect()->route('bebidas.index')->with('aviso', 'Debe indicar una bebida que no exista');
         }
 
         $bebida->update();

@@ -31,8 +31,8 @@ class PedidoController extends Controller
      */
     public function create(Mesa $mesa, Distribucion $distribucionmesa)
     {
-        if($distribucionmesa->user_id!=auth()->user()->id || $mesa->distribucion_id != $distribucionmesa->id)
-            return redirect()->back()->with('mensaje', '¡Solo puedes acceder a tus pedidos!');
+        if($distribucionmesa->user_id != auth()->user()->id || $mesa->distribucion_id != $distribucionmesa->id)
+            return redirect()->back()->with('aviso', '¡Solo puedes acceder a tus pedidos!');
         else
             return view('pedidos.create', compact('mesa'));
     }
@@ -66,7 +66,7 @@ class PedidoController extends Controller
         $bebida = DB::table('bebidas')->find($pedido->bebida_id);
 
         if($tapa!=null && $tapa->tipotapa_id==2 && $bebida!=null) {
-            return redirect()->back()->with('mensaje', 'Las raciones deben pedirse sin bebida');
+            return redirect()->back()->with('aviso', 'Las raciones deben pedirse sin bebida');
         }
         $pedido->total_pedido=0;
         for($i=0;$i<($pedido->cantidad);$i++){
@@ -82,11 +82,11 @@ class PedidoController extends Controller
 
 
         if($pedido->tapa_id == null && $pedido->bebida_id == null){
-            return redirect()->back()->with('mensaje', 'Debe seleccionar una bebida o tapa');
+            return redirect()->back()->with('aviso', 'Debe seleccionar una bebida o tapa');
         }else
             $pedido->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('mensaje','Pedido realizado correctamente');
     }
 
     /**
@@ -122,7 +122,7 @@ class PedidoController extends Controller
 
         $pedido->total_pedido=0;
         if($tapa!=null && $tapa->tipotapa_id==2 && $bebida!=null) {
-            return redirect()->back()->with('mensaje', 'Las raciones deben pedirse sin bebida');
+            return redirect()->back()->with('aviso', 'Las raciones deben pedirse sin bebida');
         }
 
         for($i=0;$i<($pedido->cantidad);$i++){
@@ -152,12 +152,14 @@ class PedidoController extends Controller
 
 
         if($pedido->tapa_id == null && $pedido->bebida_id == null){
-            return redirect()->back()->with('mensaje', 'Debe seleccionar una bebida o tapa');
+            return redirect()->back()->with('aviso', 'Debe seleccionar una bebida o tapa');
         }else
             $pedido->update();
 
         if($pedido->estado_id==4 && $estado_inicial!=4)
             return redirect()->back()->with('mensaje','Pedido actualizado con éxito y enviado a la factura');
+        else if($estado_inicial == 4 && $pedido->estado_id!=4)
+            return redirect()->back()->with('mensaje','Pedido actualizado con éxito y devuelto al listado');
         else
             return redirect()->back()->with('mensaje','Pedido actualizado con éxito');
 

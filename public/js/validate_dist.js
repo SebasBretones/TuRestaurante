@@ -23,9 +23,9 @@ function validarNombreEdit(){
 
 function validarFormulario(event) {
   if(validarNombre() || validarNombreEdit()){
-    toastr.warning('Comprobando que el nombre sea único...', {timeOut: 1500})
+    toastr.warning('Comprobando que el nombre sea único...')
   } else{
-    toastr.error('Debe escribir un nombre con un máximo de 40 caracteres', {timeOut: 1500});
+    toastr.error('Debe escribir un nombre con un máximo de 40 caracteres');
     event.preventDefault();
   }
 }

@@ -50,7 +50,7 @@ class TapaController extends Controller
         $tapas = Tapa::where('user_id', auth()->user()->id)->get();
         foreach($tapas as $t){
             if ($t->nombre == $tapa->nombre)
-                return redirect()->route('tapas.index')->with('mensaje', 'Debe indicar un plato que no exista');
+                return redirect()->route('tapas.index')->with('aviso', 'Debe indicar un plato que no exista');
         }
 
         $tapa->save();
@@ -76,7 +76,7 @@ class TapaController extends Controller
         $tapas = Tapa::where('user_id', auth()->user()->id)->get();
         foreach($tapas as $t){
             if ($t->nombre == $tapa->nombre && $tapa->nombre != $nombre_inicial)
-                return redirect()->route('tapas.index')->with('mensaje', 'Debe indicar un plato que no exista');
+                return redirect()->route('tapas.index')->with('aviso', 'Debe indicar un plato que no exista');
         }
         $tapa->update();
 

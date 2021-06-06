@@ -56,7 +56,7 @@ class DistribucionController extends Controller
         $distribuciones = Distribucion::where('user_id', auth()->user()->id)->get();
         foreach($distribuciones as $t){
             if ($t->nombre == $distribucion->nombre)
-                return redirect()->route('distribucionmesas.index')->with('mensaje', 'Debe indicar una distribución que no exista');
+                return redirect()->route('distribucionmesas.index')->with('aviso', 'Debe indicar una distribución que no exista');
         }
 
         $distribucion->save();
@@ -87,7 +87,7 @@ class DistribucionController extends Controller
         }
 
         if($distribucionmesa->user_id!=auth()->user()->id)
-            return redirect()->route('distribucionmesas.index')->with('mensaje', '¡No puedes acceder a datos de otros usuarios!');
+            return redirect()->route('distribucionmesas.index')->with('aviso', '¡No puedes acceder a datos de otros usuarios!');
         else
             return view('distribucionmesas.detalles', compact('distribucionmesa', 'mesas'));
     }
@@ -108,11 +108,11 @@ class DistribucionController extends Controller
         $distribuciones = Distribucion::where('user_id', auth()->user()->id)->get();
         foreach($distribuciones as $t){
             if ($t->nombre == $distribucion->nombre)
-                return redirect()->route('distribucionmesas.index')->with('mensaje', 'Debe indicar una distribución que no exista');
+                return redirect()->route('distribucionmesas.index')->with('aviso', 'Debe indicar una distribución que no exista');
         }
 
         $distribucion->update();
-        return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución creada correctamente");
+        return redirect()->route('distribucionmesas.index')->with('mensaje',"Distribución editada correctamente");
     }
 
     /**
