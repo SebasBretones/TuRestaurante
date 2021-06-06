@@ -62,7 +62,7 @@
                   <div class="btn-group">
                     <button class="btn btn-success" type="button"
                     data-tapa_id="{{$tapa->id}}" data-nombre="{{$tapa->nombre}}" data-precio="{{$tapa->precio}}"
-                    data-tipotapa_id="{{$tapa->tipotapa_id}}" data-bs-toggle="modal" data-bs-target="#editarTapa">Editar</button>
+                    data-tipotapa_id="{{$tapa->tipotapa_id}}" data-disponible="{{$tapa->disponible}}" data-bs-toggle="modal" data-bs-target="#editarTapa">Editar</button>
                     <form name="f" action="{{route('tapas.destroy', $tapa)}}"  method="POST">
                       @csrf
                       @method('DELETE')
@@ -154,6 +154,22 @@
                 @endforeach
             </select>
           </div>
+          <div class="row mt-3">
+            <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="disponible" id="disponible" value="0">
+                        <label class="form-check-label" for="disponible">
+                        No Disponible
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="disponible" id="disponible2" value="1">
+                        <label class="form-check-label" for="disponible2">
+                        Disponible
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button class="btn btn-warning" type="reset">Resetear</button>
                 <button type="submit" class="btn btn-success">Editar</button>

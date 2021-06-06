@@ -6,8 +6,18 @@ $(document).ready(function(){
     let nombre = button.data('nombre');
     let precio = button.data('precio');
     let tipobebida_id = button.data('tipobebida_id');
-    
+    let disponible = button.data('disponible');
+
     let modal =$(this);
+
+    let d1 = document.getElementById('disponible');
+    let d2 = document.getElementById('disponible2');
+
+    if (disponible == 0) {
+        d1.checked= true;
+    } else {
+        d2.checked= true;
+    }
 
     modal.find('.modal-body #bebida_id').val(id);
     modal.find('.modal-body #nombre_edit').val(nombre);
@@ -17,5 +27,5 @@ $(document).ready(function(){
 
   });
 
-  
+
 });

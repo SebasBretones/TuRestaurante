@@ -72,6 +72,7 @@ class BebidaController extends Controller
         $bebida->nombre = $request->nombre;
         $bebida->precio = $request->precio;
         $bebida->tipobebida_id = $request->tipobebida_id;
+        $bebida->disponible = $request->disponible;
 
         $bebidas = Bebida::where('user_id', auth()->user()->id)->get();
         foreach($bebidas as $t){

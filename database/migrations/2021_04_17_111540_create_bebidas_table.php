@@ -17,6 +17,7 @@ class CreateBebidasTable extends Migration
             $table->id();
             $table->string('nombre',120);
             $table->double('precio',8,2)->default(3);
+            $table->boolean('disponible')->default(true);
             $table->ForeignId('tipobebida_id');
             $table->foreign('tipobebida_id')->references('id')
             ->on('tipobebidas')

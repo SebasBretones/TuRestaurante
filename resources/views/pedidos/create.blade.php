@@ -43,7 +43,7 @@
                 <select name="tapa_id" id="tapa_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona un plato</option>
                     @foreach ($tapas as $item)
-                    <option value="{{$item->id}}|{{$item->tipotapa_id}}">
+                    <option value="{{$item->id}}|{{$item->tipotapa_id}}" @if ($item->disponible == 0) disabled @endif>
                         @php
                             $tipo = '\App\Models\Tipotapa'::find($item->tipotapa_id);
                         @endphp
@@ -57,7 +57,7 @@
                 <select name="bebida_id" id="bebida_id" class="form-select form-select-md" aria-label=".form-select-md example">
                     <option selected>Selecciona una bebida</option>
                     @foreach ($bebidas as $item)
-                    <option value="{{$item->id}}">
+                    <option value="{{$item->id}}" @if ($item->disponible == 0) disabled @endif>
                         @php
                             $tipo = '\App\Models\Tipobebida'::find($item->tipobebida_id);
                         @endphp

@@ -72,6 +72,7 @@ class TapaController extends Controller
         $tapa->nombre = $request->nombre;
         $tapa->precio = $request->precio;
         $tapa->tipotapa_id = $request->tipotapa_id;
+        $tapa->disponible = $request->disponible;
 
         $tapas = Tapa::where('user_id', auth()->user()->id)->get();
         foreach($tapas as $t){

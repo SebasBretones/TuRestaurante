@@ -17,6 +17,7 @@ class CreateTapasTable extends Migration
             $table->id();
             $table->string('nombre',120);
             $table->double('precio',8,2)->default(1.5);
+            $table->boolean('disponible')->default(true);
             $table->ForeignId('tipotapa_id');
             $table->foreign('tipotapa_id')->references('id')
             ->on('tipotapas')

@@ -61,7 +61,7 @@
                   <div class="btn-group">
                     <button class="btn btn-success" type="button"
                     data-bebida_id="{{$bebida->id}}" data-nombre="{{$bebida->nombre}}" data-precio="{{$bebida->precio}}"
-                    data-tipobebida_id="{{$bebida->tipobebida_id}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
+                    data-tipobebida_id="{{$bebida->tipobebida_id}}" data-disponible="{{$bebida->disponible}}" data-bs-toggle="modal" data-bs-target="#editarBebida">Editar</button>
                     <form name="f" action="{{route('bebidas.destroy', $bebida)}}"  method="POST">
                       @csrf
                       @method('DELETE')
@@ -154,6 +154,22 @@
                         <option value="{{$item->id}}">{{$item->nombre}}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="disponible" id="disponible" value="0">
+                        <label class="form-check-label" for="disponible">
+                        No Disponible
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="disponible" id="disponible2" value="1">
+                        <label class="form-check-label" for="disponible2">
+                        Disponible
+                        </label>
+                    </div>
+                </div>
             </div>
           <div class="modal-footer">
             <button class="btn btn-warning" type="reset">Resetear</button>
