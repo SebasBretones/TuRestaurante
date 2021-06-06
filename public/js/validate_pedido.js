@@ -18,7 +18,7 @@ $(document).ready(function(){
       } else
         return true;
     }
-    
+
     function validarCantidad(){
       if (cantidad.length==0){
         toastr.error('Debe indicar la cantidad de pedido que quiere', {timeOut: 1500});
@@ -33,7 +33,6 @@ $(document).ready(function(){
     if(validarTapaBebida() && validarCantidad()){
       toastr.success('Formulario validado correctamente', {timeOut: 1500})
     } else{
-      toastr.error('No se ha podido validar el formulario', {timeOut: 1500});
       event.preventDefault();
     }
 
