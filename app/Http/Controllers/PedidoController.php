@@ -152,12 +152,20 @@ class PedidoController extends Controller
         }
 
 
-        if($pedido->tapa_id == null && $pedido->bebida_id == null){
+        if($pedido->tapa_id == null && $pedido->bebida_id == null)
             return redirect()->back()->with('aviso', 'Debe seleccionar una bebida o tapa');
-        }else if(($tapa->disponible == 0 || $bebida->disponible == 0) && $cantidad_inicial < $pedido->cantidad){
-            return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
-        } else
-            $pedido->update();
+            else if ($tapa != null && $bebida != null) {
+                if(($tapa->disponible == 0 || $bebida->disponible == 0) && $cantidad_inicial < $pedido->cantidad)
+                    return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
+        } else if ($tapa != null) {
+            if($tapa->disponible == 0  && $cantidad_inicial < $pedido->cantidad)
+                return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
+        } else if ($bebida != null) {
+            if($bebida->disponible == 0  && $cantidad_inicial < $pedido->cantidad)
+                return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
+        }
+
+        $pedido->update();
 
         if($pedido->estado_id==4 && $estado_inicial!=4)
             return redirect()->back()->with('mensaje','Pedido actualizado con éxito y enviado a la factura');
@@ -178,9 +186,11 @@ class PedidoController extends Controller
     {
         $mesa=DB::table('mesas')->find($pedido->mesa_id);
         $factura=DB::table('facturas')->find($mesa->factura_id);
-        DB::table('facturas')
-            ->where('id', $factura->id)
-            ->update(['total_factura' => $factura->total_factura - $pedido->total_pedido]);
+        if($pedido->estado_id == 4) {
+            DB::table('facturas')
+                ->where('id', $factura->id)
+                ->update(['total_factura' => $factura->total_factura - $pedido->total_pedido]);
+        }
 
         $pedido->delete();
 

@@ -186,7 +186,7 @@
                             <select name="tapa_id" id="tapa_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                                 <option>Selecciona un plato</option>
                                 @foreach ($tapas as $item)
-                                    <option value="{{$item->id}}" @if ($item->disponible == 0 && $item->id != $tapa->id) disabled @endif
+                                    <option value="{{$item->id}}"
                                         @if ($tapa != null && $item->id == $tapa->id)
                                         selected
                                         @endif>
@@ -205,7 +205,7 @@
                             <select name="bebida_id" id="bebida_id_edit" class="form-select form-select-md" aria-label=".form-select-md example">
                                 <option>Selecciona una bebida</option>
                                 @foreach ($bebidas as $item)
-                                    <option value="{{$item->id}}" @if ($item->disponible == 0 && $item->id != $bebida->id) disabled @endif
+                                    <option value="{{$item->id}}"
                                         @if ($bebida!=null && $item->id==$bebida->id)
                                             selected
                                         @endif>
