@@ -53,7 +53,6 @@ function validarFormulario(event) {
   if((validaNumAsientos() && validarOcupada())){
     toastr.success('Formulario validado correctamente', {timeOut: 1500})
   } else{
-    toastr.error('No se ha podido validar el formulario', {timeOut: 1500});
     event.preventDefault();
   }
 }
@@ -62,7 +61,6 @@ function validarFormularioCrear(event) {
   if((validaNumAsientosCrear() && validarOcupadaCrear())){
     toastr.success('Formulario validado correctamente', {timeOut: 1500})
   } else{
-    toastr.error('No se ha podido validar el formulario', {timeOut: 1500});
     event.preventDefault();
   }
 }
