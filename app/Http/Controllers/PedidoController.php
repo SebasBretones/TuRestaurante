@@ -101,6 +101,7 @@ class PedidoController extends Controller
         $pedido = Pedido::find($request->pedido_id);
         $estado_inicial = $pedido->estado_id;
         $precio_inicial = $pedido->total_pedido;
+        $cantidad_inicial = $pedido->cantidad;
 
         $pedido->estado_id=$request->estado_id;
         $pedido->cantidad=$request->cantidad;
@@ -153,7 +154,9 @@ class PedidoController extends Controller
 
         if($pedido->tapa_id == null && $pedido->bebida_id == null){
             return redirect()->back()->with('aviso', 'Debe seleccionar una bebida o tapa');
-        }else
+        }else if(($tapa->disponible == 0 || $bebida->disponible == 0) && $cantidad_inicial < $pedido->cantidad){
+            return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
+        } else
             $pedido->update();
 
         if($pedido->estado_id==4 && $estado_inicial!=4)
