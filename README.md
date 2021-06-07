@@ -16,4 +16,5 @@ Para una guía más amplia y más cosas sobre el proyecto, accede a la **[Docume
 
 ### License
 Aplicación desarrollada por **[Sebastián Bretones Ortiz](https://www.linkedin.com/in/sebasti%C3%A1n-bretones-ortiz-902377172/)**
+
 See the **[License file](https://github.com/SebasBretones/TuRestaurante/blob/master/LICENSE.md)** file for license rights and limitations (MIT).
