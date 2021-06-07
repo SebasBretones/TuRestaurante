@@ -99,9 +99,9 @@ class PedidoController extends Controller
     public function update(PedidoRequest $request)
     {
         $pedido = Pedido::find($request->pedido_id);
-        $estado_inicial = $pedido->estado_id;
-        $precio_inicial = $pedido->total_pedido;
         $cantidad_inicial = $pedido->cantidad;
+        $estado_inicial = $pedido->estado_id;
+
 
         $pedido->estado_id=$request->estado_id;
         $pedido->cantidad=$request->cantidad;
@@ -137,21 +137,6 @@ class PedidoController extends Controller
                 $pedido->total_pedido= $pedido->total_pedido + $tapa->precio;
         }
 
-        $mesa=DB::table('mesas')->find($pedido->mesa_id);
-        $factura=DB::table('facturas')->find($mesa->factura_id);
-        if($estado_inicial!=4) {
-            if($pedido->estado_id==4){
-                DB::table('facturas')
-                    ->where('id', $factura->id)
-                    ->update(['total_factura' => $factura->total_factura + $pedido->total_pedido]);
-            }
-        } else {
-            DB::table('facturas')
-                ->where('id', $factura->id)
-                ->update(['total_factura' => $factura->total_factura + $pedido->total_pedido - $precio_inicial]);
-        }
-
-
         if($pedido->tapa_id == null && $pedido->bebida_id == null)
             return redirect()->back()->with('aviso', 'Debe seleccionar una bebida o tapa');
             else if ($tapa != null && $bebida != null) {
@@ -166,6 +151,19 @@ class PedidoController extends Controller
         }
 
         $pedido->update();
+
+        $pedidos = DB::table('pedidos')->where([
+                                 ['mesa_id' , $pedido->mesa_id],
+                                 ['estado_id' , 4]
+                                 ])->get();
+
+        $total = 0;
+        foreach ($pedidos as $ped) {
+            $total += $ped->total_pedido;
+        }
+
+        $mesa=DB::table('mesas')->find($pedido->mesa_id);
+        DB::table('facturas')->where('id', $mesa->factura_id)->update(['total_factura' => $total]);
 
         if($pedido->estado_id==4 && $estado_inicial!=4)
             return redirect()->back()->with('mensaje','Pedido actualizado con éxito y enviado a la factura');
