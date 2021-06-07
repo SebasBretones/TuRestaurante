@@ -15,4 +15,4 @@ Una vez tengas las anteriores herramientas, deberás seguir los siguientes pasos
 
 Para una guía más amplia y más cosas sobre el proyecto, accede a la **[Documentación](https://docs.google.com/document/d/12WMyngtfGs91RRnOBeQQBxPSbryNtH9GImAan7Bsvuw/edit?usp=sharing)**
 
-<p align="center">**Aplicación desarrollada por [Sebastián Bretones Ortiz]https://www.linkedin.com/in/sebasti%C3%A1n-bretones-ortiz-902377172/**</p>
+**Aplicación desarrollada por [Sebastián Bretones Ortiz]https://www.linkedin.com/in/sebasti%C3%A1n-bretones-ortiz-902377172/**
