@@ -280,6 +280,38 @@ class PedidoController extends Controller
         }
     }
 
+    foreach ($pedidosT as $ped) {
+        $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
+                                      'estado_id' => 4  ])->get();
+        $cont = 0;
+
+        foreach ($pedidos as $pedido) {
+            if ($pedido->tapa_id != null) {
+                $tapa = Tapa::find($pedido->tapa_id);
+                if ($tapa->tipotapa_id == 2) {
+                    foreach ($pedidos as $ped_rac) {
+                        if ($ped_rac->tapa_id != null) {
+                            $tapar = Tapa::find($ped_rac->tapa_id);
+                            if (($tapar->tipotapa_id == 2) && ($pedido->id != $ped_rac->id) && ($tapa->id == $tapar->id)) {
+                                Pedido::find($pedido->id)->delete();
+                                Pedido::find($ped_rac->id)->update([
+                                    'cantidad' => $pedido->cantidad + $ped_rac->cantidad,
+                                    'total_pedido' => $pedido->total_pedido + $ped_rac->total_pedido]);
+
+                                $cont=1;
+                                break;
+                            }
+                    }
+                }
+                }
+            }
+            if ($cont == 1)
+                break;
+        }
+    }
+
+
+
     $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
                                       'estado_id' => 4  ])->get();
 
