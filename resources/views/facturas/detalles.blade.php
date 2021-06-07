@@ -141,6 +141,12 @@
                             <option>Selecciona un plato</option>
                             @foreach ($tapas as $item)
                                 <option value="{{$item->id}}"
+                                    @if ($tapa != null)
+                                        @if ($item->disponible == 0 && $item->id != $tapa->id) disabled @endif
+                                    @elseif($item->disponible == 0)
+                                        disabled
+                                    @endif
+
                                     @if ($tapa!=null && $item->id==$tapa->id)
                                     selected
                                     @endif>
@@ -160,6 +166,11 @@
                             <option>Selecciona una bebida</option>
                             @foreach ($bebidas as $item)
                                 <option value="{{$item->id}}"
+                                    @if ($bebida != null)
+                                        @if ($item->disponible == 0 && $item->id != $bebida->id) disabled @endif
+                                    @elseif($item->disponible == 0)
+                                        disabled
+                                    @endif
                                     @if ($bebida!=null && $item->id==$bebida->id)
                                         selected
                                     @endif>
