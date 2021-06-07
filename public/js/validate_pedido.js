@@ -20,10 +20,10 @@ $(document).ready(function(){
     }
 
     function validarCantidad(){
-      if (cantidad.length==0){
+      if (cantidad.length == 0){
         toastr.error('Debe indicar la cantidad de pedido que quiere', {timeOut: 1500});
         return false;
-      }else if(cantidad<0 || cantidad>30){
+      }else if(cantidad < 1 || cantidad > 30){
         toastr.error('La cantidad del pedido debe estar entre 1 y 30', {timeOut: 1500});
         return false;
       } else
