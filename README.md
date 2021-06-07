@@ -16,7 +16,7 @@ Para una guía más amplia y más cosas sobre el proyecto, accede a la **[Docume
 
 ## Link
 
-Aplicación disponible en el siguiente **[link](http://turestaurante.herokuapp.com/) **
+Aplicación disponible en el siguiente **[link](http://turestaurante.herokuapp.com/)**
 
 ## License
 
