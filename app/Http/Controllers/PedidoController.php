@@ -101,6 +101,8 @@ class PedidoController extends Controller
         $pedido = Pedido::find($request->pedido_id);
         $cantidad_inicial = $pedido->cantidad;
         $estado_inicial = $pedido->estado_id;
+        $tapa_inicial = $pedido->tapa_id;
+        $bebida_inicial = $pedido->bebida_id;
 
 
         $pedido->estado_id=$request->estado_id;
@@ -139,9 +141,9 @@ class PedidoController extends Controller
 
         if($pedido->tapa_id == null && $pedido->bebida_id == null)
             return redirect()->back()->with('aviso', 'Debe seleccionar una bebida o tapa');
-            else if ($tapa != null && $bebida != null) {
-                if(($tapa->disponible == 0 || $bebida->disponible == 0) && $cantidad_inicial < $pedido->cantidad)
-                    return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
+        else if ($tapa != null && $bebida != null) {
+            if(($tapa->disponible == 0 || $bebida->disponible == 0) && $cantidad_inicial < $pedido->cantidad)
+                return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
         } else if ($tapa != null) {
             if($tapa->disponible == 0  && $cantidad_inicial < $pedido->cantidad)
                 return redirect()->back()->with('aviso', 'No puede aumentar la cantidad, no hay más disponible');
@@ -280,49 +282,63 @@ class PedidoController extends Controller
         }
     }
 
-    foreach ($pedidosT as $ped) {
-        $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
-                                      'estado_id' => 4  ])->get();
-        $cont = 0;
+        foreach ($pedidosT as $ped) {
+            $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
+                                        'estado_id' => 4  ])->get();
+            $cont = 0;
 
-        foreach ($pedidos as $pedido) {
-            if ($pedido->tapa_id != null) {
-                $tapa = Tapa::find($pedido->tapa_id);
-                if ($tapa->tipotapa_id == 2) {
-                    foreach ($pedidos as $ped_rac) {
-                        if ($ped_rac->tapa_id != null) {
-                            $tapar = Tapa::find($ped_rac->tapa_id);
-                            if (($tapar->tipotapa_id == 2) && ($pedido->id != $ped_rac->id) && ($tapa->id == $tapar->id)) {
-                                Pedido::find($pedido->id)->delete();
-                                Pedido::find($ped_rac->id)->update([
-                                    'cantidad' => $pedido->cantidad + $ped_rac->cantidad,
-                                    'total_pedido' => $pedido->total_pedido + $ped_rac->total_pedido]);
+            foreach ($pedidos as $pedido) {
+                if ($pedido->tapa_id != null) {
+                    $tapa = Tapa::find($pedido->tapa_id);
+                    if ($tapa->tipotapa_id == 2) {
+                        foreach ($pedidos as $ped_rac) {
+                            if ($ped_rac->tapa_id != null) {
+                                $tapar = Tapa::find($ped_rac->tapa_id);
+                                if (($tapar->tipotapa_id == 2) && ($pedido->id != $ped_rac->id) && ($tapa->id == $tapar->id)) {
+                                    Pedido::find($pedido->id)->delete();
+                                    Pedido::find($ped_rac->id)->update([
+                                        'cantidad' => $pedido->cantidad + $ped_rac->cantidad,
+                                        'total_pedido' => $pedido->total_pedido + $ped_rac->total_pedido]);
 
-                                $cont=1;
-                                break;
-                            }
+                                    $cont=1;
+                                    break;
+                                }
+                        }
+                    }
                     }
                 }
-                }
+                if ($cont == 1)
+                    break;
             }
-            if ($cont == 1)
-                break;
         }
+
+
+
+        $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
+                                        'estado_id' => 4  ])->get();
+
+        $total = 0;
+        foreach ($pedidos as $ped) {
+            $total += $ped->total_pedido;
+        }
+
+        Factura::find($factura->id)
+        ->update(['total_factura' => $total]);
+
+        return redirect()->back()->with('mensaje', 'Pedido recalculado correctamente');
     }
 
+    public function entregarPedidos(Mesa $mesa) {
+        $pedidos = DB::table('pedidos')->where([
+            ['mesa_id',$mesa->id],
+            ['estado_id','!=',1],
+            ])->paginate(10);
 
+        foreach ($pedidos as $ped) {
+            DB::table('pedidos')->where('id', $ped->id)
+            ->update(['estado_id' => 4]);
+        }
 
-    $pedidos = Pedido::where(['mesa_id' => $pedidosT[array_key_first($pedidosT)]->mesa_id,
-                                      'estado_id' => 4  ])->get();
-
-    $total = 0;
-    foreach ($pedidos as $ped) {
-        $total += $ped->total_pedido;
-    }
-
-    Factura::find($factura->id)
-    ->update(['total_factura' => $total]);
-
-    return redirect()->back()->with('mensaje', 'Pedido recalculado correctamente');
+        return redirect()->back()->with('mensaje', 'Pedidos entregados');
     }
 }

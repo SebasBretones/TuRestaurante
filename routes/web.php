@@ -44,6 +44,9 @@ Route::middleware(['auth','verified'])->group(function(){
         Route::get('/{factura}','App\Http\Controllers\PedidoController@recalcularFactura')->name('pedidos.recalcular');
     });
 
+    Route::get('entregas/{mesa}','App\Http\Controllers\PedidoController@entregarPedidos')->name('pedidos.entregar');
+
+
     Route::resource('pedidos', PedidoController::class)->except([
         'create', 'store']);
 

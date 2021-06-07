@@ -95,7 +95,7 @@
                             <th class="pColumn4">Tapa</th>
                             <th class="pColumn5">Bebida</th>
                             <th class="pColumn6">Cantidad</th>
-                            <th class="pColumn7"></th>
+                            <th class="pColumn7"><a class="btn btn-primary" href="{{route('pedidos.entregar',$mesa) }}">Entregar pedidos</a></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -187,9 +187,7 @@
                                 <option>Selecciona un plato</option>
                                 @foreach ($tapas as $item)
                                     <option value="{{$item->id}}"
-                                        @if ($tapa != null)
-                                            @if ($item->disponible == 0 && $item->id != $tapa->id) disabled @endif
-                                        @elseif($item->disponible == 0)
+                                        @if ($item->disponible == 0)
                                             disabled
                                         @endif
 
@@ -212,9 +210,7 @@
                                 <option>Selecciona una bebida</option>
                                 @foreach ($bebidas as $item)
                                     <option value="{{$item->id}}"
-                                        @if ($bebida != null)
-                                            @if ($item->disponible == 0 && $item->id != $bebida->id) disabled @endif
-                                        @elseif($item->disponible == 0)
+                                        @if ($item->disponible == 0)
                                             disabled
                                         @endif
 
