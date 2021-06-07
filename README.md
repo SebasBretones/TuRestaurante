@@ -10,7 +10,7 @@ Necesitarás Git para clonarlo o puedes descargarlo en formato ZIP. Además es n
 Una vez tengas las anteriores herramientas, deberás seguir los siguientes pasos:
 - **Ejecuta el comando git clone para clonar el proyecto**
 - **Ejecuta el comando composer update para instalar las dependencias del proyecto**
-- **Renombra el archivo .env.example a .env y configúralo según los datos de tu base de datos y mailtrap**
+- **Renombra el archivo .env.example a .env y configúralo según los datos de tu base de datos y mailtrap (en producción configurado con gmail)**
 
 Para una guía más amplia y más cosas sobre el proyecto, accede a la **[Documentación](https://docs.google.com/document/d/12WMyngtfGs91RRnOBeQQBxPSbryNtH9GImAan7Bsvuw/edit?usp=sharing)**
 
