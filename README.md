@@ -1,4 +1,4 @@
-![alt text](https://github.com/SebasBretones/TuRestaurante/tree/master/public/img/logo.jpg?raw=true)
+![alt text](https://github.com/SebasBretones/TuRestaurante/blob/master/public/img/logo.jpg?raw=true)
 
 # Sobre la aplicación
 
