@@ -1,9 +1,8 @@
 ![alt text](https://github.com/SebasBretones/TuRestaurante/blob/master/public/img/logo.jpg?raw=true)
 
 # Sobre la aplicación
-
 La aplicación TuRestaurante ha sido realizada con Laravel, framework PHP. El objetivo es poder llevar a cabo la gestión de todo tipo de restaurantes, bares..., pudiendo
-almacenar las comidas, bebidas y realizar pedidos con estos. Además se podrán organizar las mesas en diferentes distribuciones. Se podrán imprimir las facturas además de mostrar la carta mediante código QR, ambas en PDF.
+almacenar las comidas, bebidas y realizar pedidos con estos. Además se podrán organizar las mesas en diferentes distribuciones. Ofrece la posibilidad de  imprimir las facturas además de mostrar la carta mediante código QR, ambas en PDF.
 
 ## Guía de instalación
 
