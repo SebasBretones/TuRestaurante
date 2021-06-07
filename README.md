@@ -14,14 +14,13 @@ Una vez tengas las anteriores herramientas, deberás seguir los siguientes pasos
 
 Para una guía más amplia y más cosas sobre el proyecto, accede a la **[Documentación](https://docs.google.com/document/d/12WMyngtfGs91RRnOBeQQBxPSbryNtH9GImAan7Bsvuw/edit?usp=sharing)**
 
-### Link
+## Link
 
 Aplicación disponible en el siguiente **[link](http://turestaurante.herokuapp.com/) **
 
-### License
+## License
 
 Aplicación desarrollada por **[Sebastián Bretones Ortiz](https://www.linkedin.com/in/sebasti%C3%A1n-bretones-ortiz-902377172/)**
 
 See the **[License file](https://github.com/SebasBretones/TuRestaurante/blob/master/LICENSE.md)** file for license rights and limitations (MIT).
 
-###Link
