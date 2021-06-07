@@ -339,6 +339,21 @@ class PedidoController extends Controller
             ->update(['estado_id' => 4]);
         }
 
+        $pedidos = DB::table('pedidos')->where([
+            ['mesa_id',$mesa->id],
+            ['estado_id',4],
+            ])->get();
+
+        $total = 0;
+
+        foreach ($pedidos as $ped) {
+            $total += $ped->total_pedido;
+        }
+
+        Factura::find($mesa->factura_id)
+        ->update(['total_factura' => $total]);
+
+
         return redirect()->back()->with('mensaje', 'Pedidos entregados');
     }
 }

@@ -95,7 +95,7 @@
                             <th class="pColumn4">Tapa</th>
                             <th class="pColumn5">Bebida</th>
                             <th class="pColumn6">Cantidad</th>
-                            <th class="pColumn7"><a class="btn btn-primary" href="{{route('pedidos.entregar',$mesa) }}">Entregar pedidos</a></th>
+                            <th class="pColumn7"><a class="btn btn-success" href="{{route('pedidos.entregar',$mesa) }}">Entregar pedidos</a></th>
                         </tr>
                     </thead>
                     <tbody>
