@@ -20,7 +20,7 @@ class CartaController extends Controller
     public function generateCarta(User $user) {
         $tapas = Tapa::where([
             ['tipotapa_id',1],
-            ['user_id',$user->id]
+            ['user_id',1]
         ])->orderBy('nombre')->get();
 
         $raciones = Tapa::where([
@@ -38,17 +38,7 @@ class CartaController extends Controller
             ['user_id',$user->id]
         ])->orderBy('nombre')->get();
 
-        $pdf= PDF::loadview('pdf.carta',compact('tapas','raciones','bebidasC','bebidasS','user'));
-        $output = $pdf->output();
-        $path = public_path().'/pdf/user'.$user->id;
-        File::makeDirectory($path, $mode = 0777, true, true);
-        file_put_contents('pdf/user'.$user->id.'/Carta.pdf', $output);
-        return redirect()->route('cartas.index')->with('mensaje' , 'Carta generada correctamente');
+       return view('pdf.carta',compact('tapas','raciones','bebidasC','bebidasS','user'));
     }
 
-    public function downloadCarta(User $user){
-        $file = public_path()."/pdf/user".$user->id."/Carta.pdf";
-        $headers = array('Content-Type: application/pdf',);
-        return response()->download($file, 'Carta.pdf', $headers);
-    }
 }

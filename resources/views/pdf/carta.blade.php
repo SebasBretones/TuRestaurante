@@ -6,37 +6,26 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Carta</title>
     <style>
-
-    @page { margin: 100px;
-        }
-
-
-      .page-break {
-          page-break-inside: avoid;
-      }
       body {
         font-family: 'Playfair Display', serif;
         font-style: italic;
         color: #FFB03B;
-        background-image: url('img/pizarra.jpg');
+        background-image: url('../img/pizarra.jpg');
         background-size: cover;
         text-transform: uppercase;
       }
-
       .titulo {
         font-size: 50px;
         margin-bottom: 60px;
       }
-
       .subtitulo {
+        text-align: left;
         font-size: 40px;
         padding-bottom: 30px;
       }
-
       .contenedor {
-        padding-top: 50px;
+        padding-top: 80px;
       }
-
       table {
         width: 100%;
       }
@@ -45,52 +34,43 @@
         content: "";
         border-bottom: #FFB03B dotted;
       }
-
       .column1Title{
         text-align: left;
-        padding-left: 35px;
+        padding-left: 225px;
         width: 100%;
       }
-
-      .column1 {;
-        padding-left: 70px;
-        text-align: left;
+      .column1 {
+        padding-right: 20px;
+        text-align: right;
         width: 20%;
-      }
-
+      }}
       .column2 {
         text-align: left;
-        padding-left: 45px;
         width: 60%;
       }
-
       .column3 {
         text-align: left;
         width: 20%;
-        padding-left: 40px;
+        padding-left: 20px;
         font-size: 14px;
       }
 
-
-
       td {
-        font-size: 12px;
+        font-size: 22px;
         padding-bottom: 10px;
         text-align: center;
       }
-
 
     </style>
   </head>
 
   <body>
-    <div class="page-break">
     <div class="contenedor">
       <table>
         <thead>
           <tr>
             <th> </th>
-            <th class="titulo">Carta {{$user->name}}</th>
+            <th class="titulo">Carta {{auth()->user()->name}}</th>
             <th> </th>
           </tr>
         </thead>
@@ -192,7 +172,6 @@
         @endforeach
       </tbody>
     </table>
-</div>
 
   </body>
 </html>
