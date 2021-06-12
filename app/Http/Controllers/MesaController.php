@@ -22,9 +22,16 @@ class MesaController extends Controller
     {
         $mesa = new Mesa();
         $datos = $request->validated();
+        $mesa->nombre=$datos['nombre'];
         $mesa->num_asientos=$datos['num_asientos'];
         $mesa->ocupada=$datos['ocupada'];
         $mesa->distribucion_id=$datos['distribucion_id'];
+
+        $mesas = Mesa::where('distribucion_id', $mesa->distribucion_id)->get();
+        foreach($mesas as $m){
+            if ($m->nombre == $mesa->nombre)
+                return redirect()->route('distribucionmesas.show', $mesa->distribucion_id)->with('aviso', 'Debe indicar una mesa que no exista');
+        }
 
         if($mesa->save()){
             $factura = Factura::create([
@@ -46,12 +53,21 @@ class MesaController extends Controller
      */
     public function update(MesaRequest $request)
     {
-        $mesa = array(
-            'num_asientos' => $request->num_asientos,
-            'ocupada' => $request->ocupada,
-            'distribucion_id' => $request->distribucion_id,
-        );
-        Mesa::find($request->mesa_id)->update($mesa);
+        $mesa = Mesa::find($request->mesa_id);
+        $datos = $request->validated();
+        $mesa->nombre=$datos['nombre'];
+        $mesa->num_asientos=$datos['num_asientos'];
+        $mesa->ocupada=$datos['ocupada'];
+        $mesa->distribucion_id=$datos['distribucion_id'];
+
+        $mesas = Mesa::where('distribucion_id', $request->distribucion_id)->get();
+
+        foreach($mesas as $m){
+            if ($m->nombre == $mesa->nombre && $m->id != $mesa->id)
+                return redirect()->route('distribucionmesas.show', $request->distribucion_id)->with('aviso', 'Debe indicar una mesa que no exista');
+        }
+
+         $mesa->update();
 
         return redirect()
         ->back()->with('mensaje', 'Mesa editada correctamente');

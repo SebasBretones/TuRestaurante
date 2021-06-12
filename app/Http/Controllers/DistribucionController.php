@@ -78,12 +78,12 @@ class DistribucionController extends Controller
            $mesas = Mesa::orderBy('id')
            ->where([
                ['distribucion_id', $distribucionmesa->id],
-               ["id","LIKE","%{$search}%"]
+               ["nombre","LIKE","%{$search}%"]
             ])->paginate(6)->withQueryString();
 
         } else {
             $mesas = Mesa::where('distribucion_id', $distribucionmesa->id)
-            ->orderBy('id')->paginate(6)->withQueryString();
+            ->orderBy('nombre')->paginate(6)->withQueryString();
         }
 
         if($distribucionmesa->user_id!=auth()->user()->id)

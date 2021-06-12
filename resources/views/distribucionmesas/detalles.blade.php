@@ -23,7 +23,7 @@
     </div>
     <div class="col-4">
         <form class="input-group" action="{{route('distribucionmesas.show',$distribucionmesa)}}" method="GET">
-            <input type="number" class="form-control" name="search" placeholder="Mesa nº" value="{{request()->query('search')}}">
+            <input type="text" class="form-control" name="search" placeholder="Mesa" value="{{request()->query('search')}}">
         </form>
     </div>
 </div>
@@ -45,7 +45,7 @@
         @endphp
         <div class="col">
             <div class="card shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#eceeef" dy=".3em">Mesa {{$mesa->id}}</text></svg>
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#eceeef" dy=".3em">Mesa {{$mesa->nombre}}</text></svg>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group qMesa" data-mesa="{{$mesa->id}}">
@@ -58,7 +58,7 @@
                                 <a href="{{route('facturas.show',[$factura,$distribucionmesa])}}" type="button" class="btn btn-sm btn-outline-secondary">Factura</a>
                             @endif
                             <a class="btn btn-sm btn-outline-secondary edit-mesa-button" role="button"
-                            data-mesa_id="{{$mesa->id}}" data-num_asientos="{{$mesa->num_asientos}}" data-ocupada="{{$mesa->ocupada}}"
+                            data-nombre="{{$mesa->nombre}}" data-mesa_id="{{$mesa->id}}" data-num_asientos="{{$mesa->num_asientos}}" data-ocupada="{{$mesa->ocupada}}"
                             data-distribucion_id="{{$mesa->distribucion_id}}"  data-bs-toggle="modal" data-bs-target="#editarMesa">Editar</a>
                             <form name="borrar" action="{{route('mesas.destroy',$mesa)}}" method="POST">
                                 @csrf
@@ -100,6 +100,10 @@
                     @csrf
                     @method('PUT')
                     <div class="col">
+                        <label for="nombre" class="col-form-label">Nombre</label>
+                        <input type="text" class="form-control" name="nombre" placeholder="Nombre" id="nombre">
+                    </div>
+                    <div class="mt-2">
                         <label for="num_asientos" class="col-form-label">Número de asientos</label>
                         <input type="number" class="form-control" name="num_asientos" placeholder="Número de asientos" id="num_asientos" value="">
                     </div>
@@ -159,6 +163,10 @@
             <form name="f" action="{{route('mesas.store')}}" class="needs-validation row g-3" method="POST">
                 @csrf
                 <div class="col">
+                    <label for="nombre" class="col-form-label">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre" id="nombre_crear">
+                </div>
+                <div class="mt-2">
                     <label for="num_asientos" class="col-form-label">Número de asientos</label>
                     <input type="number" class="form-control" name="num_asientos" placeholder="Número de asientos" value="" id="num_asientos_crear">
                 </div>

@@ -15,6 +15,7 @@ class CreateMesasTable extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
+            $table->string('nombre',120);
             $table->boolean('ocupada')->default(false);
             $table->integer('num_asientos');
 

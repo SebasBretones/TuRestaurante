@@ -16,6 +16,13 @@ class MesaRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'nombre' => trim(ucwords(strtolower($this->nombre)))
+        ]);
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -24,6 +31,7 @@ class MesaRequest extends FormRequest
     public function rules()
     {
         return [
+            'nombre' => ['required', 'max:120'],
             'num_asientos' => ['required','numeric', 'min:1', 'max:30'],
             'ocupada' => 'required',
             'distribucion_id' => 'required'
@@ -33,6 +41,8 @@ class MesaRequest extends FormRequest
     public function messages()
     {
         return [
+            'nombre.required' => 'Debe indicar un nombre',
+            'nombre.max' => 'El nombre no debe tener más de 120 caracteres',
             'num_asientos.required' => 'Debe indicar un número de asientos',
             'num_asientos.min' => 'El mínimo de asientos es de 1',
             'num_asientos.max' => 'El máximo de asientos es de 30'

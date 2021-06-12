@@ -5,6 +5,15 @@ function iniciar() {
   document.getElementById('crearMesa').addEventListener('submit', validarFormularioCrear);
 }
 
+function validarNombre(){
+    let nombre = document.getElementById('nombre').value;
+    if (nombre.length == 0 || nombre.length > 40){
+      toastr.error('Debe indicar un nombre con no más de 120 caracteres.')
+      return false;
+    } else
+      return true;
+}
+
 function validaNumAsientos(){
   let num_asientos = document.getElementById('num_asientos').value;
   if (num_asientos.length == 0){
@@ -25,6 +34,15 @@ function validarOcupada(){
     return false;
   } else
     return true;
+}
+
+function validarNombreCrear(){
+    let nombre = document.getElementById('nombre_crear').value;
+    if (nombre.length == 0 || nombre.length > 40){
+      toastr.error('Debe indicar un nombre con no más de 120 caracteres.')
+      return false;
+    } else
+      return true;
 }
 
 function validaNumAsientosCrear(){
@@ -50,7 +68,7 @@ function validarOcupadaCrear(){
 }
 
 function validarFormulario(event) {
-  if((validaNumAsientos() && validarOcupada())){
+  if((validarNombre() && validaNumAsientos() && validarOcupada())){
     toastr.success('Formulario validado correctamente', {timeOut: 1500})
   } else{
     event.preventDefault();
@@ -58,7 +76,7 @@ function validarFormulario(event) {
 }
 
 function validarFormularioCrear(event) {
-  if((validaNumAsientosCrear() && validarOcupadaCrear())){
+  if((validarNombreCrear() && validaNumAsientosCrear() && validarOcupadaCrear())){
     toastr.success('Formulario validado correctamente', {timeOut: 1500})
   } else{
     event.preventDefault();
