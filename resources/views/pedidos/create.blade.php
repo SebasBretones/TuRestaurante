@@ -74,8 +74,11 @@
         </div>
         <div class="row mt-4">
             <div class="col">
+                <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#info">
+                    <span class="material-icons">info</span>
+                </button>
                 <button class="btn btn-warning" type="reset">Resetear</button>
-                <button class="btn btn-success" type="submit">Crear pedido</button>
+                <button class="btn btn-success" type="submit">Realizar pedido</button>
             </div>
         </div>
     </form>
@@ -83,6 +86,9 @@
 
 @if (count($pedidos)!=0)
     <hr/>
+    <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#infoe">
+        <span class="material-icons">info</span>
+    </button>
     <div class="row mt-4">
         <div class="col-md-12">
             <div class="table100 ver3 res m-b-110">
@@ -234,7 +240,7 @@
                     </div>
                     <input type="hidden" name="mesa_id" id="mesa_id_edit">
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-warning" type="reset">Resetear</button>
                         <button type="submit" class="btn btn-success">Editar</button>
                     </div>
                 </form>
@@ -244,11 +250,73 @@
     </div>
 @endif
 
+<div class="modal fade" id="info" tabindex="-1" aria-labelledby="infoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoLabel">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body infom">
+            <div class="card login-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                           <p>- Pedido: para crear un pedido hay que seleccionar al menos un plato o bebida, además de la cantidad (entre 1 y 30).</p>
+                            <p>Si el plato es una ración, el pedido no podrá contener bebida.</p>
+                            <p>Si el plato es una tapa, podrá ir acompañado de una bebida de cualquier tipo o ir sola.</p>
+                            <p>Si la bebida va acompañada de una tapa, se sumará el precio de ambas si es sin tapa, o solo el precio de la bebida si es con tapa.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="justify-content-start">
+                <hr>
+                <div>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-dismiss="modal">Entendido</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="infoe" tabindex="-1" aria-labelledby="infoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoLabel">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body infom">
+            <div class="card login-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <p>- Lista pedidos: desde la siguiente tabla se podrán editar todos los pedidos.</p>
+                            <p>Si cambia el estado a entregado, el pedido desaparecerá de esta lista y pasará a la factura. Aparecerá un
+                                enlace para ir a la factura en la esquina superior derecha.
+                            </p>
+                            <p>Si algún plato o bebida del pedido dejan de estar disponibles, se podrán cambiar a otros que estén disponibles.</p>
+                            <p>También se podrán entregar todos los pedidos, incluso los no disponibles, usando el botón <b>ENTREGAR PEDIDOS</b>,
+                                siempre y cuando su estado sea Preparación o Finalizado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="justify-content-start">
+                <hr>
+                <div>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-dismiss="modal">Entendido</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')
     <script src="{{ asset('js/edit_pedido.js') }}"></script>
     <script src="{{ asset('js/validate_pedido.js') }}"></script>
 @endsection
-

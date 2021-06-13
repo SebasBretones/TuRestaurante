@@ -57,7 +57,7 @@ Route::middleware(['auth','verified'])->group(function(){
     Route::resource('cartas', CartaController::class)->only('index');
 });
 
-Route::get('/generate-carta/{user}', [CartaController::class, 'generateCarta']);
+Route::get('cartas/{user}', [CartaController::class, 'show']);
 
 
 

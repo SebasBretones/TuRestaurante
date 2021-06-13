@@ -34,9 +34,14 @@
     No hay pedidos entregados
 </div>
 @else
-<div class="d-flex justify-content-end mb-4 mt-4">
-    <a class="btn btn-primary" href="{{route('pedidos.recalcular',$factura) }}">Recalcular factura</a>
-    <div class="ms-2">
+<div class="row justify-content-between mt-4">
+    <div class="left col-2">
+        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#info">
+            <span class="material-icons">info</span>
+        </button>
+    </div>
+    <div class="right col-10">
+        <a class="btn btn-primary" href="{{route('pedidos.recalcular',$factura) }}">Recalcular factura</a>
         <a class="btn btn-primary" href="{{ URL::to('download-pdf',$factura) }}">Imprimir factura</a>
     </div>
 </div>
@@ -187,7 +192,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-warning" type="reset">Resetear</button>
                     <button type="submit" class="btn btn-primary">Editar</button>
                 </div>
             </form>
@@ -207,6 +212,72 @@
         </div>
     </div>
 @endif
+
+<div class="modal fade" id="info" tabindex="-1" aria-labelledby="infoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoLabel">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body infom">
+            <div class="card login-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <p>- Factura: desde la siguiente tabla se podrán editar todos los pedidos.</p>
+                            <p>Si cambia a cualquier otro estado, el pedido desaparecerá de esta lista y pasará a los pedidos.</p>
+                            <p>Si algún plato o bebida del pedido dejan de estar disponibles, se podrán cambiar a otros que estén disponibles o dejarlos como están.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <p>
+                                - Recalcular factura: el botón recalcular factura juntará los pedidos que contengan los mismos platos y/o bebidas.
+                                Además, juntará los pedidos que contengan solo tapas con los que tengan solo bebidas que puedan incluir tapas y
+                                recalculará el precio que se deba descontar al juntarlos.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <p>
+                                - Imprimir factura: el botón imprimir factura descargará la factura en un fichero PDF con un formato similar al de la tabla.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <p>- Pagar factura: este botón eliminará todos los pedidos de la mesa actual, incluso los no entregados.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="justify-content-start">
+                <hr>
+                <div>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-dismiss="modal">Entendido</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 @section('js')
     <script src="{{ asset('js/edit_pedido.js') }}"></script>

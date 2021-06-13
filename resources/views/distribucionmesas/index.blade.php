@@ -1,13 +1,15 @@
 @extends('main')
 
 @section('title')
-  <div class="titulo distribucion-header">
-    <div class="container text-center">
-      <div class="row">
-        <div class="col-lg-12">
-          <h1>Distribucion</h1>
+  <div class="encabezado">
+    <div class="titulo distribucion-header">
+        <div class="container text-center">
+        <div class="row">
+            <div class="col-lg-12">
+            <h1>Distribucion</h1>
+            </div>
         </div>
-      </div>
+        </div>
     </div>
   </div>
 @endsection
@@ -26,13 +28,24 @@
 </div>
 
 @if (count($distribuciones)==0)
-  <p>
-    @if (request()->query('search'))
-      No se han encontrado registros para la busqueda de <strong>{{request()->query('search')}}</strong>
-    @else
-      No se han encontrado registros
-    @endif
-  </p>
+<div class="card login-card mtg">
+    <div class="row no-gutters"">
+        <div class="col-md-12">
+            <div class="card-body text-center">
+                @if (request()->query('search'))
+                No se han encontrado registros para la busqueda de <strong>{{request()->query('search')}}</strong>
+                @else
+                ¡Crea tu primera distribución! En las distribuciones podrás crear las mesas correspondientes para tenerlas mejor organizadas
+                <div class="alert alert-success alert-dismissible fade show bottomf text-center" role="alert">
+                    <strong>¡Comienza pulsando el botón de crear!</strong>
+                    <button type="button" class="btn-close btn-close" aria-label="Close" data-dismiss="alert"></button>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
 @else
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
         @foreach ($distribuciones as $distribucionmesa)
@@ -81,9 +94,17 @@
                 <div class="row mt-4">
                     <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="">
                 </div>
-                <div class="modal-footer">
-                    <button class="btn btn-warning" type="reset">Resetear</button>
-                    <button type="submit" class="btn btn-success">Crear</button>
+                <div class="justify-content-between">
+                    <hr>
+                    <div class="left">
+                        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#info">
+                            <span class="material-icons">info</span>
+                        </button>
+                    </div>
+                    <div class="right">
+                        <button class="btn btn-warning" type="reset">Resetear</button>
+                        <button type="submit" class="btn btn-success">Crear</button>
+                    </div>
                 </div>
             </form>
         </div>
@@ -107,13 +128,49 @@
                     <input type="text" class="form-control" name="nombre" id="nombre_edit" placeholder="Nombre">
                 </div>
                 <input type="hidden" id="distribucion_id" name="distribucion_id">
-                <div class="modal-footer">
-                    <button class="btn btn-warning" type="reset">Resetear</button>
-                    <button type="submit" class="btn btn-success">Editar</button>
+                <div class="justify-content-between">
+                    <hr>
+                    <div class="left">
+                        <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#info">
+                            <span class="material-icons">info</span>
+                        </button>
+                    </div>
+                    <div class="right">
+                        <button class="btn btn-warning" type="reset">Resetear</button>
+                        <button type="submit" class="btn btn-success">Editar</button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
+    </div>
+</div>
+
+<div class="modal fade" id="info" tabindex="-1" aria-labelledby="infoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoLabel">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body infom">
+            <div class="card login-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Nombre: indica un nombre identificativo para la distribución. Debe ser único y no tener más de 40 caracteres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="justify-content-start">
+                <hr>
+                <div>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-dismiss="modal">Entendido</button></div>
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 @endsection

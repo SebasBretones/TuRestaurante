@@ -26,13 +26,25 @@
 </div>
 
 @if (count($tapas)==0)
-  <p>
-    @if (request()->query('search'))
-      No se han encontrado registros para la busqueda de <strong>{{request()->query('search')}}</strong>
-    @else
-      No se han encontrado registros
-    @endif
-  </p>
+<div class="card login-card mtg">
+    <div class="row no-gutters"">
+        <div class="col-md-12">
+            <div class="card-body text-center">
+                @if (request()->query('search'))
+                No se han encontrado registros para la busqueda de <strong>{{request()->query('search')}}</strong>
+                @else
+                ¡Crea tu primer plato! Los platos aparecerán en la <a class="sinestilo" href="{{route('cartas.index')}}" target="_blank">carta</a>
+                y podrás realizar pedidos con ellas
+                <div class="alert alert-success alert-dismissible fade show bottomf text-center" role="alert">
+                    <strong>¡Comienza pulsando el botón de crear!</strong>
+                    <button type="button" class="btn-close btn-close" aria-label="Close" data-dismiss="alert"></button>
+                </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
+
 @else
   <div class="row mt-2">
     <div class="col-md-12">
@@ -112,10 +124,18 @@
                     @endforeach
                 </select>
             </div>
-          <div class="modal-footer">
-            <button class="btn btn-warning" type="reset">Resetear</button>
-            <button type="submit" class="btn btn-success">Crear</button>
-          </div>
+            <div class="justify-content-between">
+                <hr>
+                <div class="left">
+                    <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#info">
+                        <span class="material-icons">info</span>
+                    </button>
+                </div>
+                <div class="right">
+                    <button class="btn btn-warning" type="reset">Resetear</button>
+                    <button type="submit" class="btn btn-success">Crear</button>
+                </div>
+            </div>
       </form>
       </div>
   </div>
@@ -170,9 +190,17 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-warning" type="reset">Resetear</button>
-                <button type="submit" class="btn btn-success">Editar</button>
+            <div class="justify-content-between">
+                <hr>
+                <div class="left">
+                    <button class="btn" type="button" data-bs-toggle="modal" data-bs-target="#infoe">
+                        <span class="material-icons">info</span>
+                    </button>
+                </div>
+                <div class="right">
+                    <button class="btn btn-warning" type="reset">Resetear</button>
+                    <button type="submit" class="btn btn-success">Editar</button>
+                </div>
             </div>
       </form>
       </div>
@@ -180,6 +208,114 @@
   </div>
 </div>
 
+<div class="modal fade" id="info" tabindex="-1" aria-labelledby="infoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoLabel">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body infom">
+            <div class="card login-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Nombre: indica un nombre identificativo para el plato. Debe ser único y no tener más de 120 caracteres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Precio: indica un precio que se encuentre entre 0.05 y 200 €.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Tipo: indica el tipo de plato. Las raciones deberán pedirse sin bebidas, mientras que las tapas se pueden pedir
+                            con cualquier tipo de bebidas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="justify-content-start">
+                <hr>
+                <div>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-dismiss="modal">Entendido</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="infoe" tabindex="-1" aria-labelledby="infoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="infoLabel">Información</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body infom">
+            <div class="card login-card">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Nombre: indica un nombre identificativo para el plato. Debe ser único y no tener más de 120 caracteres.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Precio: indica un precio que se encuentre entre 0.05 y 200 €.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Tipo: indica el tipo de plato. Las raciones deberán pedirse sin bebidas, mientras que las tapas se pueden pedir
+                            con cualquier tipo de bebidas.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card login-card mt-1">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            - Disponibilidad: indica su disponibilidad. Si no se encuentra disponible, no se podrán realizar pedidos nuevos con este plato
+                            ni editarlos los ya hechos. Si están en preparación o finalizados, podrás entregarlos o eliminarlos.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="justify-content-start">
+                <hr>
+                <div>
+                    <button type="button" class="btn btn-primary"  data-bs-toggle="modal" data-bs-dismiss="modal">Entendido</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('js')

@@ -129,6 +129,26 @@ body
     margin: 0 auto;
 }
 
+.mtg {
+    margin-top: 120px;
+}
+
+.sinestilo {
+    text-decoration: none;
+}
+
+.bottomf{
+    position:fixed;
+    left:0px;
+    right:0px;
+    bottom:0px;
+    height:60px;
+    z-index:0;
+}
+
+.infom{
+    background-color: #F3F3F3;
+}
 
 /* ============ desktop view ============ */
 @media all and (min-width: 601px) {
@@ -186,6 +206,25 @@ body
     padding-bottom: 9px;
   }
 
+  .mtg {
+    margin-top: 100px;
+    }
+
+    .tapas-header {
+        padding: 110px 0 82px;
+        background-size: 100% 55%;
+      }
+
+      .distribucion-header {
+        padding: 110px 0 82px;
+        background-size: 100% 55%;
+      }
+
+      .bebidas-header {
+        padding: 110px 0 82px;
+        background-size: 100% 55%;
+      }
+
 }
 
 @media (max-width: 500px) {
@@ -207,6 +246,10 @@ body
       text-transform: uppercase;
       background-color: #6c7ae0;
     }
+
+    .mtg {
+        margin-top: 90px;
+        }
   }
 
   @media (max-width: 430px) {
@@ -232,6 +275,10 @@ body
       text-transform: uppercase;
       background-color: #6c7ae0;
     }
+
+    .mtg {
+        margin-top: 80px;
+        }
   }
 
   @media (max-width: 330px) {
@@ -258,6 +305,10 @@ body
       text-transform: uppercase;
       background-color: #6c7ae0;
     }
+
+    .mtg {
+        margin-top: 20px;
+        }
   }
 /* ============ small devices .end// ============ */
 

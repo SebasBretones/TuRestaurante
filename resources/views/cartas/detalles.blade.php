@@ -70,7 +70,7 @@
         <thead>
           <tr>
             <th> </th>
-            <th class="titulo">Carta {{$user->name}}</th>
+            <th class="titulo">Carta {{auth()->user()->name}}</th>
             <th> </th>
           </tr>
         </thead>

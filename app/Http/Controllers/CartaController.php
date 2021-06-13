@@ -17,7 +17,7 @@ class CartaController extends Controller
         return view ('cartas.index', compact('user'));
     }
 
-    public function generateCarta(User $user) {
+    public function show(User $user) {
         $tapas = Tapa::where([
             ['tipotapa_id',1],
             ['user_id',1]
