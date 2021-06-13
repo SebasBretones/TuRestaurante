@@ -38,7 +38,7 @@ class CartaController extends Controller
             ['user_id',$user->id]
         ])->orderBy('nombre')->get();
 
-       return view('pdf.carta',compact('tapas','raciones','bebidasC','bebidasS','user'));
+       return view('cartas.detalles',compact('tapas','raciones','bebidasC','bebidasS','user'));
     }
 
 }
