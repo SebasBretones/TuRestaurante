@@ -13,7 +13,7 @@
 </div>
 
 <div class="text-center mt-5">
-    {!!QrCode::size(200)->generate( URL::to('show',$user) ) !!}
+    {!!QrCode::size(200)->generate( URL::to('cartas',$user) ) !!}
 </div>
 @endsection
 
