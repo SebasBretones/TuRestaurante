@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Distribucion;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -26,6 +27,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if(config('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
+
         view()->composer('*', function($view){
             if(auth()->user()){
             $dist = Distribucion::orderBy('nombre')
