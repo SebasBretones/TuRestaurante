@@ -35,16 +35,16 @@
                 @else
                 ¡Crea tu primer plato! Los platos aparecerán en la <a class="sinestilo" href="{{route('cartas.index')}}" target="_blank">carta</a>
                 y podrás realizar pedidos con ellas
-                <div class="alert alert-success alert-dismissible fade show bottomf text-center" role="alert">
-                    <strong>¡Comienza pulsando el botón de crear!</strong>
-                    <button type="button" class="btn-close btn-close" aria-label="Close" data-dismiss="alert"></button>
-                </div>
                 @endif
             </div>
         </div>
     </div>
 </div>
 
+<div class="alert alert-success alert-dismissible fade show bottomf text-center" role="alert">
+    <strong>¡Comienza pulsando el botón de crear!</strong>
+    <button type="button" class="btn-close btn-close" aria-label="Close" data-dismiss="alert"></button>
+</div>
 @else
   <div class="row mt-2">
     <div class="col-md-12">

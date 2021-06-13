@@ -7,10 +7,6 @@
         <div class="col-md-12">
             <div class="card-body text-center">
                 Escanea este código qr para acceder a la carta
-                <div class="alert alert-success alert-dismissible fade show bottomf text-center" role="alert">
-                    <strong>¡Comienza pulsando el botón de crear!</strong>
-                    <button type="button" class="btn-close btn-close" aria-label="Close" data-dismiss="alert"></button>
-                </div>
             </div>
         </div>
     </div>

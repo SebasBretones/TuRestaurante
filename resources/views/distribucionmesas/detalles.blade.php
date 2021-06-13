@@ -37,16 +37,16 @@
                 No se han encontrado registros para la busqueda de <strong>{{request()->query('search')}}</strong>
                 @else
                 ¡Crea tu primera mesa! Desde cada mesa podrás realizar pedidos y acceder a la factura que se genere con estos
-                <div class="alert alert-success alert-dismissible fade show bottomf text-center" role="alert">
-                    <strong>¡Comienza pulsando el botón de crear!</strong>
-                    <button type="button" class="btn-close btn-close" aria-label="Close" data-dismiss="alert"></button>
-                </div>
                 @endif
             </div>
         </div>
      </div>
   </div>
   <div id="editarMesa"></div>
+  <div class="alert alert-success alert-dismissible fade show bottomf text-center" role="alert">
+    <strong>¡Comienza pulsando el botón de crear!</strong>
+    <button type="button" class="btn-close btn-close" aria-label="Close" data-dismiss="alert"></button>
+  </div>
 @else
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mt-2">
         @foreach ($mesas as $mesa)
