@@ -1,0 +1,78 @@
+body {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #FFB03B;
+    background-image: url('../img/pizarra.jpg');
+    background-size: cover;
+    text-transform: uppercase;
+  }
+  .titulo {
+    font-size: 50px;
+    margin-bottom: 60px;
+  }
+  .subtitulo {
+    text-align: left;
+    font-size: 40px;
+    padding-bottom: 30px;
+  }
+  .contenedor {
+    padding-top: 80px;
+  }
+  table {
+    width: 100%;
+  }
+
+  .bCentrado {
+    content: "";
+    border-bottom: #FFB03B dotted;
+  }
+  .column1Title{
+    text-align: left;
+    padding-left: 9%;
+    width: 100%;
+  }
+  .column1 {
+    padding-right: 1%;
+    text-align: right;
+    width: 20%;
+  }
+
+  .column2 {
+    text-align: left;
+    width: 60%;
+  }
+  .column3 {
+    text-align: left;
+    width: 20%;
+    padding-left: 1%;
+    font-size: 14px;
+  }
+
+  td {
+    font-size: 22px;
+    padding-bottom: 10px;
+    text-align: center;
+  }
+
+
+  @media (max-width: 600px) {
+    .titulo {
+        font-size: 30px;
+      }
+      .subtitulo {
+        font-size: 20px;
+      }
+
+      .column3 {
+        text-align: left;
+        width: 20%;
+        padding-left: 1%;
+        font-size: 6px;
+      }
+
+      td {
+        font-size: 14px;
+        padding-bottom: 10px;
+        text-align: center;
+      }
+  }
